@@ -1,7 +1,7 @@
 export default function Page() {
     return (
         <div>
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto">
                 <h1 className="text-3xl font-bold mb-6">Hi and Welcome on my website. I'm a Software Architect.</h1>
                 <p>Welcome to my personal website! I'm Martijn Pannekoek, a software architect with a passion for building scalable and efficient systems.</p>
                 <p>
@@ -9,7 +9,7 @@ export default function Page() {
                     Feel free to check out my blog for insights on software development, architecture, and more!
                 </p>
             </div>
-            <div className="min-h-240">
+            <div className="min-h-160">
                 
             </div>
         </div>

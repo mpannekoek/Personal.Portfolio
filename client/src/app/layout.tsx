@@ -17,18 +17,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
       </head>
-        <body>
+        <body className='bg-theme dark:bg-theme-dark'>
           <ThemeProvider
             attribute='class'
             defaultTheme='system'
             enableSystem
             disableTransitionOnChange
           >
-            <NavBar />
-            <div className="pt-6">
+            <NavBar />            
+            <div className="pt-6 px-6 mx-auto lg:max-w-5xl">
               {children}
-            </div>
-            <Footer />
+              <Footer />
+            </div>            
           </ThemeProvider>
         </body>
     </html>

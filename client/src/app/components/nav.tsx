@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ThemeToggle from '../../theme/theme-toggle';
+import { House, Menu } from 'lucide-react';
+
 
 const navItems = {
     '/': { name: 'About' },
@@ -35,16 +37,17 @@ export default function NavBar() {
                     <div className='hidden md:block'>
                         Martijn Pannekoek
                     </div>
-                    <div className="flex p-2 gap-4 mx-auto border rounded-3xl">                   
-                        {Object.entries(navItems).map(([path, { name }]) => (
-                            <Link
-                                key={path}
-                                href={path}
-                                className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
-                                >
-                                {name}
-                            </Link>
-                        ))}
+                    <div className="flex px-6 gap-2 mx-auto rounded-3xl bg-stone-100/90 ring-1 ring-stone-200 shadow-xl shadow-stone-300/50">
+                        <Link href="/" className="hover:bg-gray-500/20 rounded-3xl p-1">
+                            <House size='22' />
+                        </Link>
+                        <span className="my-auto">|</span>
+                        <button
+                            type="button"
+                            className="cursor-pointer hover:bg-gray-500/20 rounded-3xl p-1">
+                            <Menu size='22' />
+                        </button>
+                        <span className="my-auto">|</span>
                         <ThemeToggle />
                     </div>
                     <div className='hidden md:block'>
