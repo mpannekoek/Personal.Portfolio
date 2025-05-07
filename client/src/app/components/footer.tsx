@@ -1,24 +1,25 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Code } from 'lucide-react';
-import facebookIcon from '../../../public/images/facebook-icon.svg';
-import githubIcon from '../../../public/images/github-icon.svg';
-import gmailIcon from '../../../public/images/gmail-icon.svg';
-import instagramIcon from '../../../public/images/instagram-icon.svg';
-import linkedinIcon from '../../../public/images/linkedin-icon.svg';
-
-let currentYear = new Date().getFullYear();
+import facebookIcon from '../../../public/images/icons/facebook-icon.svg';
+import githubIcon from '../../../public/images/icons/github-icon.svg';
+import gmailIcon from '../../../public/images/icons/gmail-icon.svg';
+import instagramIcon from '../../../public/images/icons/instagram-icon.svg';
+import linkedinIcon from '../../../public/images/icons/linkedin-icon.svg';
 
 export default function Footer() {
+    let currentYear = new Date().getFullYear();
+
     return (
-        <footer className="">
-            <div className="container mx-auto">
+        <footer>
+            <div className="container mx-auto px-6">
                 <div className="flex justify-between">
-                    <div className="text-xl">
-                        <Code className='mb-1' />
-                        Martijn Pannekoek
+                    <div className="flex-col">
+                        <Code className='font-bold mb-1' />
+                        <div className="text-xl">Martijn Pannekoek</div>
+                        <div>Software Architect</div>
                     </div>
-                    <div className='flex-col'>
+                    <div className="flex-col">
                         <div className="font-bold mb-1">Pages</div>
                         <div><Link href="/about">About</Link></div>
                         <div><Link href="/blogs">Blogs</Link></div>
