@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Code } from 'lucide-react';
-import facebookIcon from '../../../public/images/icons/facebook-icon.svg';
-import githubIcon from '../../../public/images/icons/github-icon.svg';
-import gmailIcon from '../../../public/images/icons/gmail-icon.svg';
-import instagramIcon from '../../../public/images/icons/instagram-icon.svg';
-import linkedinIcon from '../../../public/images/icons/linkedin-icon.svg';
+import Link from "next/link";
+import Image from "next/image";
+import { Code } from "lucide-react";
+import facebookIcon from "../../../public/images/icons/social/facebook-icon.svg";
+import githubIcon from "../../../public/images/icons/social/github-icon.svg";
+import gmailIcon from "../../../public/images/icons/social/gmail-icon.svg";
+import instagramIcon from "../../../public/images/icons/social/instagram-icon.svg";
+import linkedinIcon from "../../../public/images/icons/social/linkedin-icon.svg";
 
 export default function Footer() {
     let currentYear = new Date().getFullYear();
@@ -29,19 +29,19 @@ export default function Footer() {
                 <hr className="my-6 border-gray-200" />
                 <div className="flex gap-6 justify-center">
                     <Link href="https://github.com" target="_blank">
-                        <Image priority src={githubIcon} alt='Check my code on GitHub' />
+                        <Image priority src={githubIcon} alt="Check my code on GitHub" />
                     </Link>
                     <Link href="https://github.com" target="_blank">
-                        <Image priority src={linkedinIcon} alt='Follow me on LinkedIn' />
+                        <Image priority src={linkedinIcon} alt="Follow me on LinkedIn" />
                     </Link>
                     <Link href="https://instagram.com" target="_blank">
-                        <Image priority src={instagramIcon} alt='Follow me on Instagram' />
+                        <Image priority src={instagramIcon} alt="Follow me on Instagram" />
                     </Link>
                     <Link href="https://facebook.com" target="_blank">
-                        <Image priority src={facebookIcon} alt='Follow me on Facebook' />
+                        <Image priority src={facebookIcon} alt="Follow me on Facebook" />
                     </Link>
                     <Link href="mailto:martijnpannekoek.development@gmail.com" target="_blank">
-                        <Image priority src={gmailIcon} alt='Mail me' />
+                        <Image priority src={gmailIcon} alt="Mail me" />
                     </Link>
                 </div>
                 <div className="text-center my-6">

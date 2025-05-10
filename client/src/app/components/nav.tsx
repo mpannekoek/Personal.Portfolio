@@ -31,7 +31,7 @@ export default function NavBar() {
 
     return (
         <div>
-            <div className="h-6 bg-black dark:bg-white" />
+            <div className="h-6 bg-black dark:bg-secondary" />
             <nav className={(isSticky ? "fixed top-0 left-0 right-0 bg-primary/80" : "")}>
                 <div className="mx-auto">
                     <div className="flex justify-between mx-4 py-2">

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import martijnImage from "../../public/images/about/martijn.jpg";
 import { HandMetal, Minus } from "lucide-react";
+import ReactSvg from "./components/svg/react-icon";
 
 export default function Page() {
     return (
@@ -57,9 +58,17 @@ export default function Page() {
                                 </h2>
                             </div>
                         </div>
+                        <div className="flex flex-col md:flex-row">
+                            <div className="basis-1/3 min-h-80 rounded-xl border-4 border-dashed border-primary mb-6 md:mb-0 md:mr-6">
+                            </div>
+                            <div className="basis-1/3 min-h-80 rounded-xl border-4 border-dashed border-secondary mb-6 md:mb-0">
+                            </div>
+                            <div className="basis-1/3 min-h-80 rounded-xl border-4 border-dashed border-primary md:mb-0 md:ml-6">
+                            </div>
+                        </div>
                     </FadeIn>
                     <FadeIn delay="delay-700">
-                        <div className="flex">
+                        <div className="flex mt-6">
                             <div className="text-primary h-min my-auto">
                                 <Minus />
                             </div>
@@ -69,16 +78,11 @@ export default function Page() {
                                 </h2>
                             </div>
                         </div>
-                        <div className="flex flex-col md:flex-row">
-                            <div className="basis-1/2 min-h-64 border-2 mb-6 md:mb-0 md:border-r-1">
-                                {/* https://tamalsen.dev/ */}
-                            </div>
-                            <div className="basis-1/2 min-h-64 border-2 md:border-l-1">
-                            </div>
-                        </div>
                     </FadeIn>
                 </div>
             </div>
         </main >
     );
-}
+};
+
+{/* https://tamalsen.dev/ */ }

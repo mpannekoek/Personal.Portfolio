@@ -8,6 +8,8 @@
   --color-debug-3: green;
 
   --color-primary: var(--color-violet-600);
+  --color-secondary: #D53AED;
+  --color-accent: #EDD53A;
 }
 
 .container {
