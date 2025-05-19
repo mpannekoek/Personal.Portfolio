@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import martijnImage from "../../public/images/about/martijn.jpg";
 import { HandMetal, Minus } from "lucide-react";
-import ReactSvg from "./components/svg/react-icon";
 
 export default function Page() {
     return (
