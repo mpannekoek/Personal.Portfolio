@@ -83,5 +83,3 @@ export default function Page() {
         </main >
     );
 };
-
-{/* https://tamalsen.dev/ */ }
