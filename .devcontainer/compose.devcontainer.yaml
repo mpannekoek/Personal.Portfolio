@@ -10,4 +10,4 @@ services:
     # in a sub-folder, so you will mount '..'. You would then reference this path as the
     # 'workspaceFolder' in '.devcontainer/devcontainer.json' so VS Code starts here.
     volumes:
-      - ../client:/workspace:cached
+      - ..:/workspace:cached
