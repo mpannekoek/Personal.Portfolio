@@ -1,0 +1,14 @@
+{
+  "name": "Node.js Development Container: MP.Portfolio",
+  "dockerComposeFile": [
+    "compose.devcontainer.yaml"
+  ],
+  "service": "mp.portfolio.client",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": []
+    }
+  }
+}
