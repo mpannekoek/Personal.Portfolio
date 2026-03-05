@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ThemeToggle from "../../theme/theme-toggle";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -21,6 +21,8 @@ export default function NavBar() {
     const pathname = usePathname();
     const [isSticky, setSticky] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isMenuVisible, setMenuVisible] = useState(false);
+    const closeTimeoutRef = useRef<number | null>(null);
 
     const isActivePath = (href: string) => {
         if (href === "/") {
@@ -44,10 +46,10 @@ export default function NavBar() {
 
     const getMobileNavItemClass = (isActive: boolean) => {
         if (isActive) {
-            return "rounded-lg bg-primary/12 px-3 py-2 text-primary font-semibold ring-1 ring-primary/25";
+            return "rounded-lg bg-primary/12 px-3 py-2.5 text-primary font-semibold ring-1 ring-primary/25";
         }
 
-        return "rounded-lg px-3 py-2 text-black/80 hover:bg-black/6 hover:text-black dark:text-white/85 dark:hover:bg-white/10 dark:hover:text-white";
+        return "rounded-lg px-3 py-2.5 text-black/80 transition-colors hover:bg-black/6 hover:text-black dark:text-white/85 dark:hover:bg-white/10 dark:hover:text-white";
     };
 
     useEffect(() => {
@@ -59,6 +61,30 @@ export default function NavBar() {
         window.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (closeTimeoutRef.current !== null) {
+            window.clearTimeout(closeTimeoutRef.current);
+            closeTimeoutRef.current = null;
+        }
+
+        if (isMenuOpen) {
+            setMenuVisible(true);
+            return;
+        }
+
+        closeTimeoutRef.current = window.setTimeout(() => {
+            setMenuVisible(false);
+        }, 250);
+    }, [isMenuOpen]);
+
+    useEffect(() => {
+        return () => {
+            if (closeTimeoutRef.current !== null) {
+                window.clearTimeout(closeTimeoutRef.current);
+            }
         };
     }, []);
 
@@ -101,18 +127,24 @@ export default function NavBar() {
                     </div>
                 </div>
             </nav>
-            <div className={`fixed inset-0 z-50 md:hidden ${isMenuOpen ? "block" : "hidden"}`}>
+            <div
+                className={`fixed inset-0 z-50 md:hidden transition-opacity duration-[250ms] ease-out ${
+                    isMenuVisible ? "visible" : "invisible"
+                } ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
                 <button
                     type="button"
                     aria-label="Close mobile menu backdrop"
-                    className="absolute inset-0 bg-black/45 backdrop-blur-sm"
+                    className="absolute inset-0 bg-black/45 backdrop-blur-sm transition-opacity duration-[250ms] ease-out"
                     onClick={() => setMenuOpen(false)}
                 />
                 <div
                     id="mobile-menu"
-                    className="absolute top-0 right-0 bottom-0 w-4/5 max-w-sm border-l border-black/10 bg-white/95 shadow-2xl dark:border-white/10 dark:bg-zinc-950/95">
-                    <div className={(isSticky ? "hidden" : "h-6 bg-black dark:bg-secondary")} />
-                    <div className="px-4 py-3">
+                    className={`absolute top-0 right-0 bottom-0 w-4/5 max-w-sm overflow-hidden border-l border-black/10 bg-white/95 shadow-2xl transition-transform duration-[250ms] ease-out dark:border-white/10 dark:bg-zinc-950/95 ${
+                        isMenuOpen ? "translate-x-0" : "translate-x-full"
+                    }`}>
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/12 via-secondary/5 to-transparent dark:from-secondary/18 dark:via-secondary/7" />
+                    <div className="pointer-events-none absolute inset-y-6 left-0 w-px bg-gradient-to-b from-secondary/0 via-secondary/55 to-secondary/0" />
+                    <div className="relative z-10 px-4 py-4">
                         <div className="w-min ml-auto">
                             <button
                                 type="button"
@@ -124,7 +156,10 @@ export default function NavBar() {
                                 <X />
                             </button>
                         </div>
-                        <div className="mt-4 flex flex-col gap-2">
+                        <div className="mt-5 px-1">
+                            <p className="px-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-black/45 dark:text-white/45">Navigation</p>
+                        </div>
+                        <div className="mt-2 flex flex-col gap-1.5">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.href}
