@@ -144,7 +144,7 @@ export default function NavBar() {
                     }`}>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/12 via-secondary/5 to-transparent dark:from-secondary/18 dark:via-secondary/7" />
                     <div className="pointer-events-none absolute inset-y-6 left-0 w-px bg-gradient-to-b from-secondary/0 via-secondary/55 to-secondary/0" />
-                    <div className="relative z-10 px-4 pb-4 pt-16">
+                    <div className="relative z-10 px-4 pb-6 pt-16">
                         <div className="px-1">
                             <p className="px-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-black/45 dark:text-white/45">Navigation</p>
                         </div>
@@ -159,6 +159,14 @@ export default function NavBar() {
                                     {item.label}
                                 </Link>
                             ))}
+                        </div>
+                        <div className="mt-8 flex justify-center">
+                            <Link
+                                href="/"
+                                className="inline-flex items-center rounded-full border border-black/10 bg-white/70 px-3 py-1.5 text-black/85 shadow-sm ring-1 ring-white/65 transition-colors hover:bg-white dark:border-white/15 dark:bg-zinc-900/70 dark:text-white/85 dark:ring-white/10 dark:hover:bg-zinc-900"
+                                onClick={() => setMenuOpen(false)}>
+                                <span className="font-mono text-sm font-semibold tracking-[0.08em]">&lt;MP /&gt;</span>
+                            </Link>
                         </div>
                     </div>
                 </div>
