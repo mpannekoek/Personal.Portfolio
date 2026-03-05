@@ -4,16 +4,16 @@ import { useEffect, useState, RefObject, useRef } from "react";
 
 export default function FadeIn({ children, delay = "delay-0" }: { children: React.ReactNode, delay?: string }) {
     const ref = useRef<HTMLDivElement>(null);
-    const isRefIntersecting = isElementIntersecting(ref);
+    const isRefIntersecting = useElementIntersecting(ref);
 
     return (
         <div ref={ref} className={`transition-opacity ${delay} duration-700 ease-in ${isRefIntersecting ? "opacity-100" : "opacity-0"}`}>
             {children}
         </div>
     )
-};
+}
 
-function isElementIntersecting(ref: RefObject<HTMLElement | null>) {
+function useElementIntersecting(ref: RefObject<HTMLElement | null>) {
     const [isIntersecting, setIntersecting] = useState(false);
 
     useEffect(() => {
@@ -38,4 +38,4 @@ function isElementIntersecting(ref: RefObject<HTMLElement | null>) {
     }, [ref]);
 
     return isIntersecting;
-};
+}

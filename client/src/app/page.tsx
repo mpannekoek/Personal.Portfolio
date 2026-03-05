@@ -11,7 +11,7 @@ export default function Page() {
                 <div className="lg:max-w-3xl">
                     <FadeIn delay="delay-100">
                         <h1 className="font-bold mb-6 text-3xl md:text-5xl">
-                            Hi and welcome. Let's build something amazing together!
+                            Hi and welcome. Let&apos;s build something amazing together!
                         </h1>
                     </FadeIn>
                 </div>
@@ -38,7 +38,7 @@ export default function Page() {
                                 Who am I?
                             </h2>
                             <p className="text-xl">
-                                I'm Martijn, a software architect with a passion for building scalable and efficient systems.
+                                I&apos;m Martijn, a software architect with a passion for building scalable and efficient systems.
                                 I have experience in various programming languages and frameworks, and I enjoy exploring new technologies.
                                 Feel free to check out my <Link href="/blog"><b>blog</b></Link> for insights on software development, architecture, and more!
                             </p>

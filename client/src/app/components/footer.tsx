@@ -45,7 +45,7 @@ export default function Footer() {
                     </Link>
                 </div>
                 <div className="text-center my-6">
-                    © {currentYear} <a href="/" className="hover:underline">Martijn Pannekoek</a>. All Rights Reserved.
+                    © {currentYear} <Link href="/" className="hover:underline">Martijn Pannekoek</Link>. All Rights Reserved.
                 </div>
             </div>
         </footer>
