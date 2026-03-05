@@ -8,7 +8,7 @@ import instagramIcon from "../../../public/images/icons/social/instagram-icon.sv
 import linkedinIcon from "../../../public/images/icons/social/linkedin-icon.svg";
 
 export default function Footer() {
-    let currentYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
 
     return (
         <footer>
