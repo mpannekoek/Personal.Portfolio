@@ -91,7 +91,7 @@ export default function NavBar() {
     return (
         <div>
             <div className="h-6 bg-black dark:bg-secondary" />
-            <nav className={isSticky ? "fixed top-0 left-0 right-0 z-40 bg-primary/80 backdrop-blur-md shadow-sm" : "relative z-30"}>
+            <nav className={isSticky ? "fixed top-0 left-0 right-0 z-[60] bg-primary/80 backdrop-blur-md shadow-sm" : "relative z-[60]"}>
                 <div className="mx-auto">
                     <div className="flex justify-between mx-4 py-2">
                         <div className="flex gap-1 text-lg font-bold">
@@ -114,14 +114,14 @@ export default function NavBar() {
                             <ThemeToggle />
                             <button
                                 type="button"
-                                className="cursor-pointer rounded-3xl p-1 transition-colors hover:bg-primary/85 md:hidden"
+                                className="relative z-[61] cursor-pointer rounded-3xl p-1 transition-colors hover:bg-primary/85 md:hidden"
                                 aria-controls="mobile-menu"
                                 aria-expanded={isMenuOpen}
-                                aria-label="Toggle mobile menu"
+                                aria-label={isMenuOpen ? "Close mobile menu" : "Open mobile menu"}
                                 onClick={() => {
                                     setMenuOpen((prev) => !prev);
                                 }}>
-                                <Menu size="22" />
+                                {isMenuOpen ? <X size="22" /> : <Menu size="22" />}
                             </button>
                         </div>
                     </div>
@@ -144,19 +144,8 @@ export default function NavBar() {
                     }`}>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/12 via-secondary/5 to-transparent dark:from-secondary/18 dark:via-secondary/7" />
                     <div className="pointer-events-none absolute inset-y-6 left-0 w-px bg-gradient-to-b from-secondary/0 via-secondary/55 to-secondary/0" />
-                    <div className="relative z-10 px-4 py-4">
-                        <div className="w-min ml-auto">
-                            <button
-                                type="button"
-                                className="cursor-pointer rounded-3xl p-1 transition-colors hover:bg-primary/85"
-                                aria-label="Close mobile menu"
-                                onClick={() => {
-                                    setMenuOpen(false);
-                                }}>
-                                <X />
-                            </button>
-                        </div>
-                        <div className="mt-5 px-1">
+                    <div className="relative z-10 px-4 pb-4 pt-16">
+                        <div className="px-1">
                             <p className="px-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-black/45 dark:text-white/45">Navigation</p>
                         </div>
                         <div className="mt-2 flex flex-col gap-1.5">
