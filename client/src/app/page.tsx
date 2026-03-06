@@ -4,6 +4,34 @@ import Link from "next/link";
 import martijnImage from "../../public/images/about/martijn.jpg";
 import { HandMetal, Minus } from "lucide-react";
 
+type LatestPostPreview = {
+    title: string;
+    excerpt: string;
+    date: string;
+    href: string;
+};
+
+const latestPosts: LatestPostPreview[] = [
+    {
+        title: "Designing Reliable Event-Driven Systems",
+        excerpt: "A pragmatic walkthrough of building resilient event pipelines without overcomplicating your architecture.",
+        date: "March 1, 2026",
+        href: "/blog",
+    },
+    {
+        title: "Choosing the Right Boundaries in a Modular Monolith",
+        excerpt: "How to define module boundaries that stay maintainable as teams and product complexity grow.",
+        date: "February 16, 2026",
+        href: "/blog",
+    },
+    {
+        title: "From Prototype to Production: A Backend Checklist",
+        excerpt: "The essential technical checks I use to turn proof-of-concepts into dependable production services.",
+        date: "February 2, 2026",
+        href: "/blog",
+    },
+];
+
 export default function Page() {
     return (
         <main>
@@ -58,12 +86,29 @@ export default function Page() {
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row">
-                            <div className="basis-1/3 min-h-80 rounded-xl border-4 border-dashed border-primary mb-6 md:mb-0 md:mr-6">
-                            </div>
-                            <div className="basis-1/3 min-h-80 rounded-xl border-4 border-dashed border-secondary mb-6 md:mb-0">
-                            </div>
-                            <div className="basis-1/3 min-h-80 rounded-xl border-4 border-dashed border-primary md:mb-0 md:ml-6">
-                            </div>
+                            {latestPosts.map((post, index) => (
+                                <article
+                                    key={post.title}
+                                    className={`basis-1/3 min-h-80 rounded-xl border border-zinc-200 bg-white/80 p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md ${index < latestPosts.length - 1 ? "mb-6 md:mb-0 md:mr-6" : "md:ml-0"}`}
+                                >
+                                    <p className="mb-4 inline-flex items-center text-sm font-medium uppercase tracking-wide text-zinc-500">
+                                        <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-secondary/70" />
+                                        {post.date}
+                                    </p>
+                                    <h3 className="mb-4 text-xl font-bold text-zinc-900">
+                                        {post.title}
+                                    </h3>
+                                    <p className="mb-6 text-base leading-relaxed text-zinc-700">
+                                        {post.excerpt}
+                                    </p>
+                                    <Link
+                                        href={post.href}
+                                        className="font-semibold text-primary underline decoration-secondary/45 decoration-2 underline-offset-4 hover:text-primary/80 hover:decoration-secondary/65"
+                                    >
+                                        Read post
+                                    </Link>
+                                </article>
+                            ))}
                         </div>
                     </FadeIn>
                     <FadeIn delay="delay-700">
