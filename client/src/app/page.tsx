@@ -153,10 +153,14 @@ export default function Page() {
                 <div className="flex flex-col md:flex-row mt-6">
                     <div className="md:basis-64 mx-6">
                         <FadeIn delay="delay-300">
-                            <Image
-                                src={martijnImage}
-                                alt="Picture of Martijn"
-                                className="rounded-full border-10 border-primary" />
+                            <div className="profile-photo-wrap">
+                                <span className="profile-photo-orbit" aria-hidden="true" />
+                                <span className="profile-photo-glow" aria-hidden="true" />
+                                <Image
+                                    src={martijnImage}
+                                    alt="Picture of Martijn"
+                                    className="profile-photo-image rounded-full border-10 border-primary" />
+                            </div>
                         </FadeIn>
                     </div>
                     <div className="md:basis-128 mt-6">
