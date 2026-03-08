@@ -1,41 +1,40 @@
 "use client";
 
-import { useEffect, useState, RefObject, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function FadeIn({ children, delay = "delay-0" }: { children: React.ReactNode, delay?: string }) {
     const ref = useRef<HTMLDivElement>(null);
-    const isRefIntersecting = useElementIntersecting(ref);
-
-    return (
-        <div ref={ref} className={`transition-opacity ${delay} duration-700 ease-in ${isRefIntersecting ? "opacity-100" : "opacity-0"}`}>
-            {children}
-        </div>
-    )
-}
-
-function useElementIntersecting(ref: RefObject<HTMLElement | null>) {
-    const [isIntersecting, setIntersecting] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                setIntersecting(true);
-
-                if (ref.current) {
-                    // Unobserve the element after it has been intersected
-                    observer.unobserve(ref.current);
-                }
-            }
-        });
-
-        if (ref.current) {
-            observer.observe(ref.current);
+        const node = ref.current;
+        if (!node) {
+            return;
         }
 
-        return () => {
-            observer.disconnect();
-        };
-    }, [ref]);
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        );
 
-    return isIntersecting;
+        observer.observe(node);
+
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <div
+            ref={ref}
+            className={`transition-[opacity,transform] ${delay} duration-700 ease-out ${
+                isVisible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+            }`}
+        >
+            {children}
+        </div>
+    );
 }
