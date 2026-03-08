@@ -1,5 +1,6 @@
 import FadeIn from './components/providers/fade-in-provider';
 import ContactShortcut from "./components/contact-shortcut";
+import SectionHeading from "./components/section-heading";
 import Image from "next/image";
 import Link from "next/link";
 import martijnImage from "../../public/images/about/martijn.jpg";
@@ -9,7 +10,6 @@ import {
     BrainCircuit,
     Database,
     HandMetal,
-    Minus,
     Puzzle,
     type LucideIcon,
 } from "lucide-react";
@@ -182,16 +182,11 @@ export default function Page() {
                 </div>
                 <div className="min-h-160 mt-6">
                     <FadeIn delay="delay-700">
-                        <div className="flex">
-                            <div className="text-primary h-min my-auto">
-                                <Minus />
-                            </div>
-                            <div>
-                                <h2 className="font-bold mb-6 text-2xl md:text-4xl">
-                                    <span className="text-primary">L</span>atest posts
-                                </h2>
-                            </div>
-                        </div>
+                        <SectionHeading
+                            title="Insights"
+                            eyebrow="Recent Writing"
+                            variant="reactive"
+                        />
                         <div className="flex flex-col md:flex-row">
                             {latestPosts.map((post, index) => (
                                 <article
@@ -288,15 +283,12 @@ export default function Page() {
                         </article>
                     </FadeIn>
                     <FadeIn delay="delay-700">
-                        <div className="flex mt-6">
-                            <div className="text-primary h-min my-auto">
-                                <Minus />
-                            </div>
-                            <div>
-                                <h2 className="font-bold mb-6 text-2xl md:text-4xl">
-                                    <span className="text-primary">S</span>kills
-                                </h2>
-                            </div>
+                        <div className="mt-6">
+                            <SectionHeading
+                                title="Toolkit"
+                                eyebrow="15 years building"
+                                variant="reactive"
+                            />
                         </div>
                         <div className="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
                             <p className="text-lg leading-relaxed text-700 lg:col-span-2">
@@ -346,15 +338,12 @@ export default function Page() {
                         </div>
                     </FadeIn>
                     <FadeIn delay="delay-700">
-                        <div id="contact-shortcut" className="flex mt-6 scroll-mt-24">
-                            <div className="text-primary h-min my-auto">
-                                <Minus />
-                            </div>
-                            <div>
-                                <h2 className="font-bold mb-6 text-2xl md:text-4xl">
-                                    <span className="text-primary">C</span>ontact
-                                </h2>
-                            </div>
+                        <div id="contact-shortcut" className="mt-6 scroll-mt-24">
+                            <SectionHeading
+                                title="Let's Connect"
+                                eyebrow="Open for collaborations"
+                                variant="reactive"
+                            />
                         </div>
                         <ContactShortcut />
                     </FadeIn>
