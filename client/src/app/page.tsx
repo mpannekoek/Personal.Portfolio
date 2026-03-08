@@ -1,4 +1,5 @@
 import FadeIn from './components/providers/fade-in-provider';
+import ContactShortcut from "./components/contact-shortcut";
 import Image from "next/image";
 import Link from "next/link";
 import martijnImage from "../../public/images/about/martijn.jpg";
@@ -41,6 +42,17 @@ type SkillItem = {
 type SkillGroup = {
     title: string;
     skills: SkillItem[];
+};
+
+type CurrentProject = {
+    title: string;
+    summary: string;
+    status: string;
+    timeline: string;
+    progress: number;
+    stack: string[];
+    href: string;
+    linkLabel: string;
 };
 
 const latestPosts: LatestPostPreview[] = [
@@ -102,6 +114,17 @@ const skillGroups: SkillGroup[] = [
     },
 ];
 
+const currentProject: CurrentProject = {
+    title: "AI-Assisted Portfolio Evolution",
+    summary: "Improving this portfolio with practical UX upgrades, stronger project storytelling, and better conversion paths from visitor to contact.",
+    status: "Actively building",
+    timeline: "March 2026",
+    progress: 68,
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide", "Vercel"],
+    href: "/blog",
+    linkLabel: "Follow progress",
+};
+
 export default function Page() {
     return (
         <main>
@@ -111,6 +134,20 @@ export default function Page() {
                         <h1 className="font-bold mb-6 text-3xl md:text-5xl">
                             Hi and welcome. Let&apos;s build something amazing together!
                         </h1>
+                        <div className="flex flex-wrap gap-3">
+                            <Link
+                                href="#current-project"
+                                className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/85 dark:bg-secondary dark:text-black dark:hover:bg-secondary/85"
+                            >
+                                View current project
+                            </Link>
+                            <Link
+                                href="#contact-shortcut"
+                                className="inline-flex items-center rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-800 transition-colors hover:border-primary/40 hover:text-primary dark:border-white/20 dark:bg-transparent dark:text-white/85 dark:hover:border-secondary/40 dark:hover:text-secondary"
+                            >
+                                Contact me
+                            </Link>
+                        </div>
                     </FadeIn>
                 </div>
                 <div className="flex flex-col md:flex-row mt-6">
@@ -180,6 +217,75 @@ export default function Page() {
                                 </article>
                             ))}
                         </div>
+                        <div className="mt-8 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent dark:via-secondary/45" />
+                    </FadeIn>
+                    <FadeIn delay="delay-700">
+                        <article
+                            id="current-project"
+                            className="mt-6 rounded-2xl border border-zinc-200 bg-white/80 p-6 shadow-sm ring-1 ring-white/70 transition-all hover:border-zinc-300 dark:border-white/12 dark:bg-zinc-950/75 dark:ring-white/8 md:p-8 scroll-mt-24"
+                        >
+                            <div>
+                                <div className="mb-4 flex flex-wrap items-center gap-2">
+                                    <span className="inline-flex items-center rounded-full border border-zinc-300 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-zinc-700 dark:border-white/20 dark:text-white/80">
+                                        {currentProject.status}
+                                    </span>
+                                    <span className="text-sm font-medium text-zinc-600 dark:text-white/65">
+                                        {currentProject.timeline}
+                                    </span>
+                                </div>
+                                <h3 className="text-2xl font-bold text-zinc-900 dark:text-white md:text-3xl">
+                                    {currentProject.title}
+                                </h3>
+                                <p className="mt-3 max-w-3xl text-base leading-relaxed text-zinc-700 dark:text-white/75">
+                                    {currentProject.summary}
+                                </p>
+                                <div className="mt-6">
+                                    <div className="mb-2 flex items-center justify-between">
+                                        <p className="text-sm font-semibold uppercase tracking-[0.08em] text-zinc-700 dark:text-white/70">
+                                            Progress
+                                        </p>
+                                        <div className="flex items-center gap-3">
+                                            <span className="inline-flex items-center text-xs font-medium text-zinc-600 dark:text-white/65">
+                                                <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-zinc-500 dark:bg-white/70" />
+                                                In progress
+                                            </span>
+                                            <p className="text-sm font-bold text-zinc-800 dark:text-white">
+                                                {currentProject.progress}%
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        role="progressbar"
+                                        aria-label="Current project progress"
+                                        aria-valuemin={0}
+                                        aria-valuemax={100}
+                                        aria-valuenow={currentProject.progress}
+                                        className="h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-white/12"
+                                    >
+                                        <div
+                                            className="h-full rounded-full bg-zinc-900 transition-all dark:bg-white"
+                                            style={{ width: `${currentProject.progress}%` }}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mt-6 flex flex-wrap gap-2">
+                                    {currentProject.stack.map((item) => (
+                                        <span
+                                            key={item}
+                                            className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-white/14 dark:bg-white/5 dark:text-white/80"
+                                        >
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                                <Link
+                                    href={currentProject.href}
+                                    className="mt-6 inline-flex items-center rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-semibold text-zinc-800 transition-colors hover:border-zinc-400 hover:bg-zinc-50 dark:border-white/20 dark:text-white dark:hover:bg-white/8"
+                                >
+                                    {currentProject.linkLabel}
+                                </Link>
+                            </div>
+                        </article>
                     </FadeIn>
                     <FadeIn delay="delay-700">
                         <div className="flex mt-6">
@@ -238,6 +344,19 @@ export default function Page() {
                                 </article>
                             ))}
                         </div>
+                    </FadeIn>
+                    <FadeIn delay="delay-700">
+                        <div id="contact-shortcut" className="flex mt-6 scroll-mt-24">
+                            <div className="text-primary h-min my-auto">
+                                <Minus />
+                            </div>
+                            <div>
+                                <h2 className="font-bold mb-6 text-2xl md:text-4xl">
+                                    <span className="text-primary">C</span>ontact
+                                </h2>
+                            </div>
+                        </div>
+                        <ContactShortcut />
                     </FadeIn>
                 </div>
             </div>
