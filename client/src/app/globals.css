@@ -24,79 +24,137 @@
       max-width: 64rem /* 1024px */;
   }
 }
-@keyframes mp-photo-orbit {
-  from {
-    transform: rotate(0deg);
+@keyframes mp-photo-ripple {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  20% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.28;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
   }
 }
 
-@keyframes mp-photo-float {
+@keyframes mp-photo-glow-drift {
   0%,
   100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-@keyframes mp-photo-pulse {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: scale(1);
-  }
-  50% {
     opacity: 0.7;
-    transform: scale(1.03);
+    transform: translate3d(-12px, -10px, 0) scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(16px, 12px, 0) scale(1.08);
   }
 }
 
 .profile-photo-wrap {
+  --mp-photo-tone-1: color-mix(in srgb, var(--color-primary) 72%, white);
+  --mp-photo-tone-2: color-mix(in srgb, var(--color-primary) 88%, var(--color-secondary));
+  --mp-photo-tone-3: color-mix(in srgb, var(--color-accent) 82%, white);
+  --mp-photo-tone-4: color-mix(in srgb, var(--color-secondary) 78%, white);
+  --mp-photo-shadow: rgb(15 23 42 / 0.26);
   position: relative;
   display: inline-flex;
+  margin: 1rem;
+  isolation: isolate;
   border-radius: 9999px;
-  animation: mp-photo-float 5s ease-in-out infinite;
+}
+
+.dark .profile-photo-wrap {
+  --mp-photo-tone-1: color-mix(in srgb, var(--color-primary) 72%, white);
+  --mp-photo-tone-2: color-mix(in srgb, var(--color-secondary) 76%, white);
+  --mp-photo-tone-3: color-mix(in srgb, var(--color-accent) 72%, white);
+  --mp-photo-tone-4: color-mix(in srgb, var(--color-primary) 44%, var(--color-secondary));
+  --mp-photo-shadow: rgb(2 6 23 / 0.62);
 }
 
 .profile-photo-orbit {
   position: absolute;
-  inset: -10px;
+  inset: -18px;
+  z-index: 1;
   border-radius: 9999px;
-  background: conic-gradient(
-    from 0deg,
-    color-mix(in srgb, var(--color-primary) 32%, transparent),
-    color-mix(in srgb, var(--color-secondary) 45%, transparent),
-    color-mix(in srgb, var(--color-primary) 32%, transparent)
-  );
-  animation: mp-photo-orbit 10s linear infinite;
+  pointer-events: none;
+}
+
+.profile-photo-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.profile-photo-orbit::after {
+  inset: -10px;
+  border: 1.5px solid color-mix(in srgb, var(--mp-photo-tone-3) 44%, transparent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--mp-photo-tone-1) 8%, transparent),
+    0 0 18px color-mix(in srgb, var(--mp-photo-tone-4) 16%, transparent);
+  animation: mp-photo-ripple 6.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 .profile-photo-glow {
   position: absolute;
-  inset: -14px;
+  inset: -34px;
+  z-index: 0;
   border-radius: 9999px;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--color-secondary) 16%, transparent) 45%,
-    transparent 72%
-  );
-  filter: blur(5px);
-  animation: mp-photo-pulse 4s ease-in-out infinite;
+  background:
+    radial-gradient(
+      circle at 28% 30%,
+      color-mix(in srgb, var(--mp-photo-tone-1) 30%, transparent) 0,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 70% 72%,
+      color-mix(in srgb, var(--mp-photo-tone-2) 28%, transparent) 0,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle,
+      color-mix(in srgb, var(--mp-photo-tone-4) 18%, transparent) 22%,
+      transparent 68%
+    );
+  filter: blur(22px) saturate(1.04);
+  opacity: 0.62;
+  animation: mp-photo-glow-drift 8.5s ease-in-out infinite;
 }
 
 .profile-photo-image {
   position: relative;
   z-index: 2;
+  box-shadow:
+    0 24px 60px -34px color-mix(in srgb, var(--mp-photo-tone-2) 30%, transparent),
+    0 12px 28px -18px var(--mp-photo-shadow);
+}
+
+.dark .profile-photo-image {
+  box-shadow:
+    0 28px 70px -32px color-mix(in srgb, var(--mp-photo-tone-1) 36%, transparent),
+    0 0 24px color-mix(in srgb, var(--mp-photo-tone-3) 10%, transparent),
+    0 18px 34px -22px var(--mp-photo-shadow);
+}
+
+.dark .profile-photo-orbit::after {
+  border-color: color-mix(in srgb, var(--mp-photo-tone-3) 52%, transparent);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--mp-photo-tone-2) 10%, transparent),
+    0 0 24px color-mix(in srgb, var(--mp-photo-tone-1) 18%, transparent);
+}
+
+.dark .profile-photo-glow {
+  opacity: 0.92;
+  filter: blur(26px) saturate(1.1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .profile-photo-wrap,
-  .profile-photo-orbit,
+  .profile-photo-orbit::after,
   .profile-photo-glow {
     animation: none;
+    opacity: 0.85;
   }
 }
