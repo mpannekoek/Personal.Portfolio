@@ -57,21 +57,21 @@ export default function NavBar() {
     const getDesktopNavItemClass = (isActive: boolean) => {
         if (isActive) {
             return isSticky
-                ? "rounded-full bg-black px-3 py-1 text-white font-semibold shadow-md ring-2 ring-white/45"
-                : "rounded-full bg-white/95 px-3 py-1 text-black font-semibold shadow-sm ring-1 ring-black/10";
+                ? "rounded-full bg-[var(--surface)] px-3 py-1 font-semibold text-[var(--text)] shadow-md ring-1 ring-[var(--ring)]"
+                : "rounded-full bg-[var(--surface-elevated)] px-3 py-1 font-semibold text-[var(--text)] shadow-sm ring-1 ring-[var(--ring)]";
         }
 
         return isSticky
-            ? "rounded-full bg-white/60 px-3 py-1 text-black font-semibold ring-1 ring-black/12 transition-colors hover:bg-white/75"
-            : "rounded-full px-3 py-1 text-black/80 hover:bg-black/6 hover:text-black transition-colors dark:text-white/85 dark:hover:bg-white/10 dark:hover:text-white";
+            ? "rounded-full bg-[var(--surface)]/70 px-3 py-1 font-semibold text-[var(--text)] ring-1 ring-[var(--border)] transition-colors hover:bg-[var(--surface-elevated)]"
+            : "rounded-full px-3 py-1 text-[var(--text-muted)] transition-colors hover:bg-primary/10 hover:text-[var(--text)]";
     };
 
     const getMobileNavItemClass = (isActive: boolean) => {
         if (isActive) {
-            return "rounded-lg bg-primary/12 px-3 py-2.5 text-primary font-semibold ring-1 ring-primary/25";
+            return "rounded-lg bg-primary/12 px-3 py-2.5 font-semibold text-primary ring-1 ring-primary/25";
         }
 
-        return "rounded-lg px-3 py-2.5 text-black/80 transition-colors hover:bg-black/6 hover:text-black dark:text-white/85 dark:hover:bg-white/10 dark:hover:text-white";
+        return "rounded-lg px-3 py-2.5 text-[var(--text-muted)] transition-colors hover:bg-primary/10 hover:text-[var(--text)]";
     };
 
     useEffect(() => {
@@ -92,10 +92,18 @@ export default function NavBar() {
         };
     }, []);
 
+    useEffect(() => {
+        document.body.dataset.mobileMenuOpen = isMenuOpen ? "true" : "false";
+
+        return () => {
+            delete document.body.dataset.mobileMenuOpen;
+        };
+    }, [isMenuOpen]);
+
     return (
         <div>
-            <div className="h-6 bg-black dark:bg-secondary" />
-            <nav className={isSticky ? "fixed top-0 left-0 right-0 z-[60] bg-primary/80 backdrop-blur-md shadow-sm" : "relative z-[60]"}>
+            <div className="h-6 bg-gradient-to-r from-primary via-accent to-highlight" />
+            <nav className={isSticky ? "fixed top-0 left-0 right-0 z-[60] border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-md shadow-sm" : "relative z-[60]"}>
                 <div className="mx-auto">
                     <div className="flex justify-between mx-4 py-2">
                         <div className="flex gap-1 text-lg font-bold">
@@ -143,19 +151,19 @@ export default function NavBar() {
                 <button
                     type="button"
                     aria-label="Close mobile menu backdrop"
-                    className="absolute inset-0 bg-black/45 backdrop-blur-sm transition-opacity duration-[250ms] ease-out"
+                    className="absolute inset-0 bg-[var(--overlay)] backdrop-blur-sm transition-opacity duration-[250ms] ease-out"
                     onClick={closeMenu}
                 />
                 <div
                     id="mobile-menu"
-                    className={`absolute top-0 right-0 bottom-0 w-4/5 max-w-sm overflow-hidden border-l border-black/10 bg-white/95 shadow-2xl transition-transform duration-[250ms] ease-out dark:border-white/10 dark:bg-zinc-950/95 ${
+                    className={`absolute top-0 right-0 bottom-0 w-4/5 max-w-sm overflow-hidden border-l border-[var(--border)] bg-[var(--surface)] shadow-2xl transition-transform duration-[250ms] ease-out ${
                         isMenuOpen ? "translate-x-0" : "translate-x-full"
                     }`}>
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/12 via-secondary/5 to-transparent dark:from-secondary/18 dark:via-secondary/7" />
-                    <div className="pointer-events-none absolute inset-y-6 left-0 w-px bg-gradient-to-b from-secondary/0 via-secondary/55 to-secondary/0" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent/12 via-accent/5 to-transparent" />
+                    <div className="pointer-events-none absolute inset-y-6 left-0 w-px bg-gradient-to-b from-accent/0 via-accent/55 to-accent/0" />
                     <div className="relative z-10 px-4 pb-6 pt-16">
                         <div className="px-1">
-                            <p className="px-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-black/45 dark:text-white/45">Navigation</p>
+                            <p className="px-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[var(--text-soft)]">Navigation</p>
                         </div>
                         <div className="mt-2 flex flex-col gap-1.5">
                             {navItems.map((item) => (
@@ -172,7 +180,7 @@ export default function NavBar() {
                         <div className="mt-8 flex justify-center">
                             <Link
                                 href="/"
-                                className="inline-flex items-center rounded-full border border-black/10 bg-white/70 px-3 py-1.5 text-black/85 shadow-sm ring-1 ring-white/65 transition-colors hover:bg-white dark:border-white/15 dark:bg-zinc-900/70 dark:text-white/85 dark:ring-white/10 dark:hover:bg-zinc-900"
+                                className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-1.5 text-[var(--text-muted)] shadow-sm ring-1 ring-[var(--ring)] transition-colors hover:bg-[var(--surface)]"
                                 onClick={closeMenu}>
                                 <span className="font-mono text-sm font-semibold tracking-[0.08em]">&lt;MP /&gt;</span>
                             </Link>

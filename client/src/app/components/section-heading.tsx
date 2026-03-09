@@ -39,10 +39,10 @@ export default function SectionHeading({ title, eyebrow, meta, variant }: Sectio
                 ref={rootRef}
                 className={`mb-6 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"}`}
             >
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-white/55">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)]">
                     {eyebrow}
                 </p>
-                <h2 className="mt-2 font-serif text-3xl font-bold text-zinc-900 dark:text-white md:text-5xl">
+                <h2 className="mt-2 font-serif text-3xl font-bold text-[var(--text)] md:text-5xl">
                     {title}
                 </h2>
             </div>
@@ -53,18 +53,18 @@ export default function SectionHeading({ title, eyebrow, meta, variant }: Sectio
         return (
             <div ref={rootRef} className="mb-6">
                 <div className="flex items-end justify-between gap-4">
-                    <h2 className="font-mono text-2xl font-bold text-zinc-900 dark:text-white md:text-4xl">
+                    <h2 className="font-mono text-2xl font-bold text-[var(--text)] md:text-4xl">
                         {`<${title} />`}
                     </h2>
                     {meta ? (
-                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-zinc-500 dark:text-white/55">
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-soft)]">
                             {meta}
                         </p>
                     ) : null}
                 </div>
-                <div className="mt-3 h-px overflow-hidden bg-zinc-200 dark:bg-white/15">
+                <div className="mt-3 h-px overflow-hidden bg-[var(--border)]">
                     <span
-                        className={`block h-full bg-gradient-to-r from-primary/60 to-secondary/60 transition-transform duration-700 ${isVisible ? "scale-x-100" : "scale-x-0"}`}
+                        className={`block h-full bg-gradient-to-r from-primary/60 via-accent/60 to-highlight/55 transition-transform duration-700 ${isVisible ? "scale-x-100" : "scale-x-0"}`}
                         style={{ transformOrigin: "left center" }}
                     />
                 </div>
@@ -75,15 +75,15 @@ export default function SectionHeading({ title, eyebrow, meta, variant }: Sectio
     return (
         <div ref={rootRef} className="mb-6">
             {eyebrow ? (
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-zinc-500 dark:text-white/55">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-soft)]">
                     {eyebrow}
                 </p>
             ) : null}
             <h2
                 className={`mt-2 text-2xl font-bold transition-all duration-500 md:text-4xl ${
                     isVisible
-                        ? "translate-y-0 scale-100 text-primary dark:text-secondary"
-                        : "translate-y-2 scale-[0.98] text-zinc-900 dark:text-white"
+                        ? "translate-y-0 scale-100 text-primary"
+                        : "translate-y-2 scale-[0.98] text-[var(--text)]"
                 }`}
             >
                 {title}

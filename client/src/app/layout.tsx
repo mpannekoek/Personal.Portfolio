@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
       </head>
-        <body className="bg-white dark:bg-black">
+        <body className="bg-[var(--bg)] text-[var(--text)]">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -28,7 +28,7 @@ export default function RootLayout({
             <div className="pt-6">
               {children}
             </div>
-            <div className="pt-6">
+            <div className="pt-0 md:pt-6">
               <Footer />
             </div>
           </ThemeProvider>

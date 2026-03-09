@@ -2,14 +2,70 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --color-debug-1: red;
-  --color-debug-2: yellow;
-  --color-debug-3: green;
+:root {
+  --bg: #f3f7ff;
+  --surface: #ffffff;
+  --surface-elevated: #f8fbff;
+  --surface-soft: #e7efff;
+  --text: #10213f;
+  --text-muted: #405476;
+  --text-soft: #60759a;
+  --border: rgb(29 78 216 / 0.18);
+  --border-strong: rgb(29 78 216 / 0.3);
+  --ring: rgb(14 165 233 / 0.28);
+  --overlay: rgb(8 17 38 / 0.46);
+  --primary: #1d4ed8;
+  --primary-contrast: #f7fbff;
+  --accent: #06b6d4;
+  --accent-contrast: #04222b;
+  --highlight: #f59e0b;
+  --highlight-contrast: #2e1800;
+}
 
-  --color-primary: var(--color-violet-600);
-  --color-secondary: #D53AED;
-  --color-accent: #EDD53A;
+.dark {
+  --bg: #030813;
+  --surface: #0a1428;
+  --surface-elevated: #0f1c33;
+  --surface-soft: #14243f;
+  --text: #e5efff;
+  --text-muted: #bfd0ef;
+  --text-soft: #95abd0;
+  --border: rgb(125 169 255 / 0.28);
+  --border-strong: rgb(125 169 255 / 0.44);
+  --ring: rgb(34 211 238 / 0.35);
+  --overlay: rgb(2 5 12 / 0.7);
+  --primary: #60a5fa;
+  --primary-contrast: #031127;
+  --accent: #22d3ee;
+  --accent-contrast: #03242d;
+  --highlight: #fbbf24;
+  --highlight-contrast: #2b1900;
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--accent);
+  --color-highlight: var(--highlight);
+  --color-accent: #7dd3fc;
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 38%, transparent);
+    color: var(--text);
+  }
+}
+
+@layer utilities {
+  .mp-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2;
+    --tw-ring-color: var(--ring);
+  }
 }
 
 .container {
@@ -53,11 +109,52 @@
   }
 }
 
+@keyframes toolkit-illustration-drift {
+  0%,
+  100% {
+    transform: scale(1.01) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.045) translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes toolkit-orb-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 1;
+  }
+}
+
+.toolkit-illustration {
+  animation: toolkit-illustration-drift 8.5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.toolkit-orb {
+  animation: toolkit-orb-float 4.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.toolkit-orb-delay {
+  animation-delay: 1.1s;
+}
+
+.toolkit-orb-delay-2 {
+  animation-delay: 2.1s;
+}
+
 .profile-photo-wrap {
-  --mp-photo-tone-1: color-mix(in srgb, var(--color-primary) 72%, white);
-  --mp-photo-tone-2: color-mix(in srgb, var(--color-primary) 88%, var(--color-secondary));
-  --mp-photo-tone-3: color-mix(in srgb, var(--color-accent) 82%, white);
-  --mp-photo-tone-4: color-mix(in srgb, var(--color-secondary) 78%, white);
+  --mp-photo-tone-1: color-mix(in srgb, var(--primary) 72%, white);
+  --mp-photo-tone-2: color-mix(in srgb, var(--primary) 76%, var(--accent));
+  --mp-photo-tone-3: color-mix(in srgb, var(--accent) 56%, white);
+  --mp-photo-tone-4: color-mix(in srgb, var(--accent) 84%, white);
   --mp-photo-shadow: rgb(15 23 42 / 0.26);
   position: relative;
   display: inline-flex;
@@ -67,10 +164,10 @@
 }
 
 .dark .profile-photo-wrap {
-  --mp-photo-tone-1: color-mix(in srgb, var(--color-primary) 72%, white);
-  --mp-photo-tone-2: color-mix(in srgb, var(--color-secondary) 76%, white);
-  --mp-photo-tone-3: color-mix(in srgb, var(--color-accent) 72%, white);
-  --mp-photo-tone-4: color-mix(in srgb, var(--color-primary) 44%, var(--color-secondary));
+  --mp-photo-tone-1: color-mix(in srgb, var(--primary) 70%, white);
+  --mp-photo-tone-2: color-mix(in srgb, var(--accent) 74%, white);
+  --mp-photo-tone-3: color-mix(in srgb, var(--accent) 52%, white);
+  --mp-photo-tone-4: color-mix(in srgb, var(--primary) 52%, var(--accent));
   --mp-photo-shadow: rgb(2 6 23 / 0.62);
 }
 
@@ -151,9 +248,17 @@
   filter: blur(26px) saturate(1.1);
 }
 
+body[data-mobile-menu-open="true"] .mobile-project-badge {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .profile-photo-orbit::after,
-  .profile-photo-glow {
+  .profile-photo-glow,
+  .toolkit-illustration,
+  .toolkit-orb {
     animation: none;
     opacity: 0.85;
   }

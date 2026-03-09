@@ -9,7 +9,7 @@ export default function ThemeToggle() {
     return (
         <button 
             type="button"
-            className="cursor-pointer hover:bg-primary/85 rounded-3xl p-1"
+            className="mp-focus cursor-pointer rounded-3xl border border-[var(--border)] bg-[var(--surface-elevated)] p-1 text-[var(--text)] transition-colors hover:bg-primary/15"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
             <Sun size='22' className="hidden dark:block"  />
             <Moon size='22' className="dark:hidden" />
