@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, type FocusEvent } from "react";
 import FadeIn from './components/providers/fade-in-provider';
 import ContactShortcut from "./components/contact-shortcut";
 import SectionHeading from "./components/section-heading";
@@ -9,8 +12,10 @@ import {
     Brain,
     BrainCircuit,
     Database,
+    FolderKanban,
     HandMetal,
     Puzzle,
+    X,
     type LucideIcon,
 } from "lucide-react";
 import { FaMicrosoft } from "react-icons/fa";
@@ -125,9 +130,264 @@ const currentProject: CurrentProject = {
     linkLabel: "Follow progress",
 };
 
-export default function Page() {
+function ProjectProgressContent({ compact = false }: { compact?: boolean }) {
     return (
-        <main>
+        <>
+            <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center rounded-full border border-zinc-300 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-zinc-700 dark:border-white/20 dark:text-white/80">
+                    {currentProject.status}
+                </span>
+                <span className="text-xs font-medium uppercase tracking-[0.08em] text-zinc-500 dark:text-white/60">
+                    {currentProject.timeline}
+                </span>
+            </div>
+            <h3 className={`font-bold text-zinc-900 dark:text-white ${compact ? "mt-4 text-xl" : "mt-5 text-2xl"}`}>
+                {currentProject.title}
+            </h3>
+            <p className={`text-zinc-700 dark:text-white/75 ${compact ? "mt-3 text-sm leading-6" : "mt-3 text-base leading-relaxed"}`}>
+                {currentProject.summary}
+            </p>
+            <div className="mt-5">
+                <div className="mb-2 flex items-center justify-between gap-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-700 dark:text-white/70">
+                        Progress
+                    </p>
+                    <div className="flex items-center gap-3">
+                        <span className="inline-flex items-center text-xs font-medium text-zinc-600 dark:text-white/65">
+                            <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-zinc-500 dark:bg-white/70" />
+                            In progress
+                        </span>
+                        <p className="text-sm font-bold text-zinc-800 dark:text-white">
+                            {currentProject.progress}%
+                        </p>
+                    </div>
+                </div>
+                <div
+                    role="progressbar"
+                    aria-label="Current project progress"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={currentProject.progress}
+                    className="h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-white/12"
+                >
+                    <div
+                        className="h-full rounded-full bg-zinc-900 transition-all dark:bg-white"
+                        style={{ width: `${currentProject.progress}%` }}
+                    />
+                </div>
+            </div>
+            <div className={`mt-5 flex flex-wrap gap-2 ${compact ? "max-w-xs" : ""}`}>
+                {currentProject.stack.map((item) => (
+                    <span
+                        key={item}
+                        className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-white/14 dark:bg-white/5 dark:text-white/80"
+                    >
+                        {item}
+                    </span>
+                ))}
+            </div>
+            <Link
+                href={currentProject.href}
+                className={`inline-flex items-center rounded-full border border-zinc-300 text-sm font-semibold text-zinc-800 transition-colors hover:border-zinc-400 hover:bg-zinc-50 dark:border-white/20 dark:text-white dark:hover:bg-white/8 ${compact ? "mt-5 px-4 py-2" : "mt-6 px-5 py-2.5"}`}
+            >
+                {currentProject.linkLabel}
+            </Link>
+        </>
+    );
+}
+
+function ProjectProgressMobileWidget({
+    isOpen,
+    onOpen,
+    onClose,
+}: {
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+}) {
+    return (
+        <div className="md:hidden">
+            <button
+                type="button"
+                aria-expanded={isOpen}
+                aria-controls="mobile-project-drawer"
+                aria-label={isOpen ? "Close current project panel" : "Open current project panel"}
+                onClick={isOpen ? onClose : onOpen}
+                className="fixed right-4 bottom-4 z-50 cursor-pointer"
+            >
+                <span className={`flex items-center gap-3 rounded-full border border-zinc-200 bg-white/94 px-3 py-3 shadow-2xl shadow-zinc-900/15 ring-1 ring-white/75 backdrop-blur transition-all duration-300 dark:border-white/12 dark:bg-zinc-950/92 dark:ring-white/10 ${isOpen ? "scale-95" : "scale-100"}`}>
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950">
+                        {isOpen ? <X size={20} /> : <FolderKanban size={20} />}
+                    </span>
+                    <span className="pr-1">
+                        <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-white/50">
+                            Project
+                        </span>
+                        <span className="mt-0.5 block text-sm font-semibold leading-none text-zinc-950 dark:text-white">
+                            {isOpen ? "Close" : `${currentProject.progress}%`}
+                        </span>
+                    </span>
+                </span>
+            </button>
+            <button
+                type="button"
+                aria-hidden={!isOpen}
+                tabIndex={isOpen ? 0 : -1}
+                onClick={onClose}
+                className={`fixed inset-0 z-30 bg-zinc-950/35 transition-opacity duration-500 ease-out dark:bg-black/55 ${isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+            />
+            <div
+                id="mobile-project-drawer"
+                className={`fixed inset-x-3 bottom-3 z-40 overflow-hidden rounded-[1.9rem] border border-zinc-200 bg-white/94 shadow-2xl shadow-zinc-900/15 ring-1 ring-white/75 backdrop-blur transition-transform duration-500 ease-out dark:border-white/12 dark:bg-zinc-950/92 dark:ring-white/10 ${isOpen ? "translate-y-0" : "translate-y-[calc(100%+5rem)]"}`}
+            >
+                <div className="border-b border-zinc-200 px-5 pb-4 pt-3 dark:border-white/10">
+                    <span className="mx-auto mb-4 block h-1.5 w-14 rounded-full bg-zinc-300 dark:bg-white/18" />
+                    <div className="flex items-center justify-between gap-4">
+                        <div>
+                            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-zinc-500 dark:text-white/50">
+                                Current Build
+                            </p>
+                            <p className="mt-1 text-sm font-semibold text-zinc-900 dark:text-white">
+                                {currentProject.title}
+                            </p>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-2xl font-bold leading-none text-zinc-950 dark:text-white">
+                                {currentProject.progress}%
+                            </p>
+                            <p className="mt-1 text-[0.68rem] uppercase tracking-[0.12em] text-zinc-500 dark:text-white/55">
+                                In progress
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="px-5 pb-5 pt-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center rounded-full border border-zinc-300 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-zinc-700 dark:border-white/20 dark:text-white/80">
+                            {currentProject.status}
+                        </span>
+                        <span className="text-[0.68rem] font-medium uppercase tracking-[0.1em] text-zinc-500 dark:text-white/55">
+                            {currentProject.timeline}
+                        </span>
+                    </div>
+                    <p className="mt-4 text-sm leading-6 text-zinc-700 dark:text-white/75">
+                        {currentProject.summary}
+                    </p>
+                    <div className="mt-4">
+                        <div
+                            role="progressbar"
+                            aria-label="Current project progress"
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                            aria-valuenow={currentProject.progress}
+                            className="h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-white/12"
+                        >
+                            <div
+                                className="h-full rounded-full bg-zinc-900 dark:bg-white"
+                                style={{ width: `${currentProject.progress}%` }}
+                            />
+                        </div>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                        {currentProject.stack.slice(0, 3).map((item) => (
+                            <span
+                                key={item}
+                                className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-[0.68rem] font-medium text-zinc-700 dark:border-white/14 dark:bg-white/5 dark:text-white/80"
+                            >
+                                {item}
+                            </span>
+                        ))}
+                    </div>
+                    <Link
+                        href={currentProject.href}
+                        className="mt-4 inline-flex items-center rounded-full border border-zinc-300 px-4 py-2 text-sm font-semibold text-zinc-800 transition-colors hover:border-zinc-400 hover:bg-zinc-50 dark:border-white/20 dark:text-white dark:hover:bg-white/8"
+                    >
+                        {currentProject.linkLabel}
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ProjectProgressDesktopWidget({
+    isOpen,
+    onClose,
+}: {
+    isOpen: boolean;
+    onClose: () => void;
+}) {
+    const [isHovered, setIsHovered] = useState(false);
+    const [isFocusWithin, setIsFocusWithin] = useState(false);
+    const [isHoverSuppressed, setIsHoverSuppressed] = useState(false);
+    const isExpanded = isOpen || isFocusWithin || (isHovered && !isHoverSuppressed);
+
+    return (
+        <aside className="pointer-events-none fixed top-1/2 left-0 z-40 hidden -translate-y-1/2 lg:block">
+            <div
+                className={`pointer-events-auto w-80 transition-transform duration-500 ease-out motion-reduce:translate-x-0 motion-reduce:transition-none ${isExpanded ? "translate-x-0" : "-translate-x-64"}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => {
+                    setIsHovered(false);
+                    setIsHoverSuppressed(false);
+                }}
+                onFocusCapture={() => setIsFocusWithin(true)}
+                onBlurCapture={(event: FocusEvent<HTMLDivElement>) => {
+                    if (event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                        return;
+                    }
+
+                    setIsFocusWithin(false);
+                }}
+            >
+                <div className="flex overflow-hidden rounded-r-[2rem] border border-zinc-200 bg-white/92 shadow-2xl shadow-zinc-900/10 ring-1 ring-white/75 backdrop-blur dark:border-white/12 dark:bg-zinc-950/88 dark:ring-white/10">
+                    <div className="flex-1 p-6">
+                        <div className="mb-4 flex justify-end">
+                            <button
+                                type="button"
+                                aria-label="Close current project widget"
+                                onClick={() => {
+                                    setIsHoverSuppressed(true);
+                                    setIsFocusWithin(false);
+                                    onClose();
+                                }}
+                                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-white/12 dark:text-white/70 dark:hover:bg-white/10"
+                            >
+                                <X size={16} />
+                            </button>
+                        </div>
+                        <ProjectProgressContent compact />
+                    </div>
+                    <div className="flex w-16 flex-col items-center justify-between border-l border-zinc-200 bg-zinc-900 px-3 py-5 text-white dark:border-white/12 dark:bg-white dark:text-zinc-950">
+                        <span className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] [writing-mode:vertical-rl] rotate-180">
+                            Project
+                        </span>
+                        <span className="text-xl font-bold">
+                            {currentProject.progress}%
+                        </span>
+                        <span className="h-10 w-px bg-white/35 dark:bg-zinc-950/20" aria-hidden="true" />
+                    </div>
+                </div>
+            </div>
+        </aside>
+    );
+}
+
+export default function Page() {
+    const [isMobileProjectDrawerOpen, setIsMobileProjectDrawerOpen] = useState(false);
+    const [isDesktopProjectWidgetOpen, setIsDesktopProjectWidgetOpen] = useState(false);
+
+    return (
+        <main className="pb-28 md:pb-0">
+            <ProjectProgressDesktopWidget
+                isOpen={isDesktopProjectWidgetOpen}
+                onClose={() => setIsDesktopProjectWidgetOpen(false)}
+            />
+            <ProjectProgressMobileWidget
+                isOpen={isMobileProjectDrawerOpen}
+                onOpen={() => setIsMobileProjectDrawerOpen(true)}
+                onClose={() => setIsMobileProjectDrawerOpen(false)}
+            />
             <div className="container mx-auto px-6">
                 <div className="lg:max-w-3xl">
                     <FadeIn delay="delay-100">
@@ -136,7 +396,21 @@ export default function Page() {
                         </h1>
                         <div className="flex flex-wrap gap-3">
                             <Link
-                                href="#current-project"
+                                href="#current-project-anchor"
+                                onClick={(event) => {
+                                    if (window.innerWidth >= 1024) {
+                                        event.preventDefault();
+                                        setIsDesktopProjectWidgetOpen(true);
+                                        return;
+                                    }
+
+                                    if (window.innerWidth >= 768) {
+                                        return;
+                                    }
+
+                                    event.preventDefault();
+                                    setIsMobileProjectDrawerOpen(true);
+                                }}
                                 className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/85 dark:bg-secondary dark:text-black dark:hover:bg-secondary/85"
                             >
                                 View current project
@@ -150,6 +424,7 @@ export default function Page() {
                         </div>
                     </FadeIn>
                 </div>
+                <div id="current-project-anchor" className="scroll-mt-24" />
                 <div className="flex flex-col md:flex-row mt-6">
                     <div className="md:basis-64 mx-6">
                         <FadeIn delay="delay-300">
@@ -217,74 +492,6 @@ export default function Page() {
                             ))}
                         </div>
                         <div className="mt-8 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent dark:via-secondary/45" />
-                    </FadeIn>
-                    <FadeIn delay="delay-700">
-                        <article
-                            id="current-project"
-                            className="mt-6 rounded-2xl border border-zinc-200 bg-white/80 p-6 shadow-sm ring-1 ring-white/70 transition-all hover:border-zinc-300 dark:border-white/12 dark:bg-zinc-950/75 dark:ring-white/8 md:p-8 scroll-mt-24"
-                        >
-                            <div>
-                                <div className="mb-4 flex flex-wrap items-center gap-2">
-                                    <span className="inline-flex items-center rounded-full border border-zinc-300 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-zinc-700 dark:border-white/20 dark:text-white/80">
-                                        {currentProject.status}
-                                    </span>
-                                    <span className="text-sm font-medium text-zinc-600 dark:text-white/65">
-                                        {currentProject.timeline}
-                                    </span>
-                                </div>
-                                <h3 className="text-2xl font-bold text-zinc-900 dark:text-white md:text-3xl">
-                                    {currentProject.title}
-                                </h3>
-                                <p className="mt-3 max-w-3xl text-base leading-relaxed text-zinc-700 dark:text-white/75">
-                                    {currentProject.summary}
-                                </p>
-                                <div className="mt-6">
-                                    <div className="mb-2 flex items-center justify-between">
-                                        <p className="text-sm font-semibold uppercase tracking-[0.08em] text-zinc-700 dark:text-white/70">
-                                            Progress
-                                        </p>
-                                        <div className="flex items-center gap-3">
-                                            <span className="inline-flex items-center text-xs font-medium text-zinc-600 dark:text-white/65">
-                                                <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-zinc-500 dark:bg-white/70" />
-                                                In progress
-                                            </span>
-                                            <p className="text-sm font-bold text-zinc-800 dark:text-white">
-                                                {currentProject.progress}%
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        role="progressbar"
-                                        aria-label="Current project progress"
-                                        aria-valuemin={0}
-                                        aria-valuemax={100}
-                                        aria-valuenow={currentProject.progress}
-                                        className="h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-white/12"
-                                    >
-                                        <div
-                                            className="h-full rounded-full bg-zinc-900 transition-all dark:bg-white"
-                                            style={{ width: `${currentProject.progress}%` }}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="mt-6 flex flex-wrap gap-2">
-                                    {currentProject.stack.map((item) => (
-                                        <span
-                                            key={item}
-                                            className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-white/14 dark:bg-white/5 dark:text-white/80"
-                                        >
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                                <Link
-                                    href={currentProject.href}
-                                    className="mt-6 inline-flex items-center rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-semibold text-zinc-800 transition-colors hover:border-zinc-400 hover:bg-zinc-50 dark:border-white/20 dark:text-white dark:hover:bg-white/8"
-                                >
-                                    {currentProject.linkLabel}
-                                </Link>
-                            </div>
-                        </article>
                     </FadeIn>
                     <FadeIn delay="delay-700">
                         <div className="mt-6">

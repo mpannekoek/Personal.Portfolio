@@ -24,6 +24,28 @@ export default function NavBar() {
     const [isMenuVisible, setMenuVisible] = useState(false);
     const closeTimeoutRef = useRef<number | null>(null);
 
+    const clearCloseTimeout = () => {
+        if (closeTimeoutRef.current !== null) {
+            window.clearTimeout(closeTimeoutRef.current);
+            closeTimeoutRef.current = null;
+        }
+    };
+
+    const openMenu = () => {
+        clearCloseTimeout();
+        setMenuVisible(true);
+        setMenuOpen(true);
+    };
+
+    const closeMenu = () => {
+        clearCloseTimeout();
+        setMenuOpen(false);
+        closeTimeoutRef.current = window.setTimeout(() => {
+            setMenuVisible(false);
+            closeTimeoutRef.current = null;
+        }, 250);
+    };
+
     const isActivePath = (href: string) => {
         if (href === "/") {
             return pathname === href;
@@ -65,26 +87,8 @@ export default function NavBar() {
     }, []);
 
     useEffect(() => {
-        if (closeTimeoutRef.current !== null) {
-            window.clearTimeout(closeTimeoutRef.current);
-            closeTimeoutRef.current = null;
-        }
-
-        if (isMenuOpen) {
-            setMenuVisible(true);
-            return;
-        }
-
-        closeTimeoutRef.current = window.setTimeout(() => {
-            setMenuVisible(false);
-        }, 250);
-    }, [isMenuOpen]);
-
-    useEffect(() => {
         return () => {
-            if (closeTimeoutRef.current !== null) {
-                window.clearTimeout(closeTimeoutRef.current);
-            }
+            clearCloseTimeout();
         };
     }, []);
 
@@ -119,7 +123,12 @@ export default function NavBar() {
                                 aria-expanded={isMenuOpen}
                                 aria-label={isMenuOpen ? "Close mobile menu" : "Open mobile menu"}
                                 onClick={() => {
-                                    setMenuOpen((prev) => !prev);
+                                    if (isMenuOpen) {
+                                        closeMenu();
+                                        return;
+                                    }
+
+                                    openMenu();
                                 }}>
                                 {isMenuOpen ? <X size="22" /> : <Menu size="22" />}
                             </button>
@@ -135,7 +144,7 @@ export default function NavBar() {
                     type="button"
                     aria-label="Close mobile menu backdrop"
                     className="absolute inset-0 bg-black/45 backdrop-blur-sm transition-opacity duration-[250ms] ease-out"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={closeMenu}
                 />
                 <div
                     id="mobile-menu"
@@ -155,7 +164,7 @@ export default function NavBar() {
                                     href={item.href}
                                     aria-current={isActivePath(item.href) ? "page" : undefined}
                                     className={getMobileNavItemClass(isActivePath(item.href))}
-                                    onClick={() => setMenuOpen(false)}>
+                                    onClick={closeMenu}>
                                     {item.label}
                                 </Link>
                             ))}
@@ -164,7 +173,7 @@ export default function NavBar() {
                             <Link
                                 href="/"
                                 className="inline-flex items-center rounded-full border border-black/10 bg-white/70 px-3 py-1.5 text-black/85 shadow-sm ring-1 ring-white/65 transition-colors hover:bg-white dark:border-white/15 dark:bg-zinc-900/70 dark:text-white/85 dark:ring-white/10 dark:hover:bg-zinc-900"
-                                onClick={() => setMenuOpen(false)}>
+                                onClick={closeMenu}>
                                 <span className="font-mono text-sm font-semibold tracking-[0.08em]">&lt;MP /&gt;</span>
                             </Link>
                         </div>
