@@ -1,5 +1,7 @@
 # Deployment
 
+This document lives under `docs/` as part of the repo structure cleanup.
+
 This repo publishes a Docker image to GitHub Container Registry and can deploy that image to Azure App Service.
 
 ## Image Publishing

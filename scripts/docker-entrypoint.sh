@@ -1,11 +1,11 @@
 #!/bin/sh
 set -eu
 
-cd /app/api
+cd /app/src/api
 npm start &
 api_pid=$!
 
-cd /app/client
+cd /app/src/web
 npm start &
 client_pid=$!
 

@@ -6,7 +6,8 @@
 **/node_modules/
 
 # Next.js build output
-client/.next/
+src/web/.next/
+src/web/out/
 
 # Local debug logs
 npm-debug.log*
