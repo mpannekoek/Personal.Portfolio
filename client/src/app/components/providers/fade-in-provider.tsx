@@ -30,7 +30,7 @@ export default function FadeIn({ children, delay = "delay-0" }: { children: Reac
     return (
         <div
             ref={ref}
-            className={`transition-[opacity,transform] ${delay} duration-700 ease-out ${
+            className={`transition-[opacity,transform] ${delay} duration-500 ease-out ${
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
             }`}
         >

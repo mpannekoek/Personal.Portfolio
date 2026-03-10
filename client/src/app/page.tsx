@@ -493,7 +493,7 @@ export default function Page() {
                         </div>
                         <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
                     </FadeIn>
-                    <FadeIn delay="delay-700">
+                    <FadeIn delay="delay-200">
                         <div className="mt-6">
                             <SectionHeading
                                 title="Toolkit"
@@ -567,7 +567,7 @@ export default function Page() {
                         </div>
                     </FadeIn>
                     <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
-                    <FadeIn delay="delay-700">
+                    <FadeIn delay="delay-200">
                         <div id="contact-shortcut" className="mt-6 scroll-mt-24">
                             <SectionHeading
                                 title="Let's Connect"
