@@ -77,7 +77,7 @@ jobs:
             az webapp config container set \
               --name "${APP_NAME}" \
               --resource-group "${RESOURCE_GROUP}" \
-              --docker-custom-image-name "${image}"
+              --container-image-name "${image}"
           fi
 
       - name: Set App Settings
