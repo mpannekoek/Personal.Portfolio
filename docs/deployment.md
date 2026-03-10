@@ -7,7 +7,7 @@ This repo publishes a Docker image to GitHub Container Registry and can deploy t
 ## Image Publishing
 
 Workflow:
-- [.github/workflows/publish-image.yml](/home/martijn/dev/projects/personal/Personal.Portfolio/.github/workflows/publish-image.yml)
+- [.github/workflows/publish-image.yml](../.github/workflows/publish-image.yml)
 
 Published image format:
 ```text
@@ -21,7 +21,7 @@ Other tags produced by the workflow:
 ## Azure Deployment
 
 Workflow:
-- [.github/workflows/deploy-azure.yml](/home/martijn/dev/projects/personal/Personal.Portfolio/.github/workflows/deploy-azure.yml)
+- [.github/workflows/deploy-azure.yml](../.github/workflows/deploy-azure.yml)
 
 This workflow expects an existing Azure App Service for Linux that runs a custom container.
 

@@ -10,16 +10,16 @@ This repository contains:
 ## Local Structure
 
 Frontend:
-- [src/web/package.json](/home/martijn/dev/projects/personal/Personal.Portfolio/src/web/package.json)
+- [src/web/package.json](src/web/package.json)
 
 API:
-- [src/api/package.json](/home/martijn/dev/projects/personal/Personal.Portfolio/src/api/package.json)
-- [src/api/server.js](/home/martijn/dev/projects/personal/Personal.Portfolio/src/api/server.js)
+- [src/api/package.json](src/api/package.json)
+- [src/api/server.js](src/api/server.js)
 
 Container startup:
-- [Dockerfile](/home/martijn/dev/projects/personal/Personal.Portfolio/Dockerfile)
-- [scripts/docker-entrypoint.sh](/home/martijn/dev/projects/personal/Personal.Portfolio/scripts/docker-entrypoint.sh)
-- [docs/deployment.md](/home/martijn/dev/projects/personal/Personal.Portfolio/docs/deployment.md)
+- [Dockerfile](Dockerfile)
+- [scripts/docker-entrypoint.sh](scripts/docker-entrypoint.sh)
+- [docs/deployment.md](docs/deployment.md)
 
 ## Running Locally
 
@@ -72,7 +72,7 @@ Notes:
 
 ## Deployment
 
-Deployment instructions are documented in [docs/deployment.md](/home/martijn/dev/projects/personal/Personal.Portfolio/docs/deployment.md).
+Deployment instructions are documented in [docs/deployment.md](docs/deployment.md).
 
 That includes:
 - publishing the image to GitHub Container Registry
@@ -82,7 +82,7 @@ That includes:
 ## GitHub Workflows
 
 Image publish workflow:
-- [.github/workflows/publish-image.yml](/home/martijn/dev/projects/personal/Personal.Portfolio/.github/workflows/publish-image.yml)
+- [.github/workflows/publish-image.yml](.github/workflows/publish-image.yml)
 
 Azure deploy workflow:
-- [.github/workflows/deploy-azure.yml](/home/martijn/dev/projects/personal/Personal.Portfolio/.github/workflows/deploy-azure.yml)
+- [.github/workflows/deploy-azure.yml](.github/workflows/deploy-azure.yml)
