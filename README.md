@@ -2,29 +2,31 @@
 
 This repository contains:
 
-- `client/`: a Next.js frontend
-- `api/`: a minimal Express API
+- `src/web/`: a Next.js frontend
+- `src/api/`: a minimal Express API
+- `docs/`: project and deployment documentation
 - `Dockerfile`: a single image that runs both services in one container
 
 ## Local Structure
 
 Frontend:
-- [client/package.json](/home/martijn/dev/projects/personal/Personal.Portfolio/client/package.json)
+- [src/web/package.json](/home/martijn/dev/projects/personal/Personal.Portfolio/src/web/package.json)
 
 API:
-- [api/package.json](/home/martijn/dev/projects/personal/Personal.Portfolio/api/package.json)
-- [api/server.js](/home/martijn/dev/projects/personal/Personal.Portfolio/api/server.js)
+- [src/api/package.json](/home/martijn/dev/projects/personal/Personal.Portfolio/src/api/package.json)
+- [src/api/server.js](/home/martijn/dev/projects/personal/Personal.Portfolio/src/api/server.js)
 
 Container startup:
 - [Dockerfile](/home/martijn/dev/projects/personal/Personal.Portfolio/Dockerfile)
-- [docker/start.sh](/home/martijn/dev/projects/personal/Personal.Portfolio/docker/start.sh)
+- [scripts/docker-entrypoint.sh](/home/martijn/dev/projects/personal/Personal.Portfolio/scripts/docker-entrypoint.sh)
+- [docs/deployment.md](/home/martijn/dev/projects/personal/Personal.Portfolio/docs/deployment.md)
 
 ## Running Locally
 
 Install dependencies:
 
 ```bash
-cd client
+cd src/web
 npm install
 
 cd ../api
@@ -34,19 +36,19 @@ npm install
 Run the API:
 
 ```bash
-cd api
+cd src/api
 npm run dev
 ```
 
-Run the client:
+Run the web app:
 
 ```bash
-cd client
+cd src/web
 npm run dev
 ```
 
 Default ports:
-- client: `3000`
+- web: `3000`
 - api: `3001`
 
 ## Docker
@@ -66,11 +68,11 @@ docker run -p 3000:3000 -p 3001:3001 personal-portfolio
 Notes:
 - the public app runs on `3000`
 - the API listens internally on `127.0.0.1:3001`
-- the client proxies `/api/*` to the API
+- the web app proxies `/api/*` to the API
 
 ## Deployment
 
-Deployment instructions are documented in [DEPLOYMENT.md](/home/martijn/dev/projects/personal/Personal.Portfolio/DEPLOYMENT.md).
+Deployment instructions are documented in [docs/deployment.md](/home/martijn/dev/projects/personal/Personal.Portfolio/docs/deployment.md).
 
 That includes:
 - publishing the image to GitHub Container Registry

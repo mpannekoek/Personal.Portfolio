@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Portfolio Dev Servers",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bash -lc '(cd \"${workspaceFolder}/src/api\" && npm run dev) & (cd \"${workspaceFolder}/src/web\" && npm run dev) & wait'"
+    }
+  ]
+}

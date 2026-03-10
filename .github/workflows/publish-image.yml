@@ -8,8 +8,8 @@ on:
       - ".dockerignore"
       - ".github/workflows/publish-image.yml"
       - "Dockerfile"
-      - "api/**"
-      - "client/**"
+      - "src/api/**"
+      - "src/web/**"
       - "docker/**"
   workflow_dispatch:
 

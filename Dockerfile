@@ -1,26 +1,26 @@
-FROM node:24.14.0-bookworm AS client-deps
+FROM node:24.14.0-bookworm AS web-deps
 
-WORKDIR /app/client
-COPY client/package*.json ./
+WORKDIR /app/src/web
+COPY src/web/package*.json ./
 RUN npm ci
 
-FROM node:24.14.0-bookworm AS client-builder
+FROM node:24.14.0-bookworm AS web-builder
 
-WORKDIR /app/client
-COPY --from=client-deps /app/client/node_modules ./node_modules
-COPY client ./
+WORKDIR /app/src/web
+COPY --from=web-deps /app/src/web/node_modules ./node_modules
+COPY src/web ./
 RUN npm run build
 
-FROM node:24.14.0-bookworm AS client-prod-deps
+FROM node:24.14.0-bookworm AS web-prod-deps
 
-WORKDIR /app/client
-COPY client/package*.json ./
+WORKDIR /app/src/web
+COPY src/web/package*.json ./
 RUN npm ci --omit=dev
 
 FROM node:24.14.0-bookworm AS api-prod-deps
 
-WORKDIR /app/api
-COPY api/package*.json ./
+WORKDIR /app/src/api
+COPY src/api/package*.json ./
 RUN npm ci --omit=dev
 
 FROM node:24.14.0-bookworm AS runner
@@ -31,19 +31,19 @@ ENV NODE_ENV=production
 ENV PORT=3001
 ENV API_ORIGIN=http://127.0.0.1:3001
 
-COPY --from=client-prod-deps /app/client/node_modules ./client/node_modules
-COPY --from=client-builder /app/client/.next ./client/.next
-COPY --from=client-builder /app/client/public ./client/public
-COPY --from=client-builder /app/client/package.json ./client/package.json
-COPY --from=client-builder /app/client/next.config.mjs ./client/next.config.mjs
+COPY --from=web-prod-deps /app/src/web/node_modules ./src/web/node_modules
+COPY --from=web-builder /app/src/web/.next ./src/web/.next
+COPY --from=web-builder /app/src/web/public ./src/web/public
+COPY --from=web-builder /app/src/web/package.json ./src/web/package.json
+COPY --from=web-builder /app/src/web/next.config.mjs ./src/web/next.config.mjs
 
-COPY --from=api-prod-deps /app/api/node_modules ./api/node_modules
-COPY api/package.json ./api/package.json
-COPY api/server.js ./api/server.js
+COPY --from=api-prod-deps /app/src/api/node_modules ./src/api/node_modules
+COPY src/api/package.json ./src/api/package.json
+COPY src/api/server.js ./src/api/server.js
 
-COPY docker/start.sh ./docker/start.sh
-RUN chmod +x /app/docker/start.sh
+COPY scripts/docker-entrypoint.sh ./scripts/docker-entrypoint.sh
+RUN chmod +x /app/scripts/docker-entrypoint.sh
 
 EXPOSE 3000 3001
 
-CMD ["/app/docker/start.sh"]
+CMD ["/app/scripts/docker-entrypoint.sh"]
