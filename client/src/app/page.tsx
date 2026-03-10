@@ -523,7 +523,7 @@ export default function Page() {
                                 </div>
                                 <div className="relative min-h-64 border-t border-[var(--border)] lg:border-l lg:border-t-0">
                                     <Image
-                                        src="/images/about/dev-cartoon-chibi.svg"
+                                        src="/images/about/dev-cartoon.svg"
                                         alt="Chibi-style developer cartoon workspace illustration"
                                         fill
                                         sizes="(min-width: 1024px) 35vw, 100vw"
