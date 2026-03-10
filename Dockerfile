@@ -1,29 +1,29 @@
-FROM node:22-bullseye AS client-deps
+FROM node:24.14.0-bookworm AS client-deps
 
 WORKDIR /app/client
 COPY client/package*.json ./
 RUN npm ci
 
-FROM node:22-bullseye AS client-builder
+FROM node:24.14.0-bookworm AS client-builder
 
 WORKDIR /app/client
 COPY --from=client-deps /app/client/node_modules ./node_modules
 COPY client ./
 RUN npm run build
 
-FROM node:22-bullseye AS client-prod-deps
+FROM node:24.14.0-bookworm AS client-prod-deps
 
 WORKDIR /app/client
 COPY client/package*.json ./
 RUN npm ci --omit=dev
 
-FROM node:22-bullseye AS api-prod-deps
+FROM node:24.14.0-bookworm AS api-prod-deps
 
 WORKDIR /app/api
 COPY api/package*.json ./
 RUN npm ci --omit=dev
 
-FROM node:22-bullseye AS runner
+FROM node:24.14.0-bookworm AS runner
 
 WORKDIR /app
 
