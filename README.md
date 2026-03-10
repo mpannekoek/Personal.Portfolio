@@ -10,11 +10,10 @@ This repository contains:
 ## Local Structure
 
 Frontend:
-- [src/web/package.json](src/web/package.json)
+- [src/web/](src/web/)
 
 API:
-- [src/api/package.json](src/api/package.json)
-- [src/api/server.js](src/api/server.js)
+- [src/api/](src/api/)
 
 Container startup:
 - [Dockerfile](Dockerfile)
