@@ -12,7 +12,7 @@ export default function Footer() {
     const pageLinks = [
         { href: "/about", label: "About" },
         { href: "/blog", label: "Blog" },
-        { href: "/contact", label: "Contact" },
+        { href: "/hire-me", label: "Hire Me" },
     ];
     const socialLinks = [
         {

@@ -419,7 +419,7 @@ export default function Page() {
                                 href="#contact-shortcut"
                                 className="inline-flex items-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/40 hover:text-primary"
                             >
-                                Contact me
+                                Let&apos;s Connect
                             </Link>
                         </div>
                     </FadeIn>

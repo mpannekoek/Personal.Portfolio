@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import ThemeToggle from "../../theme/theme-toggle";
+import LanguageToggle from "../../theme/language-toggle";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,12 +10,13 @@ import { usePathname } from "next/navigation";
 type NavItem = {
     href: string;
     label: string;
+    variant?: "default" | "cta";
 };
 
 const navItems: NavItem[] = [
     { href: "/", label: "About" },
     { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Contact" },
+    { href: "/hire-me", label: "Hire Me", variant: "cta" },
 ];
 
 export default function NavBar() {
@@ -47,6 +49,10 @@ export default function NavBar() {
     };
 
     const isActivePath = (href: string) => {
+        if (href.includes("#")) {
+            return false;
+        }
+
         if (href === "/") {
             return pathname === href;
         }
@@ -54,7 +60,13 @@ export default function NavBar() {
         return pathname.startsWith(href);
     };
 
-    const getDesktopNavItemClass = (isActive: boolean) => {
+    const getDesktopNavItemClass = (item: NavItem, isActive: boolean) => {
+        if (item.variant === "cta") {
+            return isSticky
+                ? "rounded-full bg-primary px-4 py-1.5 font-semibold text-[var(--primary-contrast)] shadow-md transition-colors hover:bg-primary/85"
+                : "rounded-full bg-primary px-4 py-1.5 font-semibold text-[var(--primary-contrast)] shadow-sm transition-colors hover:bg-primary/85";
+        }
+
         if (isActive) {
             return isSticky
                 ? "rounded-full bg-[var(--surface)] px-3 py-1 font-semibold text-[var(--text)] shadow-md ring-1 ring-[var(--ring)]"
@@ -66,7 +78,11 @@ export default function NavBar() {
             : "rounded-full px-3 py-1 text-[var(--text-muted)] transition-colors hover:bg-primary/10 hover:text-[var(--text)]";
     };
 
-    const getMobileNavItemClass = (isActive: boolean) => {
+    const getMobileNavItemClass = (item: NavItem, isActive: boolean) => {
+        if (item.variant === "cta") {
+            return "rounded-lg bg-primary px-3 py-2.5 font-semibold text-[var(--primary-contrast)] shadow-sm transition-colors hover:bg-primary/85";
+        }
+
         if (isActive) {
             return "rounded-lg bg-primary/12 px-3 py-2.5 font-semibold text-primary ring-1 ring-primary/25";
         }
@@ -118,11 +134,12 @@ export default function NavBar() {
                                         key={item.href}
                                         href={item.href}
                                         aria-current={isActivePath(item.href) ? "page" : undefined}
-                                        className={getDesktopNavItemClass(isActivePath(item.href))}>
+                                        className={getDesktopNavItemClass(item, isActivePath(item.href))}>
                                         {item.label}
                                     </Link>
                                 ))}
                             </div>
+                            <LanguageToggle />
                             <ThemeToggle />
                             <button
                                 type="button"
@@ -171,7 +188,7 @@ export default function NavBar() {
                                     key={item.href}
                                     href={item.href}
                                     aria-current={isActivePath(item.href) ? "page" : undefined}
-                                    className={getMobileNavItemClass(isActivePath(item.href))}
+                                    className={getMobileNavItemClass(item, isActivePath(item.href))}
                                     onClick={closeMenu}>
                                     {item.label}
                                 </Link>
