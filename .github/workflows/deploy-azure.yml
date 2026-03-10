@@ -1,0 +1,74 @@
+name: Deploy To Azure App Service
+
+on:
+  workflow_run:
+    workflows:
+      - Publish Docker Image
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Docker image tag to deploy
+        required: false
+        default: latest
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/${{ github.event.repository.name }}
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      APP_NAME: ${{ vars.AZURE_WEBAPP_NAME }}
+      GHCR_PAT: ${{ secrets.GHCR_PAT }}
+      GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+      IMAGE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.image_tag || 'latest' }}
+      RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+
+    steps:
+      - name: Log In To Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Configure App Service Container
+        shell: bash
+        run: |
+          set -eu
+
+          image="${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+
+          if [ -n "${GHCR_USERNAME}" ] && [ -n "${GHCR_PAT}" ]; then
+            az webapp config container set \
+              --name "${APP_NAME}" \
+              --resource-group "${RESOURCE_GROUP}" \
+              --docker-custom-image-name "${image}" \
+              --docker-registry-server-url "https://${REGISTRY}" \
+              --docker-registry-server-user "${GHCR_USERNAME}" \
+              --docker-registry-server-password "${GHCR_PAT}"
+          else
+            az webapp config container set \
+              --name "${APP_NAME}" \
+              --resource-group "${RESOURCE_GROUP}" \
+              --docker-custom-image-name "${image}"
+          fi
+
+      - name: Set App Settings
+        shell: bash
+        run: |
+          az webapp config appsettings set \
+            --name "${APP_NAME}" \
+            --resource-group "${RESOURCE_GROUP}" \
+            --settings WEBSITES_PORT=3000
