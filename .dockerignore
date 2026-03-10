@@ -1,0 +1,12 @@
+# Git metadata
+.git
+.gitignore
+
+# Dependencies
+**/node_modules/
+
+# Next.js build output
+client/.next/
+
+# Local debug logs
+npm-debug.log*

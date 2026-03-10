@@ -13,8 +13,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:tunnel": "cloudflared tunnel --url http://localhost:3000",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build --webpack",
+    "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "eslint ."
   },
   "devDependencies": {
