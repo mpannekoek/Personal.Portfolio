@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "title": "Martijn Pannekoek",
+    "description": "Software architect, engineer, and developer."
+  },
+  "nav": {
+    "about": "About",
+    "blog": "Blog",
+    "hireMe": "Hire Me",
+    "mobileNavigation": "Navigation",
+    "openMenu": "Open mobile menu",
+    "closeMenu": "Close mobile menu",
+    "closeBackdrop": "Close mobile menu backdrop"
+  },
+  "languageToggle": {
+    "label": "Change language",
+    "switchTo": "Switch language to {locale}"
+  },
+  "footer": {
+    "badge": "Personal Brand",
+    "role": "Software Architect",
+    "summary": "Designing resilient digital products with modern engineering standards and product-focused execution.",
+    "pages": "Pages",
+    "connect": "Connect",
+    "about": "About",
+    "blog": "Blog",
+    "hireMe": "Hire Me",
+    "social": {
+      "github": "Check my code on GitHub",
+      "linkedin": "Follow me on LinkedIn",
+      "instagram": "Follow me on Instagram",
+      "facebook": "Follow me on Facebook",
+      "email": "Mail me"
+    },
+    "copyright": "All Rights Reserved."
+  },
+  "blogPage": {
+    "eyebrow": "Blog",
+    "title": "Blog page",
+    "description": "Content coming soon."
+  },
+  "hireMePage": {
+    "eyebrow": "Hire Me",
+    "title": "Hire me page",
+    "description": "Content coming soon."
+  },
+  "contact": {
+    "badge": "Quick Contact",
+    "title": "Let's talk about your next project",
+    "description": "Send a short message right from this page. It opens your email app with everything prefilled so you can reach out quickly.",
+    "directEmail": "Prefer direct email?",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "Your name",
+      "email": "you@example.com",
+      "message": "Tell me what you want to build."
+    },
+    "cta": "Send via email",
+    "mailto": {
+      "defaultSender": "Portfolio visitor",
+      "intro": "Hi Martijn, this is {sender}{senderEmail}.",
+      "fallbackBody": "I would love to connect with you.",
+      "subject": "Portfolio contact request"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Hi and welcome. Let's build something amazing together!",
+      "viewProject": "View current project",
+      "connect": "Let's Connect"
+    },
+    "about": {
+      "greeting": "Hi there",
+      "title": "Who am I?",
+      "description": "I'm Martijn, a software architect with a passion for building scalable and efficient systems. I have experience in various programming languages and frameworks, and I enjoy exploring new technologies. Feel free to check out my <blog>blog</blog> for insights on software development, architecture, and more!",
+      "photoAlt": "Picture of Martijn"
+    },
+    "project": {
+      "status": "Actively building",
+      "timeline": "March 2026",
+      "title": "AI-Assisted Portfolio Evolution",
+      "summary": "Improving this portfolio with practical UX upgrades, stronger project storytelling, and better conversion paths from visitor to contact.",
+      "progress": 68,
+      "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Lucide", "Vercel"],
+      "href": "/blog",
+      "linkLabel": "Follow progress",
+      "progressLabel": "Progress",
+      "inProgress": "In progress",
+      "progressAria": "Current project progress",
+      "widgetLabel": "Project",
+      "currentBuild": "Current Build",
+      "openPanel": "Open current project panel",
+      "closePanel": "Close current project panel",
+      "closeWidget": "Close current project widget"
+    },
+    "insights": {
+      "title": "Insights",
+      "eyebrow": "Recent Writing",
+      "readPost": "Read post",
+      "latestPosts": [
+        {
+          "title": "Designing Reliable Event-Driven Systems",
+          "excerpt": "A pragmatic walkthrough of building resilient event pipelines without overcomplicating your architecture.",
+          "date": "March 1, 2026",
+          "href": "/blog"
+        },
+        {
+          "title": "Choosing the Right Boundaries in a Modular Monolith",
+          "excerpt": "How to define module boundaries that stay maintainable as teams and product complexity grow.",
+          "date": "February 16, 2026",
+          "href": "/blog"
+        },
+        {
+          "title": "From Prototype to Production: A Backend Checklist",
+          "excerpt": "The essential technical checks I use to turn proof-of-concepts into dependable production services.",
+          "date": "February 2, 2026",
+          "href": "/blog"
+        }
+      ]
+    },
+    "toolkit": {
+      "title": "Toolkit",
+      "eyebrow": "15 years building",
+      "badge": "Practical + Curious",
+      "description": "I have 15 years of programming experience across backend, cloud, and product development. Lately, I have been focusing more on AI-driven product development and agentic workflows. I enjoy solving complex problems, and I keep learning every day to stay sharp with new tools, patterns, and technologies.",
+      "tags": ["Architecture", "AI Workflows", "Continuous Learning"],
+      "illustrationAlt": "Chibi-style developer cartoon workspace illustration",
+      "skillGroups": [
+        {
+          "title": "Backend & Full Stack",
+          "skills": ["Full stack .NET", "Node.js", "Python", "SQL", "PostgreSQL", "YAML"]
+        },
+        {
+          "title": "Cloud & DevOps",
+          "skills": ["Azure", "Docker", "Podman", "Git"]
+        },
+        {
+          "title": "AI & Agentic",
+          "skills": ["AI", "OpenAI Codex", "Agentic Development"]
+        },
+        {
+          "title": "Professional Strengths",
+          "skills": ["Critical thinking", "Problem solving"]
+        }
+      ]
+    },
+    "connect": {
+      "title": "Let's Connect",
+      "eyebrow": "Open for collaborations"
+    }
+  }
+}

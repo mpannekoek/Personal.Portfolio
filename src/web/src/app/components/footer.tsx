@@ -1,44 +1,46 @@
-import Link from "next/link";
 import Image from "next/image";
 import { Code } from "lucide-react";
-import facebookIcon from "../../../public/images/icons/social/facebook-icon.svg";
-import githubIcon from "../../../public/images/icons/social/github-icon.svg";
-import gmailIcon from "../../../public/images/icons/social/gmail-icon.svg";
-import instagramIcon from "../../../public/images/icons/social/instagram-icon.svg";
-import linkedinIcon from "../../../public/images/icons/social/linkedin-icon.svg";
+import { useTranslations } from "next-intl";
+import { Link } from "../../i18n/navigation";
+import facebookIcon from "../../assets/icons/social/facebook-icon.svg";
+import githubIcon from "../../assets/icons/social/github-icon.svg";
+import gmailIcon from "../../assets/icons/social/gmail-icon.svg";
+import instagramIcon from "../../assets/icons/social/instagram-icon.svg";
+import linkedinIcon from "../../assets/icons/social/linkedin-icon.svg";
 
 export default function Footer() {
+    const t = useTranslations("footer");
     const currentYear = new Date().getFullYear();
     const pageLinks = [
-        { href: "/about", label: "About" },
-        { href: "/blog", label: "Blog" },
-        { href: "/hire-me", label: "Hire Me" },
+        { href: "/", label: t("about") },
+        { href: "/blog", label: t("blog") },
+        { href: "/hire-me", label: t("hireMe") },
     ];
     const socialLinks = [
         {
             href: "https://github.com",
             icon: githubIcon,
-            alt: "Check my code on GitHub",
+            alt: t("social.github"),
         },
         {
             href: "https://linkedin.com",
             icon: linkedinIcon,
-            alt: "Follow me on LinkedIn",
+            alt: t("social.linkedin"),
         },
         {
             href: "https://instagram.com",
             icon: instagramIcon,
-            alt: "Follow me on Instagram",
+            alt: t("social.instagram"),
         },
         {
             href: "https://facebook.com",
             icon: facebookIcon,
-            alt: "Follow me on Facebook",
+            alt: t("social.facebook"),
         },
         {
             href: "mailto:martijnpannekoek.development@gmail.com",
             icon: gmailIcon,
-            alt: "Mail me",
+            alt: t("social.email"),
         },
     ];
 
@@ -50,16 +52,16 @@ export default function Footer() {
                         <div>
                             <div className="inline-flex items-center gap-2 rounded-full border border-highlight/35 bg-highlight/12 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-highlight">
                                 <Code size={14} />
-                                Personal Brand
+                                {t("badge")}
                             </div>
                             <p className="mt-4 text-2xl font-bold text-[var(--text)]">Martijn Pannekoek</p>
-                            <p className="mt-1 text-base text-[var(--text-muted)]">Software Architect</p>
+                            <p className="mt-1 text-base text-[var(--text-muted)]">{t("role")}</p>
                             <p className="mt-4 max-w-md text-sm leading-6 text-[var(--text-soft)]">
-                                Designing resilient digital products with modern engineering standards and product-focused execution.
+                                {t("summary")}
                             </p>
                         </div>
                         <div>
-                            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--text-soft)]">Pages</p>
+                            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--text-soft)]">{t("pages")}</p>
                             <div className="mt-3 flex flex-col gap-2">
                                 {pageLinks.map((pageLink) => (
                                     <Link
@@ -72,7 +74,7 @@ export default function Footer() {
                             </div>
                         </div>
                         <div>
-                            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--text-soft)]">Connect</p>
+                            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--text-soft)]">{t("connect")}</p>
                             <div className="mt-4 flex flex-wrap gap-3">
                                 {socialLinks.map((socialLink) => (
                                     <Link
@@ -101,7 +103,7 @@ export default function Footer() {
                             className="mp-focus font-medium text-[var(--text)] underline-offset-4 transition-colors hover:text-primary hover:underline">
                             Martijn Pannekoek
                         </Link>
-                        . All Rights Reserved.
+                        . {t("copyright")}
                     </div>
                 </div>
             </div>

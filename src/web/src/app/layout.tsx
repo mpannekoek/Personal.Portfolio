@@ -1,6 +1,4 @@
 import "./globals.css";
-import NavBar from "./components/nav";
-import Footer from "./components/footer";
 import ThemeProvider from "../theme/theme-provider";
 
 export const metadata = {
@@ -14,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="nl" suppressHydrationWarning>
       <head>
       </head>
         <body className="bg-[var(--bg)] text-[var(--text)]">
@@ -23,14 +21,8 @@ export default function RootLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-          >            
-            <NavBar />            
-            <div className="pt-6">
-              {children}
-            </div>
-            <div className="pt-0 md:pt-6">
-              <Footer />
-            </div>
+          >
+            {children}
           </ThemeProvider>
         </body>
     </html>

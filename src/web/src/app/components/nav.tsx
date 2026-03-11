@@ -4,22 +4,23 @@ import { useState, useEffect, useRef } from "react";
 import ThemeToggle from "../../theme/theme-toggle";
 import LanguageToggle from "../../theme/language-toggle";
 import { Menu, X } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "../../i18n/navigation";
 
 type NavItem = {
     href: string;
-    label: string;
+    labelKey: "about" | "blog" | "hireMe";
     variant?: "default" | "cta";
 };
 
 const navItems: NavItem[] = [
-    { href: "/", label: "About" },
-    { href: "/blog", label: "Blog" },
-    { href: "/hire-me", label: "Hire Me", variant: "cta" },
+    { href: "/", labelKey: "about" },
+    { href: "/blog", labelKey: "blog" },
+    { href: "/hire-me", labelKey: "hireMe", variant: "cta" },
 ];
 
 export default function NavBar() {
+    const t = useTranslations("nav");
     const pathname = usePathname();
     const [isSticky, setSticky] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -135,7 +136,7 @@ export default function NavBar() {
                                         href={item.href}
                                         aria-current={isActivePath(item.href) ? "page" : undefined}
                                         className={getDesktopNavItemClass(item, isActivePath(item.href))}>
-                                        {item.label}
+                                        {t(item.labelKey)}
                                     </Link>
                                 ))}
                             </div>
@@ -146,7 +147,7 @@ export default function NavBar() {
                                 className="relative z-[61] cursor-pointer rounded-3xl p-1 transition-colors hover:bg-primary/85 md:hidden"
                                 aria-controls="mobile-menu"
                                 aria-expanded={isMenuOpen}
-                                aria-label={isMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+                                aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
                                 onClick={() => {
                                     if (isMenuOpen) {
                                         closeMenu();
@@ -167,7 +168,7 @@ export default function NavBar() {
                 } ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}>
                 <button
                     type="button"
-                    aria-label="Close mobile menu backdrop"
+                    aria-label={t("closeBackdrop")}
                     className="absolute inset-0 bg-[var(--overlay)] backdrop-blur-sm transition-opacity duration-[250ms] ease-out"
                     onClick={closeMenu}
                 />
@@ -180,7 +181,7 @@ export default function NavBar() {
                     <div className="pointer-events-none absolute inset-y-6 left-0 w-px bg-gradient-to-b from-accent/0 via-accent/55 to-accent/0" />
                     <div className="relative z-10 px-4 pb-6 pt-16">
                         <div className="px-1">
-                            <p className="px-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[var(--text-soft)]">Navigation</p>
+                            <p className="px-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[var(--text-soft)]">{t("mobileNavigation")}</p>
                         </div>
                         <div className="mt-2 flex flex-col gap-1.5">
                             {navItems.map((item) => (
@@ -190,7 +191,7 @@ export default function NavBar() {
                                     aria-current={isActivePath(item.href) ? "page" : undefined}
                                     className={getMobileNavItemClass(item, isActivePath(item.href))}
                                     onClick={closeMenu}>
-                                    {item.label}
+                                    {t(item.labelKey)}
                                 </Link>
                             ))}
                         </div>

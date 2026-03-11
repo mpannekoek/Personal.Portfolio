@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "title": "Martijn Pannekoek",
+    "description": "Software architect, engineer en developer."
+  },
+  "nav": {
+    "about": "Over mij",
+    "blog": "Blog",
+    "hireMe": "Huur mij in",
+    "mobileNavigation": "Navigatie",
+    "openMenu": "Open mobiel menu",
+    "closeMenu": "Sluit mobiel menu",
+    "closeBackdrop": "Sluit mobiele menu-achtergrond"
+  },
+  "languageToggle": {
+    "label": "Wijzig taal",
+    "switchTo": "Schakel taal naar {locale}"
+  },
+  "footer": {
+    "badge": "Persoonlijk merk",
+    "role": "Software Architect",
+    "summary": "Ik ontwerp veerkrachtige digitale producten met moderne engineeringstandaarden en een sterke focus op productuitvoering.",
+    "pages": "Pagina's",
+    "connect": "Contact",
+    "about": "Over mij",
+    "blog": "Blog",
+    "hireMe": "Huur mij in",
+    "social": {
+      "github": "Bekijk mijn code op GitHub",
+      "linkedin": "Volg mij op LinkedIn",
+      "instagram": "Volg mij op Instagram",
+      "facebook": "Volg mij op Facebook",
+      "email": "Mail mij"
+    },
+    "copyright": "Alle rechten voorbehouden."
+  },
+  "blogPage": {
+    "eyebrow": "Blog",
+    "title": "Blogpagina",
+    "description": "Content volgt binnenkort."
+  },
+  "hireMePage": {
+    "eyebrow": "Huur mij in",
+    "title": "Huur-mij-in pagina",
+    "description": "Content volgt binnenkort."
+  },
+  "contact": {
+    "badge": "Snel contact",
+    "title": "Laten we praten over je volgende project",
+    "description": "Stuur direct vanaf deze pagina een kort bericht. Je e-mailapp wordt geopend met alles alvast ingevuld, zodat je snel contact kunt opnemen.",
+    "directEmail": "Liever direct mailen?",
+    "fields": {
+      "name": "Naam",
+      "email": "E-mail",
+      "message": "Bericht"
+    },
+    "placeholders": {
+      "name": "Jouw naam",
+      "email": "jij@voorbeeld.nl",
+      "message": "Vertel me wat je wilt bouwen."
+    },
+    "cta": "Verstuur via e-mail",
+    "mailto": {
+      "defaultSender": "Bezoeker van portfolio",
+      "intro": "Hoi Martijn, ik ben {sender}{senderEmail}.",
+      "fallbackBody": "Ik kom graag met je in contact.",
+      "subject": "Contactverzoek via portfolio"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Hoi en welkom. Laten we samen iets moois bouwen!",
+      "viewProject": "Bekijk huidig project",
+      "connect": "Laten we verbinden"
+    },
+    "about": {
+      "greeting": "Hoi daar",
+      "title": "Wie ben ik?",
+      "description": "Ik ben Martijn, een software architect met een passie voor het bouwen van schaalbare en efficiënte systemen. Ik heb ervaring met verschillende programmeertalen en frameworks, en ik ontdek graag nieuwe technologieën. Bekijk gerust mijn <blog>blog</blog> voor inzichten over softwareontwikkeling, architectuur en meer!",
+      "photoAlt": "Foto van Martijn"
+    },
+    "project": {
+      "status": "Actief in ontwikkeling",
+      "timeline": "Maart 2026",
+      "title": "AI-ondersteunde portfolio-evolutie",
+      "summary": "Ik verbeter dit portfolio met praktische UX-upgrades, sterkere projectverhalen en betere conversiepaden van bezoeker naar contact.",
+      "progress": 68,
+      "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Lucide", "Vercel"],
+      "href": "/blog",
+      "linkLabel": "Volg de voortgang",
+      "progressLabel": "Voortgang",
+      "inProgress": "Bezig",
+      "progressAria": "Voortgang van huidig project",
+      "widgetLabel": "Project",
+      "currentBuild": "Huidige build",
+      "openPanel": "Open paneel van huidig project",
+      "closePanel": "Sluit paneel van huidig project",
+      "closeWidget": "Sluit widget van huidig project"
+    },
+    "insights": {
+      "title": "Inzichten",
+      "eyebrow": "Recente artikelen",
+      "readPost": "Lees artikel",
+      "latestPosts": [
+        {
+          "title": "Betrouwbare event-driven systemen ontwerpen",
+          "excerpt": "Een pragmatische uitleg over het bouwen van veerkrachtige event-pipelines zonder je architectuur onnodig ingewikkeld te maken.",
+          "date": "1 maart 2026",
+          "href": "/blog"
+        },
+        {
+          "title": "De juiste grenzen kiezen in een modulair monoliet",
+          "excerpt": "Hoe je modulegrenzen definieert die onderhoudbaar blijven naarmate teams en productcomplexiteit groeien.",
+          "date": "16 februari 2026",
+          "href": "/blog"
+        },
+        {
+          "title": "Van prototype naar productie: een backend-checklist",
+          "excerpt": "De technische controles die ik gebruik om proof-of-concepts om te zetten in betrouwbare productieservices.",
+          "date": "2 februari 2026",
+          "href": "/blog"
+        }
+      ]
+    },
+    "toolkit": {
+      "title": "Toolkit",
+      "eyebrow": "15 jaar bouwen",
+      "badge": "Praktisch + nieuwsgierig",
+      "description": "Ik heb 15 jaar programmeerervaring in backend, cloud en productontwikkeling. De laatste tijd richt ik me steeds meer op AI-gedreven productontwikkeling en agentische workflows. Ik los graag complexe problemen op en blijf elke dag leren om scherp te blijven met nieuwe tools, patronen en technologieën.",
+      "tags": ["Architectuur", "AI-workflows", "Blijven leren"],
+      "illustrationAlt": "Cartoonillustratie van een ontwikkelaar aan het werk",
+      "skillGroups": [
+        {
+          "title": "Backend & full stack",
+          "skills": ["Full stack .NET", "Node.js", "Python", "SQL", "PostgreSQL", "YAML"]
+        },
+        {
+          "title": "Cloud & DevOps",
+          "skills": ["Azure", "Docker", "Podman", "Git"]
+        },
+        {
+          "title": "AI & agentisch",
+          "skills": ["AI", "OpenAI Codex", "Agentische ontwikkeling"]
+        },
+        {
+          "title": "Professionele sterke punten",
+          "skills": ["Kritisch denken", "Probleemoplossend vermogen"]
+        }
+      ]
+    },
+    "connect": {
+      "title": "Laten we verbinden",
+      "eyebrow": "Open voor samenwerkingen"
+    }
+  }
+}

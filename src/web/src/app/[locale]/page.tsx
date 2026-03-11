@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, type FocusEvent } from "react";
-import FadeIn from './components/providers/fade-in-provider';
-import ContactShortcut from "./components/contact-shortcut";
-import SectionHeading from "./components/section-heading";
+import { useTranslations } from "next-intl";
+import FadeIn from "../components/providers/fade-in-provider";
+import ContactShortcut from "../components/contact-shortcut";
+import SectionHeading from "../components/section-heading";
 import Image from "next/image";
-import Link from "next/link";
-import martijnImage from "../../public/images/about/martijn.jpg";
+import martijnImage from "../../assets/about/martijn.jpg";
 import {
     BotMessageSquare,
     Brain,
@@ -31,6 +31,7 @@ import {
     SiYaml,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
+import { Link } from "../../i18n/navigation";
 
 type LatestPostPreview = {
     title: string;
@@ -49,6 +50,11 @@ type SkillGroup = {
     skills: SkillItem[];
 };
 
+type TranslatedSkillGroup = {
+    title: string;
+    skills: string[];
+};
+
 type CurrentProject = {
     title: string;
     summary: string;
@@ -58,79 +64,40 @@ type CurrentProject = {
     stack: string[];
     href: string;
     linkLabel: string;
+    progressLabel: string;
+    inProgress: string;
+    progressAria: string;
+    widgetLabel: string;
+    currentBuild: string;
+    openPanel: string;
+    closePanel: string;
+    closeWidget: string;
 };
 
-const latestPosts: LatestPostPreview[] = [
-    {
-        title: "Designing Reliable Event-Driven Systems",
-        excerpt: "A pragmatic walkthrough of building resilient event pipelines without overcomplicating your architecture.",
-        date: "March 1, 2026",
-        href: "/blog",
-    },
-    {
-        title: "Choosing the Right Boundaries in a Modular Monolith",
-        excerpt: "How to define module boundaries that stay maintainable as teams and product complexity grow.",
-        date: "February 16, 2026",
-        href: "/blog",
-    },
-    {
-        title: "From Prototype to Production: A Backend Checklist",
-        excerpt: "The essential technical checks I use to turn proof-of-concepts into dependable production services.",
-        date: "February 2, 2026",
-        href: "/blog",
-    },
+const skillGroupIcons: Array<Array<LucideIcon | IconType>> = [
+    [SiDotnet, SiNodedotjs, SiPython, Database, SiPostgresql, SiYaml],
+    [FaMicrosoft, SiDocker, SiPodman, SiGit],
+    [BrainCircuit, SiOpenai, BotMessageSquare],
+    [Brain, Puzzle],
 ];
 
-const skillGroups: SkillGroup[] = [
-    {
-        title: "Backend & Full Stack",
-        skills: [
-            { label: "Full stack .NET", icon: SiDotnet },
-            { label: "Node.js", icon: SiNodedotjs },
-            { label: "Python", icon: SiPython },
-            { label: "SQL", icon: Database },
-            { label: "PostgreSQL", icon: SiPostgresql },
-            { label: "YAML", icon: SiYaml },
-        ],
-    },
-    {
-        title: "Cloud & DevOps",
-        skills: [
-            { label: "Azure", icon: FaMicrosoft },
-            { label: "Docker", icon: SiDocker },
-            { label: "Podman", icon: SiPodman },
-            { label: "Git", icon: SiGit },
-        ],
-    },
-    {
-        title: "AI & Agentic",
-        skills: [
-            { label: "AI", icon: BrainCircuit },
-            { label: "OpenAI Codex", icon: SiOpenai },
-            { label: "Agentic Development", icon: BotMessageSquare },
-        ],
-    },
-    {
-        title: "Professional Strengths",
-        skills: [
-            { label: "Critical thinking", icon: Brain },
-            { label: "Problem solving", icon: Puzzle },
-        ],
-    },
-];
+function buildSkillGroups(groups: TranslatedSkillGroup[]): SkillGroup[] {
+    return groups.map((group, groupIndex) => ({
+        title: group.title,
+        skills: group.skills.map((label, skillIndex) => ({
+            label,
+            icon: skillGroupIcons[groupIndex][skillIndex],
+        })),
+    }));
+}
 
-const currentProject: CurrentProject = {
-    title: "AI-Assisted Portfolio Evolution",
-    summary: "Improving this portfolio with practical UX upgrades, stronger project storytelling, and better conversion paths from visitor to contact.",
-    status: "Actively building",
-    timeline: "March 2026",
-    progress: 68,
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide", "Vercel"],
-    href: "/blog",
-    linkLabel: "Follow progress",
-};
-
-function ProjectProgressContent({ compact = false }: { compact?: boolean }) {
+function ProjectProgressContent({
+    compact = false,
+    currentProject,
+}: {
+    compact?: boolean;
+    currentProject: CurrentProject;
+}) {
     return (
         <>
             <div className="flex flex-wrap items-center gap-2">
@@ -150,12 +117,12 @@ function ProjectProgressContent({ compact = false }: { compact?: boolean }) {
             <div className="mt-5">
                 <div className="mb-2 flex items-center justify-between gap-3">
                     <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-muted)]">
-                        Progress
+                        {currentProject.progressLabel}
                     </p>
                     <div className="flex items-center gap-3">
                         <span className="inline-flex items-center text-xs font-medium text-[var(--text-soft)]">
                             <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-highlight" />
-                            In progress
+                            {currentProject.inProgress}
                         </span>
                         <p className="text-sm font-bold text-[var(--text)]">
                             {currentProject.progress}%
@@ -164,7 +131,7 @@ function ProjectProgressContent({ compact = false }: { compact?: boolean }) {
                 </div>
                 <div
                     role="progressbar"
-                    aria-label="Current project progress"
+                    aria-label={currentProject.progressAria}
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-valuenow={currentProject.progress}
@@ -197,10 +164,12 @@ function ProjectProgressContent({ compact = false }: { compact?: boolean }) {
 }
 
 function ProjectProgressMobileWidget({
+    currentProject,
     isOpen,
     onOpen,
     onClose,
 }: {
+    currentProject: CurrentProject;
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
@@ -211,7 +180,7 @@ function ProjectProgressMobileWidget({
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls="mobile-project-drawer"
-                aria-label={isOpen ? "Close current project panel" : "Open current project panel"}
+                aria-label={isOpen ? currentProject.closePanel : currentProject.openPanel}
                 onClick={isOpen ? onClose : onOpen}
                 className="mobile-project-badge fixed right-4 bottom-4 z-50 cursor-pointer"
             >
@@ -221,10 +190,10 @@ function ProjectProgressMobileWidget({
                     </span>
                     <span className="pr-1">
                         <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
-                            Project
+                            {currentProject.widgetLabel}
                         </span>
                         <span className="mt-0.5 block text-sm font-semibold leading-none text-[var(--text)]">
-                            {isOpen ? "Close" : `${currentProject.progress}%`}
+                            {isOpen ? currentProject.inProgress : `${currentProject.progress}%`}
                         </span>
                     </span>
                 </span>
@@ -245,7 +214,7 @@ function ProjectProgressMobileWidget({
                     <div className="flex items-center justify-between gap-4">
                         <div>
                             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
-                                Current Build
+                                {currentProject.currentBuild}
                             </p>
                             <p className="mt-1 text-sm font-semibold text-[var(--text)]">
                                 {currentProject.title}
@@ -256,7 +225,7 @@ function ProjectProgressMobileWidget({
                                 {currentProject.progress}%
                             </p>
                             <p className="mt-1 text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text-soft)]">
-                                In progress
+                                {currentProject.inProgress}
                             </p>
                         </div>
                     </div>
@@ -276,7 +245,7 @@ function ProjectProgressMobileWidget({
                     <div className="mt-4">
                         <div
                             role="progressbar"
-                            aria-label="Current project progress"
+                            aria-label={currentProject.progressAria}
                             aria-valuemin={0}
                             aria-valuemax={100}
                             aria-valuenow={currentProject.progress}
@@ -311,9 +280,11 @@ function ProjectProgressMobileWidget({
 }
 
 function ProjectProgressDesktopWidget({
+    currentProject,
     isOpen,
     onClose,
 }: {
+    currentProject: CurrentProject;
     isOpen: boolean;
     onClose: () => void;
 }) {
@@ -345,7 +316,7 @@ function ProjectProgressDesktopWidget({
                         <div className="mb-4 flex justify-end">
                             <button
                                 type="button"
-                                aria-label="Close current project widget"
+                                aria-label={currentProject.closeWidget}
                                 onClick={() => {
                                     setIsHoverSuppressed(true);
                                     setIsFocusWithin(false);
@@ -356,11 +327,11 @@ function ProjectProgressDesktopWidget({
                                 <X size={16} />
                             </button>
                         </div>
-                        <ProjectProgressContent compact />
+                        <ProjectProgressContent compact currentProject={currentProject} />
                     </div>
                     <div className="flex w-16 flex-col items-center justify-between border-l border-[var(--border)] bg-[var(--primary)] px-3 py-5 text-[var(--primary-contrast)]">
                         <span className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] [writing-mode:vertical-rl] rotate-180">
-                            Project
+                            {currentProject.widgetLabel}
                         </span>
                         <span className="text-xl font-bold">
                             {currentProject.progress}%
@@ -374,16 +345,24 @@ function ProjectProgressDesktopWidget({
 }
 
 export default function Page() {
+    const t = useTranslations("home");
+    const latestPosts = t.raw("insights.latestPosts") as LatestPostPreview[];
+    const translatedSkillGroups = t.raw("toolkit.skillGroups") as TranslatedSkillGroup[];
+    const skillGroups = buildSkillGroups(translatedSkillGroups);
+    const currentProject = t.raw("project") as CurrentProject;
+    const toolkitTags = t.raw("toolkit.tags") as string[];
     const [isMobileProjectDrawerOpen, setIsMobileProjectDrawerOpen] = useState(false);
     const [isDesktopProjectWidgetOpen, setIsDesktopProjectWidgetOpen] = useState(false);
 
     return (
         <main className="pb-8 md:pb-0">
             <ProjectProgressDesktopWidget
+                currentProject={currentProject}
                 isOpen={isDesktopProjectWidgetOpen}
                 onClose={() => setIsDesktopProjectWidgetOpen(false)}
             />
             <ProjectProgressMobileWidget
+                currentProject={currentProject}
                 isOpen={isMobileProjectDrawerOpen}
                 onOpen={() => setIsMobileProjectDrawerOpen(true)}
                 onClose={() => setIsMobileProjectDrawerOpen(false)}
@@ -392,7 +371,7 @@ export default function Page() {
                 <div className="lg:max-w-3xl">
                     <FadeIn delay="delay-100">
                         <h1 className="font-bold mb-6 text-3xl md:text-5xl">
-                            Hi and welcome. Let&apos;s build something amazing together!
+                            {t("hero.title")}
                         </h1>
                         <div className="flex flex-wrap gap-3">
                             <Link
@@ -413,13 +392,13 @@ export default function Page() {
                                 }}
                                 className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-[var(--primary-contrast)] transition-colors hover:bg-primary/85"
                             >
-                                View current project
+                                {t("hero.viewProject")}
                             </Link>
                             <Link
                                 href="#contact-shortcut"
                                 className="inline-flex items-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/40 hover:text-primary"
                             >
-                                Let&apos;s Connect
+                                {t("hero.connect")}
                             </Link>
                         </div>
                     </FadeIn>
@@ -433,7 +412,7 @@ export default function Page() {
                                 <span className="profile-photo-glow" aria-hidden="true" />
                                 <Image
                                     src={martijnImage}
-                                    alt="Picture of Martijn"
+                                    alt={t("about.photoAlt")}
                                     className="profile-photo-image rounded-full border-10 border-primary" />
                             </div>
                         </FadeIn>
@@ -442,19 +421,21 @@ export default function Page() {
                         <FadeIn delay="delay-500">
                             <div className="flex">
                                 <span className="font-mono">
-                                    Hi there
+                                    {t("about.greeting")}
                                 </span>
                                 <span className="ml-2 text-primary">
                                     <HandMetal />
                                 </span>
                             </div>
                             <h2 className="font-bold text-primary mb-6 text-2xl md:text-4xl">
-                                Who am I?
+                                {t("about.title")}
                             </h2>
                             <p className="text-xl">
-                                I&apos;m Martijn, a software architect with a passion for building scalable and efficient systems.
-                                I have experience in various programming languages and frameworks, and I enjoy exploring new technologies.
-                                Feel free to check out my <Link href="/blog"><b>blog</b></Link> for insights on software development, architecture, and more!
+                                {t.rich("about.description", {
+                                    blog: (chunks) => (
+                                        <Link href="/blog"><b>{chunks}</b></Link>
+                                    ),
+                                })}
                             </p>
                         </FadeIn>
                     </div>
@@ -462,8 +443,8 @@ export default function Page() {
                 <div className="min-h-160 mt-6">
                     <FadeIn delay="delay-700">
                         <SectionHeading
-                            title="Insights"
-                            eyebrow="Recent Writing"
+                            title={t("insights.title")}
+                            eyebrow={t("insights.eyebrow")}
                             variant="reactive"
                         />
                         <div className="flex flex-col md:flex-row">
@@ -486,7 +467,7 @@ export default function Page() {
                                         href={post.href}
                                         className="font-semibold text-primary underline decoration-accent/45 decoration-2 underline-offset-4 hover:text-primary/80 hover:decoration-accent/65"
                                     >
-                                        Read post
+                                        {t("insights.readPost")}
                                     </Link>
                                 </article>
                             ))}
@@ -496,8 +477,8 @@ export default function Page() {
                     <FadeIn delay="delay-200">
                         <div className="mt-6">
                             <SectionHeading
-                                title="Toolkit"
-                                eyebrow="15 years building"
+                                title={t("toolkit.title")}
+                                eyebrow={t("toolkit.eyebrow")}
                                 variant="reactive"
                             />
                         </div>
@@ -507,24 +488,22 @@ export default function Page() {
                                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/7 via-transparent to-transparent" />
                                     <div className="relative">
                                         <p className="inline-flex items-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-soft)]">
-                                            Practical + Curious
+                                            {t("toolkit.badge")}
                                         </p>
                                         <p className="mt-4 text-lg leading-relaxed text-[var(--text-muted)]">
-                                            I have 15 years of programming experience across backend, cloud, and product development.
-                                            Lately, I have been focusing more on AI-driven product development and agentic workflows.
-                                            I enjoy solving complex problems, and I keep learning every day to stay sharp with new tools, patterns, and technologies.
+                                            {t("toolkit.description")}
                                         </p>
                                         <div className="mt-5 flex flex-wrap gap-2">
-                                            <span className="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">Architecture</span>
-                                            <span className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">AI Workflows</span>
-                                            <span className="inline-flex items-center rounded-full border border-highlight/35 bg-highlight/12 px-3 py-1 text-xs font-medium text-highlight">Continuous Learning</span>
+                                            <span className="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{toolkitTags[0]}</span>
+                                            <span className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">{toolkitTags[1]}</span>
+                                            <span className="inline-flex items-center rounded-full border border-highlight/35 bg-highlight/12 px-3 py-1 text-xs font-medium text-highlight">{toolkitTags[2]}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="relative min-h-64 border-t border-[var(--border)] lg:border-l lg:border-t-0">
                                     <Image
-                                        src="/images/about/dev-cartoon.svg"
-                                        alt="Chibi-style developer cartoon workspace illustration"
+                                        src="dev-cartoon.svg"
+                                        alt={t("toolkit.illustrationAlt")}
                                         fill
                                         sizes="(min-width: 1024px) 35vw, 100vw"
                                         className="toolkit-illustration object-cover"
@@ -570,8 +549,8 @@ export default function Page() {
                     <FadeIn delay="delay-200">
                         <div id="contact-shortcut" className="mt-6 scroll-mt-24">
                             <SectionHeading
-                                title="Let's Connect"
-                                eyebrow="Open for collaborations"
+                                title={t("connect.title")}
+                                eyebrow={t("connect.eyebrow")}
                                 variant="reactive"
                             />
                         </div>
@@ -581,4 +560,4 @@ export default function Page() {
             </div>
         </main >
     );
-};
+}
