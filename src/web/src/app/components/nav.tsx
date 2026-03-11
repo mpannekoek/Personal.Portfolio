@@ -160,7 +160,9 @@ export default function NavBar() {
                         <div className="flex gap-1 text-lg font-bold">
                             <Link
                                 href="/"
-                                className="group inline-flex items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 shadow-sm transition-colors hover:border-accent/65 hover:bg-[var(--surface-elevated)]"
+                                className={`group inline-flex items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 shadow-sm transition-colors hover:border-accent/65 hover:bg-[var(--surface-elevated)] ${
+                                    isMenuOpen && !isSticky ? "pointer-events-none opacity-0" : "opacity-100"
+                                }`}
                                 aria-label="Homepage"
                             >
                                 <span className="font-mono text-[0.98rem] font-semibold tracking-[0.04em] text-[var(--text)]">
