@@ -71,7 +71,7 @@ export default function LanguageToggle() {
                     }
                     disabled={isPending || localeOption.isActive}
                     onClick={() => switchLocale(localeOption.value)}
-                    className={`mp-focus rounded-3xl px-2.5 py-1 text-xs font-semibold tracking-[0.08em] transition-colors ${
+                    className={`mp-focus cursor-pointer rounded-3xl px-2.5 py-1 text-xs font-semibold tracking-[0.08em] transition-colors ${
                         localeOption.isActive
                             ? "bg-primary text-[var(--primary-contrast)]"
                             : "text-[var(--text)] hover:bg-primary/15"

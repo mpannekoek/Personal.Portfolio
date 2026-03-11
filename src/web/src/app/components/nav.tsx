@@ -156,10 +156,18 @@ export default function NavBar() {
             <div className="h-6 bg-gradient-to-r from-primary via-accent to-highlight" />
             <nav className={isSticky ? "fixed top-0 left-0 right-0 z-[60] border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-md shadow-sm" : "relative z-[60]"}>
                 <div className="mx-auto">
-                    <div className="flex justify-between mx-4 py-2">
+                    <div className="flex items-center justify-between mx-4 py-2">
                         <div className="flex gap-1 text-lg font-bold">
-                            <Link href="/">
-                                <span className="font-mono">&lt;MP /&gt;</span>
+                            <Link
+                                href="/"
+                                className="group inline-flex items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 shadow-sm transition-colors hover:border-accent/65 hover:bg-[var(--surface-elevated)]"
+                                aria-label="Homepage"
+                            >
+                                <span className="font-mono text-[0.98rem] font-semibold tracking-[0.04em] text-[var(--text)]">
+                                    <span className="text-[var(--text-soft)]">&lt;</span>
+                                    <span className="mx-0.5 text-primary transition-colors group-hover:text-highlight dark:text-accent">MP</span>
+                                    <span className="text-[var(--text-soft)]">/&gt;</span>
+                                </span>
                             </Link>
                         </div>
                         <div className="flex items-center gap-3">

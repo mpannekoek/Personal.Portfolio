@@ -423,7 +423,7 @@ export default function Page() {
                                 <span className="font-mono">
                                     {t("about.greeting")}
                                 </span>
-                                <span className="ml-2 text-primary">
+                                <span className="ml-2 text-highlight">
                                     <HandMetal />
                                 </span>
                             </div>
