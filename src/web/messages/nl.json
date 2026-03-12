@@ -35,9 +35,23 @@
     "copyright": "Alle rechten voorbehouden."
   },
   "blogPage": {
-    "eyebrow": "Blog",
-    "title": "Blogpagina",
-    "description": "Content volgt binnenkort."
+    "title": "Blog",
+    "loading": "Artikelen laden...",
+    "empty": "Geen artikelen gevonden voor dit filter.",
+    "imageFallback": "Geen afbeelding",
+    "filters": {
+      "all": "Alles"
+    },
+    "sort": {
+      "label": "Sorteren",
+      "newest": "Nieuwste",
+      "oldest": "Oudste",
+      "title": "Titel A-Z"
+    },
+    "view": {
+      "metro": "Metro-weergave",
+      "text": "Tekstweergave"
+    }
   },
   "hireMePage": {
     "eyebrow": "Huur mij in",
@@ -71,7 +85,7 @@
     "hero": {
       "title": "Hoi en welkom. Laten we samen iets moois bouwen!",
       "viewProject": "Bekijk huidig project",
-      "connect": "Laten we verbinden"
+      "connect": "Let's Connect"
     },
     "about": {
       "greeting": "Hoi daar",
@@ -132,7 +146,7 @@
       ]
     },
     "connect": {
-      "title": "Laten we verbinden",
+      "title": "Let's Connect",
       "eyebrow": "Open voor samenwerkingen"
     }
   }

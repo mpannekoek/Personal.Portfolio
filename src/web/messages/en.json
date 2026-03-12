@@ -35,9 +35,23 @@
     "copyright": "All Rights Reserved."
   },
   "blogPage": {
-    "eyebrow": "Blog",
-    "title": "Blog page",
-    "description": "Content coming soon."
+    "title": "Blog",
+    "loading": "Loading posts...",
+    "empty": "No posts match this filter.",
+    "imageFallback": "No image",
+    "filters": {
+      "all": "All"
+    },
+    "sort": {
+      "label": "Sort",
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "title": "Title A-Z"
+    },
+    "view": {
+      "metro": "Metro view",
+      "text": "Text view"
+    }
   },
   "hireMePage": {
     "eyebrow": "Hire Me",

@@ -27,6 +27,31 @@ type PlaceholderCopy = {
     excerpt: string;
 };
 
+function toPreviewCards(blogs: BlogListItem[], locale: string): BlogPreviewCard[] {
+    const formatter = new Intl.DateTimeFormat(locale, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    });
+
+    return blogs.map((blog) => {
+        const parsedDate = new Date(blog.date);
+
+        return {
+            id: blog.slug,
+            title: blog.title,
+            excerpt: blog.description,
+            date: Number.isNaN(parsedDate.getTime())
+                ? blog.date
+                : formatter.format(parsedDate),
+            href: "/blog",
+            author: blog.author,
+            tags: blog.tags,
+            image: blog.image,
+        };
+    });
+}
+
 function buildPlaceholderPosts({
     count,
     title,
@@ -65,28 +90,7 @@ export async function getLatestBlogPreviews({
 
     try {
         const blogs = await getJson<BlogListItem[]>("/api/blogs");
-        const formatter = new Intl.DateTimeFormat(locale, {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-        });
-
-        const mappedPosts = blogs.slice(0, limit).map((blog) => {
-            const parsedDate = new Date(blog.date);
-
-            return {
-                id: blog.slug,
-                title: blog.title,
-                excerpt: blog.description,
-                date: Number.isNaN(parsedDate.getTime())
-                    ? blog.date
-                    : formatter.format(parsedDate),
-                href: "/blog",
-                author: blog.author,
-                tags: blog.tags,
-                image: blog.image,
-            };
-        });
+        const mappedPosts = toPreviewCards(blogs, locale).slice(0, limit);
 
         const placeholders = buildPlaceholderPosts({
             count: Math.max(limit - mappedPosts.length, 0),
@@ -98,5 +102,14 @@ export async function getLatestBlogPreviews({
         return [...mappedPosts, ...placeholders];
     } catch {
         return fallbackPosts;
+    }
+}
+
+export async function getAllBlogPreviews(locale: string): Promise<BlogPreviewCard[]> {
+    try {
+        const blogs = await getJson<BlogListItem[]>("/api/blogs");
+        return toPreviewCards(blogs, locale);
+    } catch {
+        return [];
     }
 }
