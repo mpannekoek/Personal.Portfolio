@@ -3,7 +3,7 @@
 This repository contains:
 
 - `src/web/`: a Next.js frontend
-- `src/api/`: a minimal Express API
+- `src/api/`: a minimal Express API (TypeScript)
 - `docs/`: project and deployment documentation
 - `Dockerfile`: a single image that runs both services in one container
 
@@ -37,6 +37,13 @@ Run the API:
 ```bash
 cd src/api
 npm run dev
+```
+
+Build the API:
+
+```bash
+cd src/api
+npm run build
 ```
 
 Run the web app:
