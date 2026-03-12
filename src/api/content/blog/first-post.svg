@@ -1,0 +1,52 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="90" x2="1480" y2="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4EFE4"/>
+      <stop offset="0.55" stop-color="#E6EEF7"/>
+      <stop offset="1" stop-color="#D5E6DE"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(420 260) rotate(30) scale(430 310)">
+      <stop stop-color="#8CC5FF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#8CC5FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1160 620) rotate(-20) scale(500 360)">
+      <stop stop-color="#79DAB7" stop-opacity="0.46"/>
+      <stop offset="1" stop-color="#79DAB7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="540" y1="260" x2="1120" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0.55"/>
+    </linearGradient>
+    <filter id="blurSoft" x="0" y="0" width="1600" height="900" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g filter="url(#blurSoft)">
+    <ellipse cx="420" cy="260" rx="420" ry="300" fill="url(#glowA)"/>
+    <ellipse cx="1160" cy="620" rx="500" ry="360" fill="url(#glowB)"/>
+  </g>
+
+  <g opacity="0.42">
+    <path d="M180 740C440 590 710 565 930 455C1160 339 1325 232 1450 120" stroke="#0F172A" stroke-opacity="0.22" stroke-width="3"/>
+    <path d="M120 680C360 560 640 530 870 430C1085 336 1270 260 1400 170" stroke="#0F172A" stroke-opacity="0.16" stroke-width="2"/>
+  </g>
+
+  <g>
+    <rect x="460" y="220" width="680" height="460" rx="36" fill="#F8FAFC" fill-opacity="0.74" stroke="#0F172A" stroke-opacity="0.16"/>
+    <path d="M540 330H1060" stroke="url(#line)" stroke-width="16" stroke-linecap="round"/>
+    <path d="M540 390H980" stroke="#0F172A" stroke-opacity="0.7" stroke-width="10" stroke-linecap="round"/>
+    <path d="M540 450H910" stroke="#0F172A" stroke-opacity="0.42" stroke-width="10" stroke-linecap="round"/>
+    <path d="M540 520H870" stroke="#0F172A" stroke-opacity="0.28" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="1070" cy="560" r="52" fill="#0F172A" fill-opacity="0.92"/>
+    <path d="M1045 560H1095" stroke="#F8FAFC" stroke-width="8" stroke-linecap="round"/>
+    <path d="M1070 535V585" stroke="#F8FAFC" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <g opacity="0.65">
+    <circle cx="1280" cy="200" r="7" fill="#0F172A"/>
+    <circle cx="1320" cy="240" r="5" fill="#0F172A" fill-opacity="0.65"/>
+    <circle cx="1240" cy="250" r="4" fill="#0F172A" fill-opacity="0.55"/>
+  </g>
+</svg>
