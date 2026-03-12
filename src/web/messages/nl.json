@@ -101,26 +101,9 @@
       "title": "Inzichten",
       "eyebrow": "Recente artikelen",
       "readPost": "Lees artikel",
-      "latestPosts": [
-        {
-          "title": "Betrouwbare event-driven systemen ontwerpen",
-          "excerpt": "Een pragmatische uitleg over het bouwen van veerkrachtige event-pipelines zonder je architectuur onnodig ingewikkeld te maken.",
-          "date": "1 maart 2026",
-          "href": "/blog"
-        },
-        {
-          "title": "De juiste grenzen kiezen in een modulair monoliet",
-          "excerpt": "Hoe je modulegrenzen definieert die onderhoudbaar blijven naarmate teams en productcomplexiteit groeien.",
-          "date": "16 februari 2026",
-          "href": "/blog"
-        },
-        {
-          "title": "Van prototype naar productie: een backend-checklist",
-          "excerpt": "De technische controles die ik gebruik om proof-of-concepts om te zetten in betrouwbare productieservices.",
-          "date": "2 februari 2026",
-          "href": "/blog"
-        }
-      ]
+      "placeholderTitle": "Meer artikelen volgen snel",
+      "placeholderExcerpt": "Er komen nieuwe artikelen aan. Kom binnenkort terug voor nieuwe inzichten.",
+      "placeholderCta": "Binnenkort"
     },
     "toolkit": {
       "title": "Toolkit",

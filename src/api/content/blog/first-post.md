@@ -1,6 +1,6 @@
 ---
 slug: "first-post"
-title: "My First Post"
+title: "Hello World!"
 date: "2026-03-12"
 description: "Launching my blog"
 author: "Martijn Pannekoek"

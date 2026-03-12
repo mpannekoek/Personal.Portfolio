@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, type FocusEvent } from "react";
-import { useTranslations } from "next-intl";
+import { useEffect, useState, type FocusEvent } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import FadeIn from "../components/providers/fade-in-provider";
 import ContactShortcut from "../components/contact-shortcut";
 import SectionHeading from "../components/section-heading";
@@ -32,13 +32,9 @@ import {
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 import { Link } from "../../i18n/navigation";
+import { getLatestBlogPreviews, type BlogPreviewCard } from "../../lib/blog-client";
 
-type LatestPostPreview = {
-    title: string;
-    excerpt: string;
-    date: string;
-    href: string;
-};
+const INSIGHTS_POST_LIMIT = 3;
 
 type SkillItem = {
     label: string;
@@ -346,13 +342,62 @@ function ProjectProgressDesktopWidget({
 
 export default function Page() {
     const t = useTranslations("home");
-    const latestPosts = t.raw("insights.latestPosts") as LatestPostPreview[];
+    const locale = useLocale();
     const translatedSkillGroups = t.raw("toolkit.skillGroups") as TranslatedSkillGroup[];
     const skillGroups = buildSkillGroups(translatedSkillGroups);
     const currentProject = t.raw("project") as CurrentProject;
     const toolkitTags = t.raw("toolkit.tags") as string[];
+    const placeholderTitle = t("insights.placeholderTitle");
+    const placeholderExcerpt = t("insights.placeholderExcerpt");
+    const placeholderCta = t("insights.placeholderCta");
+    const [latestPosts, setLatestPosts] = useState<BlogPreviewCard[]>(() =>
+        Array.from({ length: INSIGHTS_POST_LIMIT }, (_, index) => ({
+            id: `placeholder-${index}`,
+            title: placeholderTitle,
+            excerpt: placeholderExcerpt,
+            date: "",
+            href: "",
+            isPlaceholder: true,
+        }))
+    );
     const [isMobileProjectDrawerOpen, setIsMobileProjectDrawerOpen] = useState(false);
     const [isDesktopProjectWidgetOpen, setIsDesktopProjectWidgetOpen] = useState(false);
+
+    useEffect(() => {
+        let isCancelled = false;
+
+        async function loadLatestPosts() {
+            setLatestPosts(
+                Array.from({ length: INSIGHTS_POST_LIMIT }, (_, index) => ({
+                    id: `placeholder-${index}`,
+                    title: placeholderTitle,
+                    excerpt: placeholderExcerpt,
+                    date: "",
+                    href: "",
+                    isPlaceholder: true,
+                }))
+            );
+
+            const posts = await getLatestBlogPreviews({
+                limit: INSIGHTS_POST_LIMIT,
+                locale,
+                placeholder: {
+                    title: placeholderTitle,
+                    excerpt: placeholderExcerpt,
+                },
+            });
+
+            if (!isCancelled) {
+                setLatestPosts(posts);
+            }
+        }
+
+        void loadLatestPosts();
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [locale, placeholderExcerpt, placeholderTitle]);
 
     return (
         <main className="pb-8 md:pb-0">
@@ -447,28 +492,59 @@ export default function Page() {
                             eyebrow={t("insights.eyebrow")}
                             variant="reactive"
                         />
-                        <div className="flex flex-col md:flex-row">
-                            {latestPosts.map((post, index) => (
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                            {latestPosts.map((post) => (
                                 <article
-                                    key={post.title}
-                                    className={`basis-1/3 min-h-80 rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] p-6 shadow-sm ring-1 ring-[var(--ring)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md ${index < latestPosts.length - 1 ? "mb-6 md:mb-0 md:mr-6" : "md:ml-0"}`}
+                                    key={post.id}
+                                    className="flex h-full flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] p-4 shadow-sm ring-1 ring-[var(--ring)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
                                 >
-                                    <p className="mb-4 inline-flex items-center text-sm font-medium uppercase tracking-wide text-[var(--text-soft)]">
-                                        <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-highlight/80" />
-                                        {post.date}
-                                    </p>
-                                    <h3 className="mb-4 text-xl font-bold text-[var(--text)]">
+                                    {post.image ? (
+                                        <div className="relative mb-3 h-28 overflow-hidden rounded-lg border border-[var(--border)]">
+                                            <Image
+                                                src={post.image}
+                                                alt={post.title}
+                                                fill
+                                                sizes="(min-width: 768px) 30vw, 100vw"
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    ) : null}
+                                    {post.date ? (
+                                        <p className="mb-2 inline-flex items-center text-xs font-medium uppercase tracking-wide text-[var(--text-soft)]">
+                                            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-highlight/80" />
+                                            {post.date}
+                                        </p>
+                                    ) : null}
+                                    <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-snug text-[var(--text)]">
                                         {post.title}
                                     </h3>
-                                    <p className="mb-6 text-base leading-relaxed text-[var(--text-muted)]">
-                                        {post.excerpt}
+                                    <p className="mb-3 line-clamp-1 text-sm leading-relaxed text-[var(--text-muted)]">
+                                        {post.author ? `${post.excerpt} - ${post.author}` : post.excerpt}
                                     </p>
-                                    <Link
-                                        href={post.href}
-                                        className="font-semibold text-primary underline decoration-accent/45 decoration-2 underline-offset-4 hover:text-primary/80 hover:decoration-accent/65"
-                                    >
-                                        {t("insights.readPost")}
-                                    </Link>
+                                    {post.tags && post.tags.length > 0 ? (
+                                        <ul className="mb-3 flex flex-wrap gap-1.5">
+                                            {post.tags.slice(0, 3).map((tag) => (
+                                                <li
+                                                    key={`${post.id}-${tag}`}
+                                                    className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[0.7rem] font-medium text-[var(--text-soft)]"
+                                                >
+                                                    {tag}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : null}
+                                    {post.isPlaceholder ? (
+                                        <span className="mt-auto text-sm font-semibold text-[var(--text-soft)]">
+                                            {placeholderCta}
+                                        </span>
+                                    ) : (
+                                        <Link
+                                            href={post.href}
+                                            className="mt-auto text-sm font-semibold text-primary underline decoration-accent/45 decoration-2 underline-offset-4 hover:text-primary/80 hover:decoration-accent/65"
+                                        >
+                                            {t("insights.readPost")}
+                                        </Link>
+                                    )}
                                 </article>
                             ))}
                         </div>

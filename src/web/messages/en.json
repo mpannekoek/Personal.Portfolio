@@ -101,26 +101,9 @@
       "title": "Insights",
       "eyebrow": "Recent Writing",
       "readPost": "Read post",
-      "latestPosts": [
-        {
-          "title": "Designing Reliable Event-Driven Systems",
-          "excerpt": "A pragmatic walkthrough of building resilient event pipelines without overcomplicating your architecture.",
-          "date": "March 1, 2026",
-          "href": "/blog"
-        },
-        {
-          "title": "Choosing the Right Boundaries in a Modular Monolith",
-          "excerpt": "How to define module boundaries that stay maintainable as teams and product complexity grow.",
-          "date": "February 16, 2026",
-          "href": "/blog"
-        },
-        {
-          "title": "From Prototype to Production: A Backend Checklist",
-          "excerpt": "The essential technical checks I use to turn proof-of-concepts into dependable production services.",
-          "date": "February 2, 2026",
-          "href": "/blog"
-        }
-      ]
+      "placeholderTitle": "More posts coming soon",
+      "placeholderExcerpt": "Fresh articles are on the way. Check back soon for new insights.",
+      "placeholderCta": "Coming soon"
     },
     "toolkit": {
       "title": "Toolkit",
