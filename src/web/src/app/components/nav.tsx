@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type MouseEvent } from "react";
 import ThemeToggle from "../../theme/theme-toggle";
 import LanguageToggle from "../../theme/language-toggle";
 import { Menu, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "../../i18n/navigation";
+import { routing } from "../../i18n/routing";
 import facebookIcon from "../../assets/icons/social/facebook-icon.svg";
 import githubIcon from "../../assets/icons/social/github-icon.svg";
 import gmailIcon from "../../assets/icons/social/gmail-icon.svg";
@@ -28,6 +29,7 @@ const navItems: NavItem[] = [
 export default function NavBar() {
     const t = useTranslations("nav");
     const footerT = useTranslations("footer");
+    const locale = useLocale();
     const pathname = usePathname();
     const [isSticky, setSticky] = useState(false);
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -66,6 +68,17 @@ export default function NavBar() {
             window.clearTimeout(closeTimeoutRef.current);
             closeTimeoutRef.current = null;
         }
+    };
+
+    const localizedHomeHref = locale === routing.defaultLocale ? "/" : `/${locale}`;
+
+    const handleLogoClick = (event: MouseEvent<HTMLAnchorElement>) => {
+        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+            return;
+        }
+
+        event.preventDefault();
+        window.location.assign(localizedHomeHref);
     };
 
     const openMenu = () => {
@@ -161,9 +174,10 @@ export default function NavBar() {
                             <Link
                                 href="/"
                                 className={`group inline-flex items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 shadow-sm transition-colors hover:border-accent/65 hover:bg-[var(--surface-elevated)] ${
-                                    isMenuOpen && !isSticky ? "pointer-events-none opacity-0" : "opacity-100"
+                                    isMenuOpen && !isSticky ? "opacity-0" : "opacity-100"
                                 }`}
                                 aria-label="Homepage"
+                                onClick={handleLogoClick}
                             >
                                 <span className="font-mono text-[0.98rem] font-semibold tracking-[0.04em] text-[var(--text)]">
                                     <span className="text-[var(--text-soft)]">&lt;</span>
