@@ -23,6 +23,7 @@ src/web/out/
 
 # production
 */build/
+src/api/dist/
 
 # misc
 .DS_Store
