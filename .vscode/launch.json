@@ -5,7 +5,7 @@
       "name": "Portfolio Dev Servers",
       "type": "node-terminal",
       "request": "launch",
-      "command": "bash -lc '(cd \"${workspaceFolder}/src/api\" && npm run dev) & (cd \"${workspaceFolder}/src/web\" && npm run dev) & wait'"
+      "command": "bash -lc '\"${workspaceFolder}/scripts/dev.sh\"'"
     }
   ]
 }

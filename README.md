@@ -53,6 +53,12 @@ cd src/web
 npm run dev
 ```
 
+Run both together from the repository root:
+
+```bash
+./scripts/dev.sh
+```
+
 Default ports:
 - web: `3000`
 - api: `3001`
