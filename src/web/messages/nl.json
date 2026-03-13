@@ -53,6 +53,14 @@
       "text": "Tekstweergave"
     }
   },
+  "blogDetailPage": {
+    "authorLabel": "Auteur: {author}",
+    "toc": "Op deze pagina",
+    "share": "Delen",
+    "shared": "Link gekopieerd",
+    "copy": "Kopieer markdown",
+    "copied": "Gekopieerd"
+  },
   "hireMePage": {
     "eyebrow": "Huur mij in",
     "title": "Huur-mij-in pagina",

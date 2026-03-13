@@ -53,6 +53,14 @@
       "text": "Text view"
     }
   },
+  "blogDetailPage": {
+    "authorLabel": "Author: {author}",
+    "toc": "On this page",
+    "share": "Share",
+    "shared": "Link copied",
+    "copy": "Copy markdown",
+    "copied": "Copied"
+  },
   "hireMePage": {
     "eyebrow": "Hire Me",
     "title": "Hire me page",

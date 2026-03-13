@@ -10,6 +10,10 @@ type BlogListItem = {
     image?: string;
 };
 
+export type BlogPost = BlogListItem & {
+    content: string;
+};
+
 export type BlogPreviewCard = {
     id: string;
     title: string;
@@ -44,7 +48,7 @@ function toPreviewCards(blogs: BlogListItem[], locale: string): BlogPreviewCard[
             date: Number.isNaN(parsedDate.getTime())
                 ? blog.date
                 : formatter.format(parsedDate),
-            href: "/blog",
+            href: `/blog/${blog.slug}`,
             author: blog.author,
             tags: blog.tags,
             image: blog.image,
@@ -112,4 +116,8 @@ export async function getAllBlogPreviews(locale: string): Promise<BlogPreviewCar
     } catch {
         return [];
     }
+}
+
+export async function getBlogPost(slug: string): Promise<BlogPost> {
+    return getJson<BlogPost>(`/api/blogs/${slug}`);
 }

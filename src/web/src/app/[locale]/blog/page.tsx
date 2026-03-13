@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Grid3X3, List, ArrowUpDown } from "lucide-react";
 import Image from "next/image";
 import { getAllBlogPreviews, type BlogPreviewCard } from "../../../lib/blog-client";
+import { Link } from "../../../i18n/navigation";
 
 type SortOption = "date-desc" | "date-asc" | "title-asc";
 type ViewMode = "metro" | "text";
@@ -167,7 +168,7 @@ export default function BlogPage() {
             {!isLoading && visiblePosts.length > 0 && viewMode === "metro" ? (
                 <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                     {visiblePosts.map((post) => (
-                        <article key={post.id} className="group">
+                        <Link key={post.id} href={post.href} className="group block">
                             <div className="relative h-56 overflow-hidden rounded-xl bg-[var(--surface)]">
                                 {post.image ? (
                                     <Image
@@ -204,7 +205,7 @@ export default function BlogPage() {
                                     {post.excerpt}
                                 </p>
                             </div>
-                        </article>
+                        </Link>
                     ))}
                 </div>
             ) : null}
@@ -212,9 +213,10 @@ export default function BlogPage() {
             {!isLoading && visiblePosts.length > 0 && viewMode === "text" ? (
                 <div className="mt-8 space-y-4">
                     {visiblePosts.map((post) => (
-                        <article
+                        <Link
                             key={post.id}
-                            className="rounded-xl bg-[var(--surface-elevated)] px-4 py-4 ring-1 ring-[var(--ring)]"
+                            href={post.href}
+                            className="block rounded-xl bg-[var(--surface-elevated)] px-4 py-4 ring-1 ring-[var(--ring)]"
                         >
                             <h2 className="text-xl font-semibold text-[var(--text)]">
                                 {post.title}
@@ -235,7 +237,7 @@ export default function BlogPage() {
                             <p className="mt-3 text-sm text-[var(--text-muted)]">
                                 {post.excerpt}
                             </p>
-                        </article>
+                        </Link>
                     ))}
                 </div>
             ) : null}
