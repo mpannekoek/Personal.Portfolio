@@ -9,6 +9,7 @@ import Image from "next/image";
 import martijnImage from "../../assets/about/martijn.jpg";
 import {
     BotMessageSquare,
+    BookOpen,
     Brain,
     BrainCircuit,
     Database,
@@ -74,7 +75,7 @@ const skillGroupIcons: Array<Array<LucideIcon | IconType>> = [
     [SiDotnet, SiNodedotjs, SiPython, Database, SiPostgresql, SiYaml],
     [FaMicrosoft, SiDocker, SiPodman, SiGit],
     [BrainCircuit, SiOpenai, BotMessageSquare],
-    [Brain, Puzzle],
+    [Brain, Puzzle, BookOpen],
 ];
 
 function buildSkillGroups(groups: TranslatedSkillGroup[]): SkillGroup[] {
