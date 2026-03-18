@@ -1,0 +1,7 @@
+services:
+  app:
+    image: ghcr.io/mpannekoek/personal.portfolio:latest
+    container_name: personal-portfolio
+    restart: unless-stopped
+    ports:
+      - "3000:3000"

@@ -18,6 +18,8 @@ Other tags produced by the workflow:
 - branch tag
 - commit SHA tag
 
+For a VPS deployment that pulls from GHCR instead of building locally, use [deploy/compose.yml](../deploy/compose.yml).
+
 ## Azure Deployment
 
 Workflow:
