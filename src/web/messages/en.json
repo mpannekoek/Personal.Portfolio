@@ -63,14 +63,77 @@
   },
   "hireMePage": {
     "eyebrow": "Hire Me",
-    "title": "Hire me page",
-    "description": "Content coming soon."
+    "title": "Websites that are clear, fast, and reliable",
+    "description": "I build websites that are easy to understand, technically solid, and pleasant to use. Whether you need a new site, a focused landing page, or improvements to an existing website, I deliver something practical that is ready to use.",
+    "heroImage": {
+      "title": "Hero image placeholder",
+      "description": "A strong personal photo or portrait can be placed here later."
+    },
+    "cta": "Discuss your project",
+    "principles": {
+      "eyebrow": "Highlights",
+      "title": "How I work",
+      "honestStory": {
+        "title": "An honest story",
+        "description": "I do not promise what is unrealistic. You get a clear view of what makes sense, what is unnecessary, and where the best return is likely to come from."
+      },
+      "idealSolution": {
+        "title": "The best solution is shaped together",
+        "description": "The strongest website does not come from assumptions, but from collaboration. I turn your goals and context into a solution that makes sense for your business and works clearly for your visitors."
+      }
+    },
+    "servicesTitle": "What I do",
+    "servicesEyebrow": "Services",
+    "servicesIntroTitle": "Practical help, without detours",
+    "servicesIntroDescription": "I mainly help with websites that need to be clear, focused, and technically sound. No filler features, just work that directly improves the quality and usefulness of your site.",
+    "services": {
+      "websites": {
+        "title": "Websites",
+        "description": "I build complete websites that fit your business, offer, and audience. You get a site with a clear structure, strong mobile support, and a solid base to launch with confidence."
+      },
+      "landingPages": {
+        "title": "Landing pages",
+        "description": "I create landing pages with one clear goal: inform, persuade, or improve conversion. The structure and content are shaped around what your visitor needs to take the next step."
+      },
+      "seo": {
+        "title": "SEO basics",
+        "description": "I make sure the technical and content foundation for search visibility is in place. For example with a logical page structure, strong titles, clean metadata, and a website search engines can read properly."
+      }
+    },
+    "process": {
+      "eyebrow": "Process",
+      "title": "How I work",
+      "description": "I work in a practical way, communicate clearly, and keep the process easy to follow from the first conversation to launch. That means you always know the next step, where we stand, and what I need from you.",
+      "stepLabel": "Step {number}",
+      "steps": {
+        "step1": {
+          "title": "Introduction",
+          "description": "We talk about what you need, who the website is for, and what it needs to achieve. I ask focused questions so we can quickly identify where the real value is."
+        },
+        "step2": {
+          "title": "Strategy / structure",
+          "description": "Next, I map out the main structure: content, flow, and logical page or section setup. That gives us a clear foundation before we spend time on details."
+        },
+        "step3": {
+          "title": "Design",
+          "description": "I turn the structure into a design that fits your identity and works well for your visitors. Every design choice stays functional, so the look supports the goal."
+        },
+        "step4": {
+          "title": "Build and feedback",
+          "description": "Then I build the website and work step by step toward a strong first version. You can give feedback along the way, so we can adjust without making the process messy."
+        },
+        "step5": {
+          "title": "Launch and aftercare",
+          "description": "Once everything is right, I launch the website and check that the essentials are in place. I also remain available afterward for small improvements, questions, or practical follow-up."
+        }
+      }
+    }
   },
   "contact": {
-    "badge": "Quick Contact",
-    "title": "Let's talk about your next project",
-    "description": "Send a short message right from this page. It opens your email app with everything prefilled so you can reach out quickly.",
-    "directEmail": "Prefer direct email?",
+    "badge": "Hire me",
+    "title": "Tell me what you need built",
+    "description": "Need a website, landing page, or improvements to an existing site? Send a short message. Your email app opens with the details prefilled so you can quickly share your project or inquiry.",
+    "directEmail": "Prefer to send a direct inquiry?",
     "fields": {
       "name": "Name",
       "email": "Email",
@@ -79,21 +142,21 @@
     "placeholders": {
       "name": "Your name",
       "email": "you@example.com",
-      "message": "Tell me what you want to build."
+      "message": "Briefly describe your project, timeline, or question."
     },
-    "cta": "Send via email",
+    "cta": "Send inquiry by email",
     "mailto": {
       "defaultSender": "Portfolio visitor",
       "intro": "Hi Martijn, this is {sender}{senderEmail}.",
-      "fallbackBody": "I would love to connect with you.",
-      "subject": "Portfolio contact request"
+      "fallbackBody": "I need help with a website or landing page and would like to discuss the project.",
+      "subject": "Project inquiry via portfolio"
     }
   },
   "home": {
     "hero": {
       "title": "Hi and welcome. Let's build something amazing together!",
       "viewProject": "View current project",
-      "connect": "Let's Connect"
+      "connect": "Hire me"
     },
     "about": {
       "greeting": "Hi there",
@@ -154,8 +217,8 @@
       ]
     },
     "connect": {
-      "title": "Let's Connect",
-      "eyebrow": "Open for collaborations"
+      "title": "Hire me",
+      "eyebrow": "Available for web projects"
     }
   }
 }

@@ -63,14 +63,77 @@
   },
   "hireMePage": {
     "eyebrow": "Huur mij in",
-    "title": "Huur-mij-in pagina",
-    "description": "Content volgt binnenkort."
+    "title": "Websites die duidelijk, snel en betrouwbaar zijn",
+    "description": "Ik bouw websites die helder zijn opgebouwd, technisch goed staan en prettig werken voor je bezoekers. Of het nu gaat om een nieuwe site, een gerichte landingspagina of het verbeteren van een bestaande website: ik zorg voor een oplossing die praktisch is en direct bruikbaar.",
+    "heroImage": {
+      "title": "Placeholder voor hero image",
+      "description": "Hier kan later een sterke foto of portret van mij komen."
+    },
+    "cta": "Bespreek je project",
+    "principles": {
+      "eyebrow": "Speerpunten",
+      "title": "Hoe ik werk",
+      "honestStory": {
+        "title": "Een eerlijk verhaal",
+        "description": "Ik beloof geen dingen die niet realistisch zijn. Je krijgt een duidelijk beeld van wat slim is, wat niet nodig is en waar je het meeste resultaat van kunt verwachten."
+      },
+      "idealSolution": {
+        "title": "De ideale oplossing ontstaat samen",
+        "description": "De beste website ontstaat niet vanuit aannames, maar in samenwerking. Ik vertaal jouw doelen en context naar een oplossing die logisch is voor je bedrijf en helder werkt voor je bezoekers."
+      }
+    },
+    "servicesTitle": "Wat ik doe",
+    "servicesEyebrow": "Diensten",
+    "servicesIntroTitle": "Praktische hulp, zonder omwegen",
+    "servicesIntroDescription": "Ik help vooral met websites die duidelijk moeten zijn, gericht moeten werken en technisch gewoon goed moeten staan. Geen losse features om het vullen, maar werk dat direct bijdraagt aan een betere site.",
+    "services": {
+      "websites": {
+        "title": "Websites bouwen",
+        "description": "Ik ontwikkel complete websites die passen bij je bedrijf, aanbod en doelgroep. Je krijgt een site die overzichtelijk is opgebouwd, goed werkt op mobiel en klaar is om mee naar buiten te treden."
+      },
+      "landingPages": {
+        "title": "Landingpages",
+        "description": "Ik maak landingspagina's met één duidelijk doel: informeren, overtuigen of conversie verbeteren. De opbouw en inhoud worden afgestemd op wat je bezoeker nodig heeft om door te klikken of contact op te nemen."
+      },
+      "seo": {
+        "title": "SEO-basis",
+        "description": "Ik zorg dat de technische en inhoudelijke basis voor vindbaarheid op orde is. Bijvoorbeeld met een logische paginastructuur, goede titels, nette metadata en een website die zoekmachines goed kunnen lezen."
+      }
+    },
+    "process": {
+      "eyebrow": "Proces",
+      "title": "Zo werk ik",
+      "description": "Ik werk praktisch, communiceer helder en houd het proces overzichtelijk van eerste gesprek tot livegang. Zo weet je steeds wat de volgende stap is, waar we staan en wat er van jou nodig is.",
+      "stepLabel": "Stap {number}",
+      "steps": {
+        "step1": {
+          "title": "Kennismaking",
+          "description": "We bespreken wat je nodig hebt, voor wie de website bedoeld is en wat het doel moet zijn. Ik stel gerichte vragen, zodat we snel scherp krijgen waar de meeste waarde zit."
+        },
+        "step2": {
+          "title": "Strategie / structuur",
+          "description": "Daarna werk ik de hoofdlijnen uit: inhoud, opbouw en logische pagina- of sectiestructuur. Zo leggen we eerst een heldere basis voordat we tijd steken in details."
+        },
+        "step3": {
+          "title": "Design",
+          "description": "Ik vertaal de structuur naar een ontwerp dat past bij je uitstraling en prettig werkt voor je bezoekers. Daarbij houd ik keuzes functioneel, zodat vorm en doel goed op elkaar aansluiten."
+        },
+        "step4": {
+          "title": "Bouw en feedback",
+          "description": "Vervolgens bouw ik de website en werk ik stap voor stap toe naar een sterke eerste versie. Jij kunt tussendoor feedback geven, zodat we gericht bijsturen zonder dat het proces rommelig wordt."
+        },
+        "step5": {
+          "title": "Livegang en nazorg",
+          "description": "Als alles klopt, zet ik de website live en controleer ik of de basis goed staat. Ook daarna blijf ik beschikbaar voor kleine verbeteringen, vragen of praktische nazorg."
+        }
+      }
+    }
   },
   "contact": {
-    "badge": "Snel contact",
-    "title": "Laten we praten over je volgende project",
-    "description": "Stuur direct vanaf deze pagina een kort bericht. Je e-mailapp wordt geopend met alles alvast ingevuld, zodat je snel contact kunt opnemen.",
-    "directEmail": "Liever direct mailen?",
+    "badge": "Huur mij in",
+    "title": "Vertel me wat je wilt laten bouwen",
+    "description": "Heb je een website, landingspagina of verbetering aan een bestaande site in gedachten? Stuur een kort bericht. Je e-mailapp wordt geopend met alles alvast ingevuld, zodat je snel je project of aanvraag kunt delen.",
+    "directEmail": "Liever direct een aanvraag sturen?",
     "fields": {
       "name": "Naam",
       "email": "E-mail",
@@ -79,21 +142,21 @@
     "placeholders": {
       "name": "Jouw naam",
       "email": "jij@voorbeeld.nl",
-      "message": "Vertel me wat je wilt bouwen."
+      "message": "Beschrijf kort je project, planning of vraag."
     },
-    "cta": "Verstuur via e-mail",
+    "cta": "Stuur aanvraag via e-mail",
     "mailto": {
       "defaultSender": "Bezoeker van portfolio",
       "intro": "Hoi Martijn, ik ben {sender}{senderEmail}.",
-      "fallbackBody": "Ik kom graag met je in contact.",
-      "subject": "Contactverzoek via portfolio"
+      "fallbackBody": "Ik zoek hulp bij een website of landingspagina en vertel je graag meer over mijn project.",
+      "subject": "Aanvraag via portfolio"
     }
   },
   "home": {
     "hero": {
       "title": "Hoi en welkom. Laten we samen iets moois bouwen!",
       "viewProject": "Bekijk huidig project",
-      "connect": "Let's Connect"
+      "connect": "Huur mij in"
     },
     "about": {
       "greeting": "Hoi daar",
@@ -154,8 +217,8 @@
       ]
     },
     "connect": {
-      "title": "Let's Connect",
-      "eyebrow": "Open voor samenwerkingen"
+      "title": "Huur mij in",
+      "eyebrow": "Beschikbaar voor webprojecten"
     }
   }
 }
