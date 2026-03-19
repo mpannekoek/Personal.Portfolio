@@ -84,12 +84,16 @@
     },
     "servicesTitle": "Wat ik doe",
     "servicesEyebrow": "Diensten",
-    "servicesIntroTitle": "Praktische hulp, zonder omwegen",
-    "servicesIntroDescription": "Ik help vooral met websites die duidelijk moeten zijn, gericht moeten werken en technisch gewoon goed moeten staan. Geen losse features om het vullen, maar werk dat direct bijdraagt aan een betere site.",
+    "servicesIntroTitle": "Digitale producten die helder werken",
+    "servicesIntroDescription": "Ik ontwerp en bouw digitale oplossingen die duidelijk, betrouwbaar en doelgericht moeten zijn. Van websites en landingpages tot web- en desktopapplicaties: geen overbodige lagen, maar werk dat professioneel staat en praktisch resultaat oplevert.",
     "services": {
       "websites": {
         "title": "Websites bouwen",
         "description": "Ik ontwikkel complete websites die passen bij je bedrijf, aanbod en doelgroep. Je krijgt een site die overzichtelijk is opgebouwd, goed werkt op mobiel en klaar is om mee naar buiten te treden."
+      },
+      "applications": {
+        "title": "Web- en desktopapplicaties",
+        "description": "Ik bouw applicaties die processen versimpelen, informatie overzichtelijk maken en prettig werken in dagelijks gebruik. Dat kan een interne tool zijn, een klantportaal of een desktopapplicatie die logisch aansluit op je manier van werken."
       },
       "landingPages": {
         "title": "Landingpages",
@@ -225,7 +229,7 @@
     },
     "connect": {
       "title": "Contact",
-      "eyebrow": "Beschikbaar voor webprojecten"
+      "eyebrow": "Beschikbaar voor opdrachten"
     }
   }
 }

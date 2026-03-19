@@ -84,12 +84,16 @@
     },
     "servicesTitle": "What I do",
     "servicesEyebrow": "Services",
-    "servicesIntroTitle": "Practical help, without detours",
-    "servicesIntroDescription": "I mainly help with websites that need to be clear, focused, and technically sound. No filler features, just work that directly improves the quality and usefulness of your site.",
+    "servicesIntroTitle": "Digital products built to work clearly",
+    "servicesIntroDescription": "I design and build digital products that need to be clear, reliable, and purposeful. From websites and landing pages to web and desktop applications: no unnecessary layers, just professional work that solves real problems.",
     "services": {
       "websites": {
         "title": "Websites",
         "description": "I build complete websites that fit your business, offer, and audience. You get a site with a clear structure, strong mobile support, and a solid base to launch with confidence."
+      },
+      "applications": {
+        "title": "Web and desktop applications",
+        "description": "I build applications that simplify processes, present information clearly, and feel solid in day-to-day use. That can be an internal tool, a client portal, or a desktop application that fits the way your business actually works."
       },
       "landingPages": {
         "title": "Landing pages",
@@ -225,7 +229,7 @@
     },
     "connect": {
       "title": "Contact",
-      "eyebrow": "Available for web projects"
+      "eyebrow": "Available for assignments"
     }
   }
 }

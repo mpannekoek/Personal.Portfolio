@@ -5,6 +5,7 @@ import {
     MessageCircle,
     MessageSquareQuote,
     MousePointerClick,
+    MonitorSmartphone,
     PanelsTopLeft,
     PencilRuler,
     Rocket,
@@ -37,19 +38,21 @@ export default async function HireMePage() {
         {
             key: "websites",
             icon: PanelsTopLeft,
-            numberTone: "text-sky-700/80",
             iconClassName: "bg-sky-500/12 text-sky-700",
+        },
+        {
+            key: "applications",
+            icon: MonitorSmartphone,
+            iconClassName: "bg-violet-500/12 text-violet-700 dark:text-violet-300",
         },
         {
             key: "landingPages",
             icon: MousePointerClick,
-            numberTone: "text-amber-700/80",
             iconClassName: "bg-amber-500/12 text-amber-700",
         },
         {
             key: "seo",
             icon: Search,
-            numberTone: "text-emerald-700/80",
             iconClassName: "bg-emerald-500/12 text-emerald-700",
         },
     ] as const;
@@ -167,7 +170,9 @@ export default async function HireMePage() {
                 </div>
             </section>
 
-            <section className="mt-14">
+            <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
+
+            <section className="mt-8">
                 <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
                     <div className="max-w-xl lg:sticky lg:top-24">
                         <SectionHeading
@@ -245,68 +250,59 @@ export default async function HireMePage() {
                 </div>
             </section>
 
-            <section className="mt-14">
-                <div className="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,rgba(59,130,246,0.08),rgba(255,255,255,0.02)_32%,rgba(16,185,129,0.08))] px-6 py-8 md:px-8 md:py-10">
-                    <div className="absolute left-0 top-0 h-40 w-40 rounded-full bg-sky-500/10 blur-3xl" />
-                    <div className="absolute bottom-0 right-0 h-40 w-40 rounded-full bg-emerald-500/10 blur-3xl" />
+            <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
 
-                    <div className="relative grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-                        <div className="max-w-lg">
-                            <SectionHeading
-                                title={t("servicesTitle")}
-                                eyebrow={t("servicesEyebrow")}
-                                variant="reactive"
-                            />
-                            <h2 className="text-3xl font-bold text-[var(--text)] md:text-4xl">
-                                {t("servicesIntroTitle")}
-                            </h2>
-                            <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
-                                {t("servicesIntroDescription")}
-                            </p>
-                        </div>
+            <section className="mt-8">
+                <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+                    <div className="max-w-lg">
+                        <SectionHeading
+                            title={t("servicesTitle")}
+                            eyebrow={t("servicesEyebrow")}
+                            variant="reactive"
+                        />
+                        <h2 className="text-3xl font-bold text-[var(--text)] md:text-4xl">
+                            {t("servicesIntroTitle")}
+                        </h2>
+                        <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
+                            {t("servicesIntroDescription")}
+                        </p>
+                    </div>
 
-                        <div className="space-y-7">
-                            {services.map((service, index) => {
-                                const Icon = service.icon;
+                    <div className="divide-y divide-[var(--border)]">
+                        {services.map((service) => {
+                            const Icon = service.icon;
 
-                                return (
-                                    <div key={service.key}>
-                                        <article className="grid gap-4 md:grid-cols-[112px_1fr] md:gap-6">
-                                            <div className="flex items-center gap-3 md:block">
-                                                <p
-                                                    className={`text-5xl font-black leading-none tracking-[-0.05em] md:text-6xl ${service.numberTone}`}
-                                                >
-                                                    0{index + 1}
-                                                </p>
-                                                <span
-                                                    className={`inline-flex h-11 w-11 items-center justify-center rounded-full ${service.iconClassName}`}
-                                                >
-                                                    <Icon className="h-5 w-5" />
-                                                </span>
-                                            </div>
-
-                                            <div className="max-w-2xl">
-                                                <h3 className="text-2xl font-semibold text-[var(--text)]">
-                                                    {t(`services.${service.key}.title`)}
-                                                </h3>
-                                                <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
-                                                    {t(`services.${service.key}.description`)}
-                                                </p>
-                                            </div>
-                                        </article>
-
-                                        {index < services.length - 1 ? (
-                                            <div className="mt-7 h-px bg-gradient-to-r from-transparent via-[var(--border)] to-transparent" />
-                                        ) : null}
+                            return (
+                                <article
+                                    key={service.key}
+                                    className="grid gap-4 py-6 transition-colors md:grid-cols-[72px_1fr] md:gap-6 md:py-7"
+                                >
+                                    <div className="flex items-start">
+                                        <span
+                                            className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ring-1 ring-inset ring-current/10 ${service.iconClassName}`}
+                                        >
+                                            <Icon className="h-5 w-5" />
+                                        </span>
                                     </div>
-                                );
-                            })}
-                        </div>
+
+                                    <div className="max-w-2xl">
+                                        <h3 className="text-xl font-semibold tracking-[-0.02em] text-[var(--text)] md:text-2xl">
+                                            {t(`services.${service.key}.title`)}
+                                        </h3>
+                                        <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
+                                            {t(`services.${service.key}.description`)}
+                                        </p>
+                                    </div>
+                                </article>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
 
-            <section className="mt-14">
+            <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
+
+            <section className="mt-8">
                 <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface-elevated)] px-6 py-8 shadow-sm ring-1 ring-[var(--ring)] md:px-8 md:py-10">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(245,158,11,0.08),transparent_38%)]" />
 
@@ -336,8 +332,7 @@ export default async function HireMePage() {
                 </div>
             </section>
 
-            <section id="contact" className="mt-14 scroll-mt-24">
-                <div className="mb-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
+            <section id="contact" className="mt-8 scroll-mt-24">
                 <ContactShortcut />
             </section>
         </main>
