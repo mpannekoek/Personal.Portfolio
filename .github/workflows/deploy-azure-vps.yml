@@ -6,8 +6,6 @@ on:
       - Publish Docker Image
     types:
       - completed
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       image_tag:
