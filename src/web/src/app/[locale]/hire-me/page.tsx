@@ -306,6 +306,36 @@ export default async function HireMePage() {
                 </div>
             </section>
 
+            <section className="mt-14">
+                <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface-elevated)] px-6 py-8 shadow-sm ring-1 ring-[var(--ring)] md:px-8 md:py-10">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(245,158,11,0.08),transparent_38%)]" />
+
+                    <div className="relative grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+                        <div className="max-w-lg">
+                            <SectionHeading
+                                title={t("pricing.title")}
+                                eyebrow={t("pricing.eyebrow")}
+                                variant="reactive"
+                            />
+                        </div>
+
+                        <div className="max-w-2xl space-y-5">
+                            <p className="text-sm font-semibold uppercase tracking-[0.12em] text-primary md:text-base">
+                                {t("pricing.intro")}
+                            </p>
+                            <p className="text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
+                                {t("pricing.description")}
+                            </p>
+                            <div className="rounded-2xl border border-[var(--border-strong)] bg-[var(--surface)] p-5 shadow-sm ring-1 ring-[var(--ring)]">
+                                <p className="text-sm font-medium leading-relaxed text-[var(--text)] md:text-base">
+                                    {t("pricing.note")}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section id="contact" className="mt-14 scroll-mt-24">
                 <div className="mb-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
                 <ContactShortcut />

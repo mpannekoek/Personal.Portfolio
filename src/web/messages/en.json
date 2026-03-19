@@ -127,6 +127,13 @@
           "description": "Once everything is right, I launch the website and check that the essentials are in place. I also remain available afterward for small improvements, questions, or practical follow-up."
         }
       }
+    },
+    "pricing": {
+      "eyebrow": "Pricing",
+      "title": "Clear costs, aligned upfront",
+      "intro": "No standard rate, but clear expectations from the start.",
+      "description": "No website project is exactly the same. The cost depends on the scope, the content, the functionality required, and the timeline. That is why I define upfront what is needed, which choices make sense, and what the budget should realistically cover.",
+      "note": "That way, you know where you stand before we start, without surprises afterward."
     }
   },
   "contact": {

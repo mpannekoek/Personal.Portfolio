@@ -127,6 +127,13 @@
           "description": "Als alles klopt, zet ik de website live en controleer ik of de basis goed staat. Ook daarna blijf ik beschikbaar voor kleine verbeteringen, vragen of praktische nazorg."
         }
       }
+    },
+    "pricing": {
+      "eyebrow": "Prijs",
+      "title": "Heldere kosten, vooraf afgestemd",
+      "intro": "Geen standaardtarief, wel duidelijkheid vooraf.",
+      "description": "Geen websiteproject is hetzelfde. De kosten hangen af van de omvang, de inhoud, de gewenste functionaliteit en de planning. Daarom stem ik vooraf scherp af wat nodig is, welke keuzes logisch zijn en wat daar financieel bij past.",
+      "note": "Zo weet je vooraf waar je aan toe bent, zonder verrassingen achteraf."
     }
   },
   "contact": {
