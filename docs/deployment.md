@@ -20,6 +20,32 @@ Other tags produced by the workflow:
 
 For a VPS deployment that pulls from GHCR instead of building locally, use [deploy/compose.yml](../deploy/compose.yml).
 
+## Azure VPS Deployment
+
+Workflow:
+- [.github/workflows/deploy-azure-vps.yml](../.github/workflows/deploy-azure-vps.yml)
+
+This workflow uses the same trigger behavior as the Azure App Service deploy workflow:
+- runs after `Publish Docker Image` succeeds on `main`
+- can also run manually via `workflow_dispatch`
+
+The deploy job opens an SSH session and runs a deploy script on the VPS.
+The script receives:
+- image tag
+- image name (`<github-owner>/<repo-name>` in lowercase)
+- container registry (`ghcr.io`)
+
+Required repository variables:
+- `VPS_HOST`
+- `VPS_USER`
+- `VPS_DEPLOY_SCRIPT_PATH`
+
+Optional repository variable:
+- `VPS_PORT` (defaults to `22`)
+
+Required repository secret:
+- `VPS_SSH_PRIVATE_KEY`
+
 ## Azure Deployment
 
 Workflow:

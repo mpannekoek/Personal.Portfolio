@@ -1,0 +1,82 @@
+name: Deploy To Azure VPS
+
+on:
+  workflow_run:
+    workflows:
+      - Publish Docker Image
+    types:
+      - completed
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Docker image tag to deploy
+        required: false
+        default: latest
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      IMAGE_NAME: ""
+      IMAGE_TAG: ""
+      WORKFLOW_RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+
+    steps:
+      - name: Resolve Image Reference
+        shell: bash
+        run: |
+          set -eu
+
+          repo_lower="$(printf '%s' "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')"
+
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            image_tag="${{ inputs.image_tag }}"
+          else
+            image_tag="sha-$(printf '%s' "${WORKFLOW_RUN_SHA}" | cut -c1-7)"
+          fi
+
+          echo "IMAGE_NAME=${repo_lower}" >> "${GITHUB_ENV}"
+          echo "IMAGE_TAG=${image_tag}" >> "${GITHUB_ENV}"
+
+      - name: Run VPS Deploy Script Over SSH
+        shell: bash
+        env:
+          VPS_HOST: ${{ vars.VPS_HOST }}
+          VPS_USER: ${{ vars.VPS_USER }}
+          VPS_PORT: ${{ vars.VPS_PORT || 22 }}
+          VPS_DEPLOY_SCRIPT_PATH: ${{ vars.VPS_DEPLOY_SCRIPT_PATH }}
+          VPS_SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }} # Placeholder: add your private key in repository secret.
+        run: |
+          set -eu
+
+          key_file="$(mktemp)"
+          known_hosts_file="$(mktemp)"
+          trap 'rm -f "${key_file}" "${known_hosts_file}"' EXIT
+
+          printf '%s\n' "${VPS_SSH_PRIVATE_KEY}" | tr -d '\r' > "${key_file}"
+          chmod 600 "${key_file}"
+
+          ssh-keyscan -p "${VPS_PORT}" -H "${VPS_HOST}" > "${known_hosts_file}"
+
+          ssh \
+            -i "${key_file}" \
+            -p "${VPS_PORT}" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="${known_hosts_file}" \
+            "${VPS_USER}@${VPS_HOST}" \
+            bash -s -- "${VPS_DEPLOY_SCRIPT_PATH}" "${IMAGE_TAG}" "${IMAGE_NAME}" "${REGISTRY}" <<'EOF'
+          set -eu
+          bash "$1" "$2" "$3" "$4"
+          EOF
