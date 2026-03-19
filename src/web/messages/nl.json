@@ -156,7 +156,7 @@
     "hero": {
       "title": "Hoi en welkom. Laten we samen iets moois bouwen!",
       "viewProject": "Bekijk huidig project",
-      "connect": "Huur mij in"
+      "connect": "Contact"
     },
     "about": {
       "greeting": "Hoi daar",
@@ -217,7 +217,7 @@
       ]
     },
     "connect": {
-      "title": "Huur mij in",
+      "title": "Contact",
       "eyebrow": "Beschikbaar voor webprojecten"
     }
   }

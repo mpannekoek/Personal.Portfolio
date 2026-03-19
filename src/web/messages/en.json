@@ -156,7 +156,7 @@
     "hero": {
       "title": "Hi and welcome. Let's build something amazing together!",
       "viewProject": "View current project",
-      "connect": "Hire me"
+      "connect": "Contact"
     },
     "about": {
       "greeting": "Hi there",
@@ -217,7 +217,7 @@
       ]
     },
     "connect": {
-      "title": "Hire me",
+      "title": "Contact",
       "eyebrow": "Available for web projects"
     }
   }
