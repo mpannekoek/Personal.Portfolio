@@ -35,6 +35,24 @@ The script receives:
 - image name (`<github-owner>/<repo-name>` in lowercase)
 - container registry (`ghcr.io`)
 
+Reference script:
+- [deploy/deploy.sh](../deploy/deploy.sh)
+
+The workflow passes these positional arguments to the script:
+```text
+<image_tag> <image_name> <registry>
+```
+
+`deploy/compose.yml` uses environment variable interpolation for the image:
+```text
+${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}
+```
+with defaults when variables are not set.
+
+If your GHCR package is private, set these environment variables on the VPS so the script can run `docker login` before pulling:
+- `GHCR_USERNAME`
+- `GHCR_PAT`
+
 Required repository variables:
 - `VPS_HOST`
 - `VPS_USER`

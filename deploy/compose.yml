@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/mpannekoek/personal.portfolio:latest
+    image: ${REGISTRY:-ghcr.io}/${IMAGE_NAME:-mpannekoek/personal.portfolio}:${IMAGE_TAG:-latest}
     container_name: personal-portfolio
     restart: unless-stopped
     ports:
