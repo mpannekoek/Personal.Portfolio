@@ -39,8 +39,11 @@ import { getLatestBlogPreviews, type BlogPreviewCard } from "../../lib/blog-clie
 const INSIGHTS_POST_LIMIT = 3;
 
 type SkillItem = {
+    key: string;
     label: string;
     icon: LucideIcon | IconType;
+    badgeToneClassName: string;
+    iconToneClassName: string;
 };
 
 type SkillGroup = {
@@ -72,19 +75,131 @@ type CurrentProject = {
     closeWidget: string;
 };
 
-const skillGroupIcons: Array<Array<LucideIcon | IconType>> = [
-    [SiDotnet, SiNodedotjs, SiPython, Database, SiPostgresql, SiYaml],
-    [FaMicrosoft, SiDocker, SiPodman, SiGit],
-    [BrainCircuit, SiOpenai, BotMessageSquare],
-    [Brain, Puzzle, BookOpen],
+type SkillDefinition = Omit<SkillItem, "label">;
+
+const skillDefinitions: SkillDefinition[][] = [
+    [
+        {
+            key: "dotnet",
+            icon: SiDotnet,
+            badgeToneClassName: "bg-[#512bd4]/10 ring-1 ring-[#512bd4]/20",
+            iconToneClassName: "text-[#512bd4]",
+        },
+        {
+            key: "nodejs",
+            icon: SiNodedotjs,
+            badgeToneClassName: "bg-[#5fa04e]/10 ring-1 ring-[#5fa04e]/20",
+            iconToneClassName: "text-[#5fa04e]",
+        },
+        {
+            key: "python",
+            icon: SiPython,
+            badgeToneClassName: "bg-[linear-gradient(135deg,rgba(55,118,171,0.16),rgba(255,212,59,0.22))] ring-1 ring-[#3776ab]/20",
+            iconToneClassName: "text-[#3776ab]",
+        },
+        {
+            key: "sql",
+            icon: Database,
+            badgeToneClassName: "bg-[#2563eb]/10 ring-1 ring-[#2563eb]/20",
+            iconToneClassName: "text-[#2563eb]",
+        },
+        {
+            key: "postgresql",
+            icon: SiPostgresql,
+            badgeToneClassName: "bg-[#336791]/10 ring-1 ring-[#336791]/20",
+            iconToneClassName: "text-[#336791]",
+        },
+        {
+            key: "yaml",
+            icon: SiYaml,
+            badgeToneClassName: "bg-[#d97706]/10 ring-1 ring-[#d97706]/20",
+            iconToneClassName: "text-[#d97706]",
+        },
+    ],
+    [
+        {
+            key: "azure",
+            icon: FaMicrosoft,
+            badgeToneClassName: "bg-[#0078d4]/10 ring-1 ring-[#0078d4]/20",
+            iconToneClassName: "text-[#0078d4]",
+        },
+        {
+            key: "docker",
+            icon: SiDocker,
+            badgeToneClassName: "bg-[#2496ed]/10 ring-1 ring-[#2496ed]/20",
+            iconToneClassName: "text-[#2496ed]",
+        },
+        {
+            key: "podman",
+            icon: SiPodman,
+            badgeToneClassName: "bg-[#892ca0]/10 ring-1 ring-[#892ca0]/20",
+            iconToneClassName: "text-[#892ca0]",
+        },
+        {
+            key: "git",
+            icon: SiGit,
+            badgeToneClassName: "bg-[#f05032]/10 ring-1 ring-[#f05032]/20",
+            iconToneClassName: "text-[#f05032]",
+        },
+    ],
+    [
+        {
+            key: "ai",
+            icon: BrainCircuit,
+            badgeToneClassName: "bg-[#6366f1]/10 ring-1 ring-[#6366f1]/20",
+            iconToneClassName: "text-[#6366f1]",
+        },
+        {
+            key: "openai-codex",
+            icon: SiOpenai,
+            badgeToneClassName: "bg-[#10a37f]/10 ring-1 ring-[#10a37f]/20",
+            iconToneClassName: "text-[#10a37f]",
+        },
+        {
+            key: "agentic-development",
+            icon: BotMessageSquare,
+            badgeToneClassName: "bg-[#0ea5e9]/10 ring-1 ring-[#0ea5e9]/20",
+            iconToneClassName: "text-[#0ea5e9]",
+        },
+    ],
+    [
+        {
+            key: "critical-thinking",
+            icon: Brain,
+            badgeToneClassName: "bg-[#475569]/10 ring-1 ring-[#475569]/20",
+            iconToneClassName: "text-[#475569]",
+        },
+        {
+            key: "problem-solving",
+            icon: Puzzle,
+            badgeToneClassName: "bg-[#f59e0b]/10 ring-1 ring-[#f59e0b]/20",
+            iconToneClassName: "text-[#f59e0b]",
+        },
+        {
+            key: "curious",
+            icon: BookOpen,
+            badgeToneClassName: "bg-[#14b8a6]/10 ring-1 ring-[#14b8a6]/20",
+            iconToneClassName: "text-[#14b8a6]",
+        },
+    ],
 ];
+
+function getSkillDefinition(groupIndex: number, skillIndex: number): SkillDefinition {
+    const definition = skillDefinitions[groupIndex]?.[skillIndex];
+
+    if (!definition) {
+        throw new Error(`Missing skill definition for group ${groupIndex}, skill ${skillIndex}.`);
+    }
+
+    return definition;
+}
 
 function buildSkillGroups(groups: TranslatedSkillGroup[]): SkillGroup[] {
     return groups.map((group, groupIndex) => ({
         title: group.title,
         skills: group.skills.map((label, skillIndex) => ({
             label,
-            icon: skillGroupIcons[groupIndex][skillIndex],
+            ...getSkillDefinition(groupIndex, skillIndex),
         })),
     }));
 }
@@ -572,11 +687,11 @@ export default function Page() {
 
                                             return (
                                                 <li
-                                                    key={skill.label}
+                                                    key={skill.key}
                                                     className="flex items-center gap-3 text-sm font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                                                 >
-                                                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent">
-                                                        <Icon className="h-3.5 w-3.5" />
+                                                    <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full ${skill.badgeToneClassName}`}>
+                                                        <Icon className={`h-3.5 w-3.5 ${skill.iconToneClassName}`} />
                                                     </span>
                                                     {skill.label}
                                                 </li>
