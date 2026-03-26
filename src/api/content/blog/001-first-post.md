@@ -6,7 +6,7 @@ description: "Launching my blog"
 author: "Martijn Pannekoek"
 tags: ["nextjs", "express", "mdx"]
 published: true
-image: "/api/blogs/assets/first-post.svg"
+image: "/api/blogs/assets/001-first-post.svg"
 ---
 
 # Hello world
