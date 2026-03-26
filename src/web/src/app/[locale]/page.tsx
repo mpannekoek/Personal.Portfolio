@@ -525,58 +525,57 @@ export default function Page() {
                                 variant="reactive"
                             />
                         </div>
-                        <div className="mb-6 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-elevated)] shadow-sm ring-1 ring-[var(--ring)]">
-                            <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
-                                <div className="relative p-6 md:p-8">
-                                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary/7 via-transparent to-transparent" />
-                                    <div className="relative">
-                                        <p className="inline-flex items-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-soft)]">
-                                            {t("toolkit.badge")}
-                                        </p>
-                                        <p className="mt-4 text-lg leading-relaxed text-[var(--text-muted)]">
-                                            {t("toolkit.description")}
-                                        </p>
-                                        <div className="mt-5 flex flex-wrap gap-2">
-                                            <span className="inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{toolkitTags[0]}</span>
-                                            <span className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">{toolkitTags[1]}</span>
-                                            <span className="inline-flex items-center rounded-full border border-highlight/35 bg-highlight/12 px-3 py-1 text-xs font-medium text-highlight">{toolkitTags[2]}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="relative min-h-64 border-t border-[var(--border)] lg:border-l lg:border-t-0">
-                                    <Image
-                                        src="dev-cartoon.svg"
-                                        alt={t("toolkit.illustrationAlt")}
-                                        fill
-                                        sizes="(min-width: 1024px) 35vw, 100vw"
-                                        className="toolkit-illustration object-cover"
-                                    />
-                                    <span className="toolkit-orb pointer-events-none absolute left-5 top-6 h-3 w-3 rounded-full bg-accent/85" />
-                                    <span className="toolkit-orb toolkit-orb-delay pointer-events-none absolute right-6 top-10 h-2.5 w-2.5 rounded-full bg-highlight/85" />
-                                    <span className="toolkit-orb toolkit-orb-delay-2 pointer-events-none absolute right-10 bottom-8 h-2 w-2 rounded-full bg-primary/85" />
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-accent/25" />
+                        <div className="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-10">
+                            <div className="max-w-xl">
+                                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                                    {t("toolkit.badge")}
+                                </p>
+                                <p className="mt-4 text-lg leading-relaxed text-[var(--text-muted)] md:text-xl">
+                                    {t("toolkit.description")}
+                                </p>
+                                <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-[var(--text-soft)]">
+                                    {toolkitTags.map((tag) => (
+                                        <span key={tag} className="inline-flex items-center gap-2">
+                                            <span className="h-1.5 w-1.5 rounded-full bg-primary/75" />
+                                            {tag}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
+
+                            <div className="relative min-h-[18rem] overflow-hidden rounded-[1.75rem] bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.14),transparent_36%),linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.09))] shadow-[0_28px_80px_-56px_rgba(15,23,42,0.55)]">
+                                <Image
+                                    src="dev-cartoon.svg"
+                                    alt={t("toolkit.illustrationAlt")}
+                                    fill
+                                    sizes="(min-width: 1024px) 48vw, 100vw"
+                                    className="toolkit-illustration object-cover object-center"
+                                />
+                                <span className="toolkit-orb pointer-events-none absolute left-5 top-6 h-3 w-3 rounded-full bg-accent/85" />
+                                <span className="toolkit-orb toolkit-orb-delay pointer-events-none absolute right-6 top-10 h-2.5 w-2.5 rounded-full bg-highlight/85" />
+                                <span className="toolkit-orb toolkit-orb-delay-2 pointer-events-none absolute right-10 bottom-8 h-2 w-2 rounded-full bg-primary/85" />
+                                <div className="absolute inset-0 bg-gradient-to-tr from-primary/16 via-transparent to-accent/20" />
+                            </div>
                         </div>
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-x-10 gap-y-8 md:grid-cols-2">
                             {skillGroups.map((group) => (
                                 <article
                                     key={group.title}
-                                    className="rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] p-6 shadow-sm ring-1 ring-[var(--ring)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
+                                    className="pt-1"
                                 >
-                                    <h3 className="mb-4 text-lg font-bold text-[var(--text)]">
+                                    <h3 className="text-lg font-semibold text-[var(--text)] md:text-xl">
                                         {group.title}
                                     </h3>
-                                    <ul className="flex flex-wrap gap-3">
+                                    <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                                         {group.skills.map((skill) => {
                                             const Icon = skill.icon;
 
                                             return (
                                                 <li
                                                     key={skill.label}
-                                                    className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm font-medium text-[var(--text-muted)]"
+                                                    className="flex items-center gap-3 text-sm font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                                                 >
-                                                    <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-accent/12 text-accent">
+                                                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/10 text-accent">
                                                         <Icon className="h-3.5 w-3.5" />
                                                     </span>
                                                     {skill.label}

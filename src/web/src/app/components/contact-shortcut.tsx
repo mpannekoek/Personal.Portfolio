@@ -22,10 +22,10 @@ export default function ContactShortcut() {
     }, [email, message, name, t]);
 
     return (
-        <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface-elevated)] p-6 shadow-sm ring-1 ring-[var(--ring)] md:p-8">
-            <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr] lg:gap-8">
+        <section className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
+            <div className="max-w-lg">
                 <div>
-                    <p className="inline-flex rounded-full border border-highlight/35 bg-highlight/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-highlight">
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-highlight">
                         {t("badge")}
                     </p>
                     <h3 className="mt-3 text-2xl font-bold text-[var(--text)] md:text-3xl">
@@ -44,45 +44,45 @@ export default function ContactShortcut() {
                         </a>
                     </p>
                 </div>
-                <form className="grid gap-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
-                    <label className="grid gap-1.5">
-                        <span className="text-sm font-medium text-[var(--text-muted)]">{t("fields.name")}</span>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(event) => setName(event.target.value)}
-                            placeholder={t("placeholders.name")}
-                            className="w-full rounded-lg border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-3 py-2 text-[var(--text)] outline-none transition-colors focus:border-primary/70"
-                        />
-                    </label>
-                    <label className="grid gap-1.5">
-                        <span className="text-sm font-medium text-[var(--text-muted)]">{t("fields.email")}</span>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                            placeholder={t("placeholders.email")}
-                            className="w-full rounded-lg border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-3 py-2 text-[var(--text)] outline-none transition-colors focus:border-primary/70"
-                        />
-                    </label>
-                    <label className="grid gap-1.5">
-                        <span className="text-sm font-medium text-[var(--text-muted)]">{t("fields.message")}</span>
-                        <textarea
-                            value={message}
-                            onChange={(event) => setMessage(event.target.value)}
-                            rows={4}
-                            placeholder={t("placeholders.message")}
-                            className="w-full resize-y rounded-lg border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-3 py-2 text-[var(--text)] outline-none transition-colors focus:border-primary/70"
-                        />
-                    </label>
-                    <a
-                        href={mailtoHref}
-                        className="inline-flex w-fit items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-[var(--primary-contrast)] transition-colors hover:bg-primary/85"
-                    >
-                        {t("cta")}
-                    </a>
-                </form>
             </div>
+            <form className="grid max-w-2xl gap-4 border-t border-[var(--border)] pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                <label className="grid gap-1.5">
+                    <span className="text-sm font-medium text-[var(--text-muted)]">{t("fields.name")}</span>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                        placeholder={t("placeholders.name")}
+                        className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 text-[var(--text)] outline-none transition-colors focus:border-primary/60"
+                    />
+                </label>
+                <label className="grid gap-1.5">
+                    <span className="text-sm font-medium text-[var(--text-muted)]">{t("fields.email")}</span>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder={t("placeholders.email")}
+                        className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 text-[var(--text)] outline-none transition-colors focus:border-primary/60"
+                    />
+                </label>
+                <label className="grid gap-1.5">
+                    <span className="text-sm font-medium text-[var(--text-muted)]">{t("fields.message")}</span>
+                    <textarea
+                        value={message}
+                        onChange={(event) => setMessage(event.target.value)}
+                        rows={4}
+                        placeholder={t("placeholders.message")}
+                        className="w-full resize-y rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5 text-[var(--text)] outline-none transition-colors focus:border-primary/60"
+                    />
+                </label>
+                <a
+                    href={mailtoHref}
+                    className="inline-flex w-fit items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-[var(--primary-contrast)] transition-colors hover:bg-primary/85"
+                >
+                    {t("cta")}
+                </a>
+            </form>
         </section>
     );
 }
