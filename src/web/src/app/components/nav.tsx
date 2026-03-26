@@ -37,7 +37,7 @@ export default function NavBar() {
     const closeTimeoutRef = useRef<number | null>(null);
     const socialLinks = [
         {
-            href: "https://github.com",
+            href: "https://github.com/mpannekoek",
             icon: githubIcon,
             alt: footerT("social.github"),
         },
@@ -57,7 +57,7 @@ export default function NavBar() {
             alt: footerT("social.facebook"),
         },
         {
-            href: "mailto:martijnpannekoek.development@gmail.com",
+            href: "mailto:mpannekoek.development@gmail.com",
             icon: gmailIcon,
             alt: footerT("social.email"),
         },

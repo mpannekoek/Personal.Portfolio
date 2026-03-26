@@ -18,7 +18,7 @@ export default function Footer() {
     ];
     const socialLinks = [
         {
-            href: "https://github.com",
+            href: "https://github.com/mpannekoek",
             icon: githubIcon,
             alt: t("social.github"),
         },
@@ -38,7 +38,7 @@ export default function Footer() {
             alt: t("social.facebook"),
         },
         {
-            href: "mailto:martijnpannekoek.development@gmail.com",
+            href: "mailto:mpannekoek.development@gmail.com",
             icon: gmailIcon,
             alt: t("social.email"),
         },

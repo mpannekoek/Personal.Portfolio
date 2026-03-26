@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 
-const contactEmail = "martijnpannekoek.development@gmail.com";
+const contactEmail = "mpannekoek.development@gmail.com";
 
 export default function ContactShortcut() {
     const t = useTranslations("contact");
