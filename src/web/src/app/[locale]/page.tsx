@@ -3,6 +3,7 @@
 import { useEffect, useState, type FocusEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import FadeIn from "../components/providers/fade-in-provider";
+import BlogListItem from "../components/blog-list-item";
 import ContactShortcut from "../components/contact-shortcut";
 import SectionHeading from "../components/section-heading";
 import Image from "next/image";
@@ -493,94 +494,26 @@ export default function Page() {
                             eyebrow={t("insights.eyebrow")}
                             variant="reactive"
                         />
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                        <div className="grid grid-cols-1 gap-x-10 gap-y-3 lg:grid-cols-2">
                             {latestPosts.map((post) => {
-                                const cardClassName =
-                                    "group mp-focus flex min-h-[19rem] h-full flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] p-4 shadow-sm ring-1 ring-[var(--ring)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md";
-                                const cardContent = (
-                                    <>
-                                        <div className={`mb-3 ${post.image ? "flex items-start gap-3" : ""}`}>
-                                            {post.image ? (
-                                                <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)]">
-                                                    <Image
-                                                        src={post.image}
-                                                        alt={post.title}
-                                                        fill
-                                                        sizes="112px"
-                                                        className="object-cover object-center"
-                                                    />
-                                                </div>
-                                            ) : null}
-                                            <div className="min-w-0">
-                                                {post.date ? (
-                                                    <p className="mb-2 inline-flex items-center text-xs font-medium uppercase tracking-wide text-[var(--text-soft)]">
-                                                        <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-highlight/80" />
-                                                        {post.date}
-                                                    </p>
-                                                ) : null}
-                                                <h3 className="line-clamp-2 text-lg font-bold leading-snug text-[var(--text)]">
-                                                    {post.title}
-                                                </h3>
-                                            </div>
-                                        </div>
-                                        {post.author ? (
-                                            <p className="mb-3 text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
-                                                {post.author}
-                                            </p>
-                                        ) : null}
-                                        <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-[var(--text-muted)]">
-                                            {post.excerpt}
-                                        </p>
-                                        {post.tags && post.tags.length > 0 ? (
-                                            <ul className="mb-4 flex flex-wrap gap-1.5">
-                                                {post.tags.slice(0, 4).map((tag) => (
-                                                    <li
-                                                        key={`${post.id}-${tag}`}
-                                                        className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[0.7rem] font-medium text-[var(--text-soft)]"
-                                                    >
-                                                        {tag}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        ) : null}
-                                        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--border)] pt-3">
-                                            <span className="line-clamp-1 text-xs uppercase tracking-[0.12em] text-[var(--text-soft)]">
-                                                {post.tags && post.tags.length > 0
-                                                    ? post.tags.slice(0, 2).join(" · ")
-                                                    : post.date}
-                                            </span>
-                                            <span
-                                                className={`text-sm font-semibold ${
-                                                post.isPlaceholder
-                                                    ? "text-[var(--text-soft)]"
-                                                    : "text-primary underline decoration-accent/45 decoration-2 underline-offset-4 transition-colors group-hover:text-primary/80 group-hover:decoration-accent/65"
-                                                }`}
-                                            >
-                                                {post.isPlaceholder ? placeholderCta : t("insights.readPost")}
-                                            </span>
-                                        </div>
-                                    </>
-                                );
-
-                                if (post.isPlaceholder) {
-                                    return (
-                                        <article key={post.id} className={cardClassName}>
-                                            {cardContent}
-                                        </article>
-                                    );
-                                }
-
                                 return (
-                                    <Link
+                                    <BlogListItem
                                         key={post.id}
-                                        href={post.href}
-                                        aria-label={`${t("insights.readPost")}: ${post.title}`}
-                                        className={cardClassName}
-                                    >
-                                        {cardContent}
-                                    </Link>
+                                        post={post}
+                                        titleTag="h3"
+                                        linkLabel={t("insights.readPost")}
+                                        placeholderMetaLabel={placeholderCta}
+                                    />
                                 );
                             })}
+                        </div>
+                        <div className="mt-5 flex justify-center">
+                            <Link
+                                href="/blog"
+                                className="mp-focus inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text-muted)] transition-colors hover:border-primary/35 hover:text-primary"
+                            >
+                                {t("insights.viewAll")}
+                            </Link>
                         </div>
                         <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
                     </FadeIn>

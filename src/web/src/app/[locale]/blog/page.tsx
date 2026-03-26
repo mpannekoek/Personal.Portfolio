@@ -3,9 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Grid3X3, List, ArrowUpDown } from "lucide-react";
-import Image from "next/image";
+import BlogListItem from "../../components/blog-list-item";
 import { getAllBlogPreviews, type BlogPreviewCard } from "../../../lib/blog-client";
-import { Link } from "../../../i18n/navigation";
 
 type SortOption = "date-desc" | "date-asc" | "title-asc";
 type ViewMode = "metro" | "text";
@@ -166,78 +165,25 @@ export default function BlogPage() {
             ) : null}
 
             {!isLoading && visiblePosts.length > 0 && viewMode === "metro" ? (
-                <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <div className="mt-8 grid grid-cols-1 gap-x-10 gap-y-4 xl:grid-cols-2">
                     {visiblePosts.map((post) => (
-                        <Link key={post.id} href={post.href} className="group block">
-                            <div className="relative h-56 overflow-hidden rounded-xl bg-[var(--surface)]">
-                                {post.image ? (
-                                    <Image
-                                        src={post.image}
-                                        alt={post.title}
-                                        fill
-                                        sizes="(min-width: 1280px) 30vw, (min-width: 768px) 50vw, 100vw"
-                                        className="object-cover object-center transition-transform duration-300 group-hover:scale-[1.01]"
-                                    />
-                                ) : (
-                                    <div className="flex h-full items-center justify-center text-sm text-[var(--text-soft)]">
-                                        {t("imageFallback")}
-                                    </div>
-                                )}
-                            </div>
-                            <div className="mt-3">
-                                <h2 className="text-2xl font-semibold text-[var(--text)]">
-                                    {post.title}
-                                </h2>
-                                <p className="mt-1 text-sm text-[var(--text-muted)]">
-                                    {post.author} · {post.date}
-                                </p>
-                                <div className="mt-2 flex flex-wrap gap-2">
-                                    {post.tags?.map((tag) => (
-                                        <span
-                                            key={`${post.id}-${tag}`}
-                                            className="rounded-full bg-[var(--surface)] px-2.5 py-1 text-xs text-[var(--text-soft)]"
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                                <p className="mt-3 line-clamp-2 text-sm text-[var(--text-muted)]">
-                                    {post.excerpt}
-                                </p>
-                            </div>
-                        </Link>
+                        <BlogListItem
+                            key={post.id}
+                            post={post}
+                            titleTag="h2"
+                        />
                     ))}
                 </div>
             ) : null}
 
             {!isLoading && visiblePosts.length > 0 && viewMode === "text" ? (
-                <div className="mt-8 space-y-4">
+                <div className="mt-8 space-y-2">
                     {visiblePosts.map((post) => (
-                        <Link
+                        <BlogListItem
                             key={post.id}
-                            href={post.href}
-                            className="block rounded-xl bg-[var(--surface-elevated)] px-4 py-4 ring-1 ring-[var(--ring)]"
-                        >
-                            <h2 className="text-xl font-semibold text-[var(--text)]">
-                                {post.title}
-                            </h2>
-                            <p className="mt-1 text-sm text-[var(--text-muted)]">
-                                {post.author} · {post.date}
-                            </p>
-                            <div className="mt-2 flex flex-wrap gap-2">
-                                {post.tags?.map((tag) => (
-                                    <span
-                                        key={`${post.id}-${tag}`}
-                                        className="rounded-full bg-[var(--surface)] px-2.5 py-1 text-xs text-[var(--text-soft)]"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                            <p className="mt-3 text-sm text-[var(--text-muted)]">
-                                {post.excerpt}
-                            </p>
-                        </Link>
+                            post={post}
+                            titleTag="h2"
+                        />
                     ))}
                 </div>
             ) : null}
