@@ -19,6 +19,7 @@ export type BlogPreviewCard = {
     title: string;
     excerpt: string;
     date: string;
+    sortDate?: string;
     href: string;
     author?: string;
     tags?: string[];
@@ -48,6 +49,7 @@ function toPreviewCards(blogs: BlogListItem[], locale: string): BlogPreviewCard[
             date: Number.isNaN(parsedDate.getTime())
                 ? blog.date
                 : formatter.format(parsedDate),
+            sortDate: blog.date,
             href: `/blog/${blog.slug}`,
             author: blog.author,
             tags: blog.tags,
@@ -72,6 +74,7 @@ function buildPlaceholderPosts({
         title,
         excerpt,
         date: "",
+        sortDate: "",
         href: "",
         isPlaceholder: true,
     }));

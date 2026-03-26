@@ -415,12 +415,12 @@ export default function Page() {
                 onClose={() => setIsMobileProjectDrawerOpen(false)}
             />
             <div className="container mx-auto px-6">
-                <div className="lg:max-w-3xl">
+                <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
                     <FadeIn delay="delay-100">
                         <h1 className="font-bold mb-6 text-3xl md:text-5xl">
                             {t("hero.title")}
                         </h1>
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex flex-wrap justify-center gap-3">
                             <Link
                                 href="#current-project-anchor"
                                 onClick={(event) => {
@@ -451,8 +451,8 @@ export default function Page() {
                     </FadeIn>
                 </div>
                 <div id="current-project-anchor" className="scroll-mt-24" />
-                <div className="flex flex-col md:flex-row mt-6">
-                    <div className="md:basis-64 mx-6">
+                <div className="mx-auto mt-8 flex max-w-5xl flex-col items-center gap-8 md:flex-row md:items-center md:justify-center md:gap-10">
+                    <div className="shrink-0">
                         <FadeIn delay="delay-300">
                             <div className="profile-photo-wrap">
                                 <span className="profile-photo-orbit" aria-hidden="true" />
@@ -464,9 +464,9 @@ export default function Page() {
                             </div>
                         </FadeIn>
                     </div>
-                    <div className="md:basis-128 mt-6">
+                    <div className="max-w-2xl text-center md:text-left">
                         <FadeIn delay="delay-500">
-                            <div className="flex">
+                            <div className="flex items-center justify-center md:justify-start">
                                 <span className="font-mono">
                                     {t("about.greeting")}
                                 </span>

@@ -58,8 +58,8 @@ export default function BlogPage() {
                 return left.title.localeCompare(right.title);
             }
 
-            const leftTimestamp = Date.parse(left.date);
-            const rightTimestamp = Date.parse(right.date);
+            const leftTimestamp = Date.parse(left.sortDate ?? "");
+            const rightTimestamp = Date.parse(right.sortDate ?? "");
 
             if (Number.isNaN(leftTimestamp) || Number.isNaN(rightTimestamp)) {
                 return left.title.localeCompare(right.title);
