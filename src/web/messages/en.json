@@ -108,6 +108,7 @@
       "eyebrow": "Process",
       "title": "How I work",
       "description": "I work in a practical way, communicate clearly, and keep the process easy to follow from the first conversation to launch. That means you always know the next step, where we stand, and what I need from you.",
+      "interactionHint": "Hover a step or click it to see more context.",
       "stepLabel": "Step {number}",
       "steps": {
         "step1": {

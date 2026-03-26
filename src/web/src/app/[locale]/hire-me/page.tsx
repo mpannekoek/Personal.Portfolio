@@ -1,19 +1,15 @@
 import {
-    Hammer,
     Handshake,
     ImageIcon,
-    MessageCircle,
     MessageSquareQuote,
     MousePointerClick,
     MonitorSmartphone,
     PanelsTopLeft,
-    PencilRuler,
-    Rocket,
     Search,
-    Workflow,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import ContactShortcut from "../../components/contact-shortcut";
+import ProcessTimeline from "../../components/process-timeline";
 import SectionHeading from "../../components/section-heading";
 
 export default async function HireMePage() {
@@ -56,49 +52,6 @@ export default async function HireMePage() {
             iconClassName: "bg-emerald-500/12 text-emerald-700",
         },
     ] as const;
-    const processSteps = [
-        {
-            key: "step1",
-            icon: MessageCircle,
-            tone: "text-sky-700",
-            chipClassName: "border-sky-500/20 bg-sky-500/12 text-sky-700",
-            badgeClassName: "bg-sky-600 text-white",
-            cardClassName: "hover:border-sky-500/30",
-        },
-        {
-            key: "step2",
-            icon: Workflow,
-            tone: "text-teal-700",
-            chipClassName: "border-teal-500/20 bg-teal-500/12 text-teal-700",
-            badgeClassName: "bg-teal-600 text-white",
-            cardClassName: "hover:border-teal-500/30",
-        },
-        {
-            key: "step3",
-            icon: PencilRuler,
-            tone: "text-amber-700",
-            chipClassName: "border-amber-500/20 bg-amber-500/12 text-amber-700",
-            badgeClassName: "bg-amber-500 text-white",
-            cardClassName: "hover:border-amber-500/30",
-        },
-        {
-            key: "step4",
-            icon: Hammer,
-            tone: "text-emerald-700",
-            chipClassName: "border-emerald-500/20 bg-emerald-500/12 text-emerald-700",
-            badgeClassName: "bg-emerald-600 text-white",
-            cardClassName: "hover:border-emerald-500/30",
-        },
-        {
-            key: "step5",
-            icon: Rocket,
-            tone: "text-rose-700",
-            chipClassName: "border-rose-500/20 bg-rose-500/12 text-rose-700",
-            badgeClassName: "bg-rose-600 text-white",
-            cardClassName: "hover:border-rose-500/30",
-        },
-    ] as const;
-
     return (
         <main className="container mx-auto px-6 pb-10">
             <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -172,83 +125,7 @@ export default async function HireMePage() {
 
             <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
 
-            <section className="mt-8">
-                <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-                    <div className="max-w-xl lg:sticky lg:top-24">
-                        <SectionHeading
-                            title={t("process.title")}
-                            eyebrow={t("process.eyebrow")}
-                            variant="reactive"
-                        />
-                        <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
-                            {t("process.description")}
-                        </p>
-
-                        <div className="relative mt-10 py-2">
-                            <div className="absolute bottom-10 left-5 top-10 w-px bg-gradient-to-b from-sky-500/75 via-teal-500/65 via-amber-500/65 via-emerald-500/65 to-rose-500/75" />
-                            <div className="space-y-8">
-                                {processSteps.map((step, index) => {
-                                    const Icon = step.icon;
-
-                                    return (
-                                        <div key={step.key} className="relative flex min-h-16 items-center gap-4">
-                                            <span
-                                                className={`relative z-10 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-[var(--background)] text-sm font-bold shadow-[0_8px_20px_rgba(15,23,42,0.06)] ${step.chipClassName}`}
-                                            >
-                                                <Icon className="h-4 w-4" />
-                                            </span>
-                                            <div>
-                                                <p className="text-base font-semibold text-[var(--text)]">
-                                                    {t(`process.steps.${step.key}.title`)}
-                                                </p>
-                                                <p
-                                                    className={`mt-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] ${step.tone}`}
-                                                >
-                                                    {t("process.stepLabel", { number: index + 1 })}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="grid gap-4">
-                        {processSteps.map((step, index) => {
-                            const Icon = step.icon;
-
-                            return (
-                                <article
-                                    key={step.key}
-                                    className={`rounded-2xl border border-[var(--border)] bg-[var(--surface-elevated)] p-5 shadow-sm ring-1 ring-[var(--ring)] transition-all hover:-translate-y-0.5 hover:shadow-md ${step.cardClassName}`}
-                                >
-                                    <div className="flex gap-4">
-                                        <span
-                                            className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-bold ${step.badgeClassName}`}
-                                        >
-                                            <Icon className="h-5 w-5" />
-                                        </span>
-                                        <div>
-                                            <p
-                                                className={`text-xs font-semibold uppercase tracking-[0.12em] ${step.tone}`}
-                                            >
-                                                {t("process.stepLabel", { number: index + 1 })}
-                                            </p>
-                                            <h3 className="mt-2 text-xl font-semibold text-[var(--text)]">
-                                                {t(`process.steps.${step.key}.title`)}
-                                            </h3>
-                                            <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
-                                                {t(`process.steps.${step.key}.description`)}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </article>
-                            );
-                        })}
-                    </div>
-                </div>
-            </section>
+            <ProcessTimeline />
 
             <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
 

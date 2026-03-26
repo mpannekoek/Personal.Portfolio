@@ -494,60 +494,93 @@ export default function Page() {
                             variant="reactive"
                         />
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                            {latestPosts.map((post) => (
-                                <article
-                                    key={post.id}
-                                    className="flex h-full flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] p-4 shadow-sm ring-1 ring-[var(--ring)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
-                                >
-                                    {post.image ? (
-                                        <div className="relative mb-3 h-28 overflow-hidden rounded-lg border border-[var(--border)]">
-                                            <Image
-                                                src={post.image}
-                                                alt={post.title}
-                                                fill
-                                                sizes="(min-width: 768px) 30vw, 100vw"
-                                                className="object-cover"
-                                            />
+                            {latestPosts.map((post) => {
+                                const cardClassName =
+                                    "group mp-focus flex min-h-[19rem] h-full flex-col rounded-xl border border-[var(--border)] bg-[var(--surface-elevated)] p-4 shadow-sm ring-1 ring-[var(--ring)] transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md";
+                                const cardContent = (
+                                    <>
+                                        <div className={`mb-3 ${post.image ? "flex items-start gap-3" : ""}`}>
+                                            {post.image ? (
+                                                <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)]">
+                                                    <Image
+                                                        src={post.image}
+                                                        alt={post.title}
+                                                        fill
+                                                        sizes="112px"
+                                                        className="object-cover object-center"
+                                                    />
+                                                </div>
+                                            ) : null}
+                                            <div className="min-w-0">
+                                                {post.date ? (
+                                                    <p className="mb-2 inline-flex items-center text-xs font-medium uppercase tracking-wide text-[var(--text-soft)]">
+                                                        <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-highlight/80" />
+                                                        {post.date}
+                                                    </p>
+                                                ) : null}
+                                                <h3 className="line-clamp-2 text-lg font-bold leading-snug text-[var(--text)]">
+                                                    {post.title}
+                                                </h3>
+                                            </div>
                                         </div>
-                                    ) : null}
-                                    {post.date ? (
-                                        <p className="mb-2 inline-flex items-center text-xs font-medium uppercase tracking-wide text-[var(--text-soft)]">
-                                            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-highlight/80" />
-                                            {post.date}
+                                        {post.author ? (
+                                            <p className="mb-3 text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
+                                                {post.author}
+                                            </p>
+                                        ) : null}
+                                        <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-[var(--text-muted)]">
+                                            {post.excerpt}
                                         </p>
-                                    ) : null}
-                                    <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-snug text-[var(--text)]">
-                                        {post.title}
-                                    </h3>
-                                    <p className="mb-3 line-clamp-1 text-sm leading-relaxed text-[var(--text-muted)]">
-                                        {post.author ? `${post.excerpt} - ${post.author}` : post.excerpt}
-                                    </p>
-                                    {post.tags && post.tags.length > 0 ? (
-                                        <ul className="mb-3 flex flex-wrap gap-1.5">
-                                            {post.tags.slice(0, 3).map((tag) => (
-                                                <li
-                                                    key={`${post.id}-${tag}`}
-                                                    className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[0.7rem] font-medium text-[var(--text-soft)]"
-                                                >
-                                                    {tag}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    ) : null}
-                                    {post.isPlaceholder ? (
-                                        <span className="mt-auto text-sm font-semibold text-[var(--text-soft)]">
-                                            {placeholderCta}
-                                        </span>
-                                    ) : (
-                                        <Link
-                                            href={post.href}
-                                            className="mt-auto text-sm font-semibold text-primary underline decoration-accent/45 decoration-2 underline-offset-4 hover:text-primary/80 hover:decoration-accent/65"
-                                        >
-                                            {t("insights.readPost")}
-                                        </Link>
-                                    )}
-                                </article>
-                            ))}
+                                        {post.tags && post.tags.length > 0 ? (
+                                            <ul className="mb-4 flex flex-wrap gap-1.5">
+                                                {post.tags.slice(0, 4).map((tag) => (
+                                                    <li
+                                                        key={`${post.id}-${tag}`}
+                                                        className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-2 py-0.5 text-[0.7rem] font-medium text-[var(--text-soft)]"
+                                                    >
+                                                        {tag}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : null}
+                                        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[var(--border)] pt-3">
+                                            <span className="line-clamp-1 text-xs uppercase tracking-[0.12em] text-[var(--text-soft)]">
+                                                {post.tags && post.tags.length > 0
+                                                    ? post.tags.slice(0, 2).join(" · ")
+                                                    : post.date}
+                                            </span>
+                                            <span
+                                                className={`text-sm font-semibold ${
+                                                post.isPlaceholder
+                                                    ? "text-[var(--text-soft)]"
+                                                    : "text-primary underline decoration-accent/45 decoration-2 underline-offset-4 transition-colors group-hover:text-primary/80 group-hover:decoration-accent/65"
+                                                }`}
+                                            >
+                                                {post.isPlaceholder ? placeholderCta : t("insights.readPost")}
+                                            </span>
+                                        </div>
+                                    </>
+                                );
+
+                                if (post.isPlaceholder) {
+                                    return (
+                                        <article key={post.id} className={cardClassName}>
+                                            {cardContent}
+                                        </article>
+                                    );
+                                }
+
+                                return (
+                                    <Link
+                                        key={post.id}
+                                        href={post.href}
+                                        aria-label={`${t("insights.readPost")}: ${post.title}`}
+                                        className={cardClassName}
+                                    >
+                                        {cardContent}
+                                    </Link>
+                                );
+                            })}
                         </div>
                         <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
                     </FadeIn>

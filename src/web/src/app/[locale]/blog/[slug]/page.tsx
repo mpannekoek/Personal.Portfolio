@@ -192,7 +192,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                                     alt={post.title}
                                     width={1600}
                                     height={900}
-                                    className="h-auto w-full object-cover"
+                                    className="h-auto w-full object-cover object-center"
                                     priority
                                 />
                             </div>
