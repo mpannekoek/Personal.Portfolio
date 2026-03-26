@@ -28,10 +28,10 @@ export default function ContactShortcut() {
                     <p className="text-xs font-semibold uppercase tracking-[0.14em] text-highlight">
                         {t("badge")}
                     </p>
-                    <h3 className="mt-3 text-2xl font-bold text-[var(--text)] md:text-3xl">
+                    <h3 className="mt-3 text-2xl font-semibold leading-tight tracking-[-0.03em] text-[var(--text)] md:text-3xl">
                         {t("title")}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-[var(--text-muted)]">
+                    <p className="mt-3 text-base leading-[1.75] text-[var(--text-muted)]">
                         {t("description")}
                     </p>
                     <p className="mt-4 text-sm text-[var(--text-soft)]">

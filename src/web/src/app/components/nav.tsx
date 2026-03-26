@@ -117,8 +117,8 @@ export default function NavBar() {
 
         if (isActive) {
             return isSticky
-                ? "relative px-1 py-1 font-bold text-[var(--text)] after:absolute after:left-1 after:right-1 after:-bottom-1.5 after:h-0.5 after:rounded-full after:bg-highlight"
-                : "relative px-1 py-1 font-bold text-[var(--text)] after:absolute after:left-1 after:right-1 after:-bottom-1.5 after:h-0.5 after:rounded-full after:bg-highlight";
+                ? "relative px-1 py-1 font-semibold text-[var(--text)] after:absolute after:left-1 after:right-1 after:-bottom-1.5 after:h-0.5 after:rounded-full after:bg-highlight"
+                : "relative px-1 py-1 font-semibold text-[var(--text)] after:absolute after:left-1 after:right-1 after:-bottom-1.5 after:h-0.5 after:rounded-full after:bg-highlight";
         }
 
         return isSticky
@@ -179,7 +179,7 @@ export default function NavBar() {
                                 aria-label="Homepage"
                                 onClick={handleLogoClick}
                             >
-                                <span className="font-mono text-[0.98rem] font-semibold tracking-[0.04em] text-[var(--text)]">
+                                <span className="font-mono text-[0.92rem] font-medium tracking-[0.02em] text-[var(--text)]">
                                     <span className="text-[var(--text-soft)]">&lt;</span>
                                     <span className="mx-0.5 text-primary transition-colors group-hover:text-highlight dark:text-accent">MP</span>
                                     <span className="text-[var(--text-soft)]">/&gt;</span>

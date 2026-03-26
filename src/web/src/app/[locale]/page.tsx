@@ -417,7 +417,7 @@ export default function Page() {
             <div className="container mx-auto px-6">
                 <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
                     <FadeIn delay="delay-100">
-                        <h1 className="font-bold mb-6 text-3xl md:text-5xl">
+                        <h1 className="mb-6 text-3xl font-semibold leading-[0.98] tracking-[-0.045em] text-[var(--text)] md:text-5xl">
                             {t("hero.title")}
                         </h1>
                         <div className="flex flex-wrap justify-center gap-3">
@@ -467,17 +467,17 @@ export default function Page() {
                     <div className="max-w-2xl text-center md:text-left">
                         <FadeIn delay="delay-500">
                             <div className="flex items-center justify-center md:justify-start">
-                                <span className="font-mono">
+                                <span className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
                                     {t("about.greeting")}
                                 </span>
                                 <span className="ml-2 text-highlight">
                                     <HandMetal />
                                 </span>
                             </div>
-                            <h2 className="font-bold text-primary mb-6 text-2xl md:text-4xl">
+                            <h2 className="mb-5 text-2xl font-semibold leading-tight tracking-[-0.03em] text-primary md:text-4xl">
                                 {t("about.title")}
                             </h2>
-                            <p className="text-xl">
+                            <p className="text-lg leading-[1.8] text-[var(--text-muted)] md:text-[1.15rem]">
                                 {t.rich("about.description", {
                                     blog: (chunks) => (
                                         <Link href="/blog"><b>{chunks}</b></Link>
@@ -487,7 +487,7 @@ export default function Page() {
                         </FadeIn>
                     </div>
                 </div>
-                <div className="min-h-160 mt-6">
+                <div className="min-h-160 mt-12 md:mt-16">
                     <FadeIn delay="delay-700">
                         <SectionHeading
                             title={t("insights.title")}
@@ -507,7 +507,7 @@ export default function Page() {
                                 );
                             })}
                         </div>
-                        <div className="mt-5 flex justify-center">
+                        <div className="mt-8 flex justify-center">
                             <Link
                                 href="/blog"
                                 className="mp-focus inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--text-muted)] transition-colors hover:border-primary/35 hover:text-primary"
@@ -515,17 +515,17 @@ export default function Page() {
                                 {t("insights.viewAll")}
                             </Link>
                         </div>
-                        <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
+                        <div className="mt-14 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent md:mt-20" />
                     </FadeIn>
                     <FadeIn delay="delay-200">
-                        <div className="mt-6">
+                        <div className="mt-10 md:mt-14">
                             <SectionHeading
                                 title={t("toolkit.title")}
                                 eyebrow={t("toolkit.eyebrow")}
                                 variant="reactive"
                             />
                         </div>
-                        <div className="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-10">
+                        <div className="mb-14 grid grid-cols-1 gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-10 md:mb-16">
                             <div className="max-w-xl">
                                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
                                     {t("toolkit.badge")}
@@ -587,16 +587,18 @@ export default function Page() {
                             ))}
                         </div>
                     </FadeIn>
-                    <div className="mt-8 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent" />
+                    <div className="mt-14 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent md:mt-20" />
                     <FadeIn delay="delay-200">
-                        <div id="contact-shortcut" className="mt-6 scroll-mt-24">
+                        <div id="contact-shortcut" className="mt-10 scroll-mt-24 md:mt-14">
                             <SectionHeading
                                 title={t("connect.title")}
                                 eyebrow={t("connect.eyebrow")}
                                 variant="reactive"
                             />
                         </div>
-                        <ContactShortcut />
+                        <div className="mt-10 md:mt-12">
+                            <ContactShortcut />
+                        </div>
                     </FadeIn>
                 </div>
             </div>

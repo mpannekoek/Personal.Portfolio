@@ -47,12 +47,23 @@
   --color-secondary: var(--accent);
   --color-highlight: var(--highlight);
   --color-accent: #7dd3fc;
+  --font-sans: var(--font-plus-jakarta-sans);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
 @layer base {
+  html {
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     background: var(--bg);
     color: var(--text);
+    font-family: var(--font-plus-jakarta-sans), sans-serif;
+    line-height: 1.6;
   }
 
   ::selection {

@@ -43,14 +43,14 @@ export default function BlogListItem({
             </div>
 
             <div className="min-w-0 pt-1">
-                <TitleTag className="text-xl font-semibold leading-tight tracking-[-0.02em] text-[var(--text)] transition-colors group-hover:text-primary md:text-[1.7rem]">
+                <TitleTag className="text-lg font-semibold leading-[1.15] tracking-[-0.025em] text-[var(--text)] transition-colors group-hover:text-primary md:text-[1.5rem]">
                     {post.title}
                 </TitleTag>
-                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[var(--text-muted)] md:text-base">
+                <p className="mt-2 line-clamp-2 text-sm leading-[1.7] text-[var(--text-muted)] md:text-[0.98rem]">
                     {post.excerpt}
                 </p>
                 {metaText ? (
-                    <p className="mt-3 text-sm text-[var(--text-soft)]">
+                    <p className="mt-3 text-[0.92rem] font-medium text-[var(--text-soft)]">
                         {metaText}
                     </p>
                 ) : null}

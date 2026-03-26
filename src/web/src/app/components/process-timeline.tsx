@@ -122,7 +122,7 @@ export default function ProcessTimeline() {
     }
 
     return (
-        <section className="mt-8">
+        <section className="mt-10 md:mt-14">
             <div>
                 <div className="max-w-3xl">
                     <SectionHeading
@@ -138,7 +138,7 @@ export default function ProcessTimeline() {
                     </p>
                 </div>
 
-                <div className="relative mt-8 overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface-elevated)] shadow-sm ring-1 ring-[var(--ring)]">
+                <div className="relative mt-10 overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface-elevated)] shadow-sm ring-1 ring-[var(--ring)] md:mt-12">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.09),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.04),transparent_58%)]" />
 
                     <div className="relative grid gap-7 p-6 md:p-7 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:gap-10">

@@ -54,9 +54,9 @@ export default function Footer() {
                                 <Code size={14} />
                                 {t("badge")}
                             </div>
-                            <p className="mt-4 text-2xl font-bold text-[var(--text)]">Martijn Pannekoek</p>
-                            <p className="mt-1 text-base text-[var(--text-muted)]">{t("role")}</p>
-                            <p className="mt-4 max-w-md text-sm leading-6 text-[var(--text-soft)]">
+                            <p className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-[var(--text)]">Martijn Pannekoek</p>
+                            <p className="mt-1 text-[0.96rem] text-[var(--text-muted)]">{t("role")}</p>
+                            <p className="mt-4 max-w-md text-sm leading-[1.8] text-[var(--text-soft)]">
                                 {t("summary")}
                             </p>
                         </div>
