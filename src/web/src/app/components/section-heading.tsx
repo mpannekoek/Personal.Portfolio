@@ -82,8 +82,8 @@ export default function SectionHeading({ title, eyebrow, meta, variant }: Sectio
             <h2
                 className={`mt-2 text-2xl font-semibold leading-tight tracking-[-0.03em] transition-all duration-500 md:text-4xl ${
                     isVisible
-                        ? "translate-y-0 scale-100 text-[var(--text)]"
-                        : "translate-y-2 scale-[0.98] text-[var(--text)]"
+                        ? "translate-y-0 scale-100 text-primary"
+                        : "translate-y-2 scale-[0.98] text-primary"
                 }`}
             >
                 {title}

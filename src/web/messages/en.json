@@ -187,8 +187,6 @@
       "summary": "Improving this portfolio with practical UX upgrades, stronger project storytelling, and better conversion paths from visitor to contact.",
       "progress": 68,
       "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Lucide", "Vercel"],
-      "href": "/blog",
-      "linkLabel": "Follow progress",
       "progressLabel": "Progress",
       "inProgress": "In progress",
       "progressAria": "Current project progress",

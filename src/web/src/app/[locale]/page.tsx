@@ -63,8 +63,6 @@ type CurrentProject = {
     timeline: string;
     progress: number;
     stack: string[];
-    href: string;
-    linkLabel: string;
     progressLabel: string;
     inProgress: string;
     progressAria: string;
@@ -266,12 +264,6 @@ function ProjectProgressContent({
                     </span>
                 ))}
             </div>
-            <Link
-                href={currentProject.href}
-                className={`inline-flex items-center rounded-full border border-[var(--border-strong)] text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/40 hover:bg-primary/8 ${compact ? "mt-5 px-4 py-2" : "mt-6 px-5 py-2.5"}`}
-            >
-                {currentProject.linkLabel}
-            </Link>
         </>
     );
 }
@@ -380,12 +372,6 @@ function ProjectProgressMobileWidget({
                             </span>
                         ))}
                     </div>
-                    <Link
-                        href={currentProject.href}
-                        className="mt-4 inline-flex items-center rounded-full border border-[var(--border-strong)] px-4 py-2 text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/40 hover:bg-primary/8"
-                    >
-                        {currentProject.linkLabel}
-                    </Link>
                 </div>
             </div>
         </div>
