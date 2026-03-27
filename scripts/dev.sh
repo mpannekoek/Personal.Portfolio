@@ -5,13 +5,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 API_DIR="$ROOT_DIR/src/api"
 WEB_DIR="$ROOT_DIR/src/web"
 
-for app_dir in "$API_DIR" "$WEB_DIR"; do
-  if [[ ! -d "$app_dir/node_modules" ]]; then
-    printf 'Missing dependencies in %s\n' "$app_dir" >&2
-    printf 'Run npm install in both src/api and src/web before starting.\n' >&2
-    exit 1
-  fi
-done
+npm install --prefix "$API_DIR"
+npm install --prefix "$WEB_DIR"
 
 cleanup() {
   trap - INT TERM EXIT
