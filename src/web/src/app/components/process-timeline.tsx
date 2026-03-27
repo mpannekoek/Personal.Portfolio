@@ -85,7 +85,6 @@ export default function ProcessTimeline() {
     const activeStepIndex = processSteps.findIndex((step) => step.key === activeStepKey);
     const activeStep = processSteps[activeStepIndex];
     const ActiveIcon = activeStep.icon;
-    const progressRatio = processSteps.length > 1 ? activeStepIndex / (processSteps.length - 1) : 0;
 
     function focusStep(index: number) {
         const boundedIndex = (index + processSteps.length) % processSteps.length;
@@ -138,29 +137,17 @@ export default function ProcessTimeline() {
                     </p>
                 </div>
 
-                <div className="relative mt-10 overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface-elevated)] shadow-sm ring-1 ring-[var(--ring)] md:mt-12">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.09),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.04),transparent_58%)]" />
-
-                    <div className="relative grid gap-7 p-6 md:p-7 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:gap-10">
+                <div className="relative mt-10 overflow-hidden rounded-[2rem] md:mt-12">
+                    <div className="relative grid gap-7 p-5 sm:p-6 md:p-7 xl:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] xl:gap-8">
                         <div
-                            className="relative min-h-full"
+                            className="relative"
                             onMouseLeave={() => setPreviewStepKey(null)}
                         >
                             <div
                                 aria-hidden="true"
-                                className="pointer-events-none absolute bottom-7 left-5 top-7 w-px bg-gradient-to-b from-sky-500/70 via-teal-500/60 via-amber-500/60 via-emerald-500/60 to-rose-500/70"
+                                className="pointer-events-none absolute bottom-[2.625rem] left-[1.625rem] top-[2.625rem] w-px -translate-x-1/2 bg-[color-mix(in_srgb,var(--border-strong)_72%,transparent)]"
                             />
-                            <div
-                                aria-hidden="true"
-                                className="pointer-events-none absolute left-[0.8rem] h-6 w-6 -translate-x-1/2 rounded-full bg-[var(--surface)] shadow-[0_0_0_1px_var(--border),0_12px_24px_rgba(8,17,38,0.18)] transition-[top] duration-500 ease-out"
-                                style={{
-                                    top: `calc(1.75rem + (100% - 3.5rem) * ${progressRatio} - 0.75rem)`,
-                                }}
-                            >
-                                <span className="absolute inset-[0.28rem] rounded-full bg-gradient-to-br from-primary via-accent to-highlight opacity-90" />
-                            </div>
-
-                            <div role="tablist" aria-orientation="vertical" className="space-y-3">
+                            <div role="tablist" aria-orientation="vertical" className="space-y-2.5">
                                 {processSteps.map((step, index) => {
                                     const Icon = step.icon;
                                     const isActive = activeStep.key === step.key;
@@ -189,29 +176,33 @@ export default function ProcessTimeline() {
                                             onFocus={() => setPreviewStepKey(step.key)}
                                             onBlur={() => setPreviewStepKey(null)}
                                             onKeyDown={(event) => handleStepKeyDown(event, index)}
-                                            className={`group relative flex w-full items-start gap-4 rounded-[1.6rem] border p-4 text-left transition-all duration-300 ease-out ${
-                                                isActive
-                                                    ? `${step.highlightClassName} translate-x-2 shadow-[0_20px_45px_-28px_rgba(8,17,38,0.55)]`
-                                                    : "border-transparent bg-transparent hover:border-[var(--border)] hover:bg-[var(--surface)]/70"
-                                            }`}
+                                            className="mp-focus group relative grid w-full grid-cols-[3.25rem_minmax(0,1fr)] items-center rounded-[1.6rem] text-left transition-all duration-300 ease-out"
                                         >
                                             <span
-                                                className={`relative z-10 mt-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border shadow-[0_8px_20px_rgba(15,23,42,0.08)] transition-all duration-300 ${step.chipClassName} ${
-                                                    isActive ? "scale-110" : "group-hover:scale-105"
-                                                }`}
+                                                className="relative z-10 flex min-h-[5.25rem] items-center justify-center"
                                             >
                                                 <span
-                                                    aria-hidden="true"
-                                                    className={`absolute inset-0 rounded-full transition-opacity duration-300 ${
-                                                        isActive
-                                                            ? `${step.glowClassName} opacity-100 animate-[process-node-pulse_2.8s_ease-in-out_infinite]`
-                                                            : "opacity-0"
-                                                    }`}
-                                                />
-                                                <Icon className="relative h-4 w-4" />
+                                                    className={`relative inline-flex h-11 w-11 items-center justify-center rounded-full border bg-[var(--surface)] transition-all duration-300 ${isActive ? `${step.chipClassName} scale-105` : "border-[var(--border)] text-[var(--text-soft)] group-hover:scale-[1.03]"}`}
+                                                >
+                                                    <span
+                                                        aria-hidden="true"
+                                                        className={`absolute inset-0 rounded-full transition-opacity duration-300 ${
+                                                            isActive
+                                                                ? `${step.glowClassName} opacity-100 animate-[process-node-pulse_2.8s_ease-in-out_infinite]`
+                                                                : "opacity-0"
+                                                        }`}
+                                                    />
+                                                    <Icon className="relative h-4 w-4" />
+                                                </span>
                                             </span>
 
-                                            <span className="min-w-0">
+                                            <span
+                                                className={`min-w-0 rounded-[1.45rem] border px-4 py-4 transition-all duration-300 ${
+                                                    isActive
+                                                        ? `${step.highlightClassName} border-[var(--border)] bg-[var(--surface)]`
+                                                        : "border-transparent bg-transparent group-hover:border-[var(--border)]/80 group-hover:bg-[var(--surface)]"
+                                                }`}
+                                            >
                                                 <span
                                                     className={`text-[0.68rem] font-semibold uppercase tracking-[0.18em] ${step.toneClassName}`}
                                                 >
@@ -227,26 +218,26 @@ export default function ProcessTimeline() {
                             </div>
                         </div>
 
-                        <div className="xl:pl-3">
+                        <div className="xl:pl-2">
                             <article
                                 key={activeStep.key}
                                 id={`${tabsBaseId}-${activeStep.key}-panel`}
                                 role="tabpanel"
                                 aria-labelledby={`${tabsBaseId}-${activeStep.key}-tab`}
-                                className="relative overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[0_26px_70px_-42px_rgba(8,17,38,0.7)] ring-1 ring-[var(--ring)] animate-[process-detail-in_320ms_cubic-bezier(0.16,1,0.3,1)] md:p-7"
+                                className="relative overflow-hidden rounded-[1.75rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[0_18px_44px_-36px_rgba(8,17,38,0.22)] animate-[process-detail-in_320ms_cubic-bezier(0.16,1,0.3,1)] md:p-7"
                             >
                                 <div
                                     aria-hidden="true"
-                                    className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${activeStep.progressClassName}`}
+                                    className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${activeStep.progressClassName}`}
                                 />
                                 <div
                                     aria-hidden="true"
-                                    className={`absolute -right-12 top-0 h-32 w-32 rounded-full blur-3xl ${activeStep.glowClassName}`}
+                                    className={`absolute -right-10 top-0 h-24 w-24 rounded-full opacity-35 blur-3xl ${activeStep.glowClassName}`}
                                 />
 
                                 <div className="flex items-start gap-4">
                                     <span
-                                        className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border shadow-sm ${activeStep.chipClassName}`}
+                                        className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border bg-[var(--surface)] ${activeStep.chipClassName}`}
                                     >
                                         <ActiveIcon className="h-5 w-5" />
                                     </span>
@@ -263,7 +254,7 @@ export default function ProcessTimeline() {
                                     </div>
                                 </div>
 
-                                <p className="mt-5 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
+                                <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
                                     {t(`process.steps.${activeStep.key}.description`)}
                                 </p>
 

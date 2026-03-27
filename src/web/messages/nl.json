@@ -112,7 +112,7 @@
       "eyebrow": "Proces",
       "title": "Zo werk ik",
       "description": "Ik werk praktisch, communiceer helder en houd het proces overzichtelijk van eerste gesprek tot livegang. Zo weet je steeds wat de volgende stap is, waar we staan en wat er van jou nodig is.",
-      "interactionHint": "Beweeg over een stap of klik erop om meer context te zien.",
+      "interactionHint": "Beweeg over een stap of klik erop om meer uitleg te zien.",
       "stepLabel": "Stap {number}",
       "steps": {
         "step1": {
