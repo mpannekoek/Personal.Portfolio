@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Grid3X3, List, ArrowUpDown } from "lucide-react";
+import { Grid3X3, List, ArrowUpDown, Search } from "lucide-react";
 import BlogListItem from "../../components/blog-list-item";
 import { getAllBlogPreviews, type BlogPreviewCard } from "../../../lib/blog-client";
 
@@ -74,44 +74,62 @@ export default function BlogPage() {
     }, [posts, selectedTag, sortBy]);
 
     return (
-        <main className="container mx-auto px-6 pb-10">
-            <h1 className="text-4xl font-bold text-[var(--text)] md:text-5xl">
-                {t("title")}
-            </h1>
-
-            <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                <div className="-mx-1 flex items-center gap-2 overflow-x-auto px-1 pb-1">
-                    <button
-                        type="button"
-                        onClick={() => setSelectedTag(null)}
-                        className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                            selectedTag === null
-                                ? "bg-primary text-[var(--primary-contrast)]"
-                                : "bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text)]"
-                        }`}
-                    >
-                        {t("filters.all")}
-                    </button>
-                    {availableTags.map((tag) => (
-                        <button
-                            key={tag}
-                            type="button"
-                            onClick={() => setSelectedTag(tag)}
-                            className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                                selectedTag === tag
-                                    ? "bg-primary text-[var(--primary-contrast)]"
-                                    : "bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text)]"
-                            }`}
-                        >
-                            {tag}
-                        </button>
-                    ))}
+        <main className="pb-10">
+            <div className="container mx-auto px-6">
+                <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+                    <div className="py-4 md:py-6">
+                        <h1 className="mb-8 text-4xl font-semibold leading-[0.98] tracking-[-0.045em] text-[var(--text)] md:text-5xl">
+                            {t("title")}
+                        </h1>
+                        <div className="mx-auto w-full max-w-2xl">
+                            <label htmlFor="blog-search" className="sr-only">
+                                {t("search.label")}
+                            </label>
+                            <div className="flex items-center gap-3 rounded-[1.5rem] border border-[var(--border)] bg-[var(--surface)] px-4 py-3 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.28)] ring-1 ring-[var(--ring)]/50">
+                                <Search className="h-5 w-5 shrink-0 text-[var(--text-soft)]" />
+                                <input
+                                    id="blog-search"
+                                    type="search"
+                                    placeholder={t("search.placeholder")}
+                                    className="w-full bg-transparent text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-soft)] md:text-base"
+                                />
+                            </div>
+                        </div>
+                        <div className="mt-6 flex flex-wrap justify-center gap-2">
+                            <button
+                                type="button"
+                                onClick={() => setSelectedTag(null)}
+                                className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                                    selectedTag === null
+                                        ? "bg-primary text-[var(--primary-contrast)]"
+                                        : "bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text)]"
+                                }`}
+                            >
+                                {t("filters.all")}
+                            </button>
+                            {availableTags.map((tag) => (
+                                <button
+                                    key={tag}
+                                    type="button"
+                                    onClick={() => setSelectedTag(tag)}
+                                    className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                                        selectedTag === tag
+                                            ? "bg-primary text-[var(--primary-contrast)]"
+                                            : "bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text)]"
+                                    }`}
+                                >
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                <div className="flex items-center gap-3 self-start lg:self-auto">
-                    <label
-                        htmlFor="blog-sort"
-                        className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-muted)]"
+                <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-end">
+                    <div className="flex items-center gap-3 self-start lg:self-auto">
+                        <label
+                            htmlFor="blog-sort"
+                            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-muted)]"
                     >
                         <ArrowUpDown className="h-4 w-4" />
                         {t("sort.label")}
@@ -156,37 +174,38 @@ export default function BlogPage() {
                 </div>
             </div>
 
-            {isLoading ? (
-                <p className="mt-8 text-sm text-[var(--text-soft)]">{t("loading")}</p>
-            ) : null}
+                {isLoading ? (
+                    <p className="mt-8 text-sm text-[var(--text-soft)]">{t("loading")}</p>
+                ) : null}
 
-            {!isLoading && visiblePosts.length === 0 ? (
-                <p className="mt-8 text-sm text-[var(--text-soft)]">{t("empty")}</p>
-            ) : null}
+                {!isLoading && visiblePosts.length === 0 ? (
+                    <p className="mt-8 text-sm text-[var(--text-soft)]">{t("empty")}</p>
+                ) : null}
 
-            {!isLoading && visiblePosts.length > 0 && viewMode === "metro" ? (
-                <div className="mt-8 grid grid-cols-1 gap-x-10 gap-y-4 xl:grid-cols-2">
-                    {visiblePosts.map((post) => (
-                        <BlogListItem
-                            key={post.id}
-                            post={post}
-                            titleTag="h2"
-                        />
-                    ))}
-                </div>
-            ) : null}
+                {!isLoading && visiblePosts.length > 0 && viewMode === "metro" ? (
+                    <div className="mt-8 grid grid-cols-1 gap-x-10 gap-y-4 xl:grid-cols-2">
+                        {visiblePosts.map((post) => (
+                            <BlogListItem
+                                key={post.id}
+                                post={post}
+                                titleTag="h2"
+                            />
+                        ))}
+                    </div>
+                ) : null}
 
-            {!isLoading && visiblePosts.length > 0 && viewMode === "text" ? (
-                <div className="mt-8 space-y-2">
-                    {visiblePosts.map((post) => (
-                        <BlogListItem
-                            key={post.id}
-                            post={post}
-                            titleTag="h2"
-                        />
-                    ))}
-                </div>
-            ) : null}
+                {!isLoading && visiblePosts.length > 0 && viewMode === "text" ? (
+                    <div className="mt-8 space-y-2">
+                        {visiblePosts.map((post) => (
+                            <BlogListItem
+                                key={post.id}
+                                post={post}
+                                titleTag="h2"
+                            />
+                        ))}
+                    </div>
+                ) : null}
+            </div>
         </main>
     );
 }

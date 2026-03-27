@@ -35,10 +35,14 @@
     "copyright": "Alle rechten voorbehouden."
   },
   "blogPage": {
-    "title": "Blog",
+    "title": "Laat je inspireren",
     "loading": "Artikelen laden...",
     "empty": "Geen artikelen gevonden voor dit filter.",
     "imageFallback": "Geen afbeelding",
+    "search": {
+      "label": "Zoek in blogartikelen",
+      "placeholder": "Zoek op artikel, onderwerp of idee"
+    },
     "filters": {
       "all": "Alles"
     },

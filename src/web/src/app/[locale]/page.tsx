@@ -532,36 +532,38 @@ export default function Page() {
             <div className="container mx-auto px-6">
                 <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
                     <FadeIn delay="delay-100">
-                        <h1 className="mb-6 text-3xl font-semibold leading-[0.98] tracking-[-0.045em] text-[var(--text)] md:text-5xl">
-                            {t("hero.title")}
-                        </h1>
-                        <div className="flex flex-wrap justify-center gap-3">
-                            <Link
-                                href="#current-project-anchor"
-                                onClick={(event) => {
-                                    if (window.innerWidth >= 1024) {
+                        <div className="py-4 md:py-6">
+                            <h1 className="mb-8 text-3xl font-semibold leading-[0.98] tracking-[-0.045em] text-[var(--text)] md:text-5xl">
+                                {t("hero.title")}
+                            </h1>
+                            <div className="flex flex-wrap justify-center gap-3">
+                                <Link
+                                    href="#current-project-anchor"
+                                    onClick={(event) => {
+                                        if (window.innerWidth >= 1024) {
+                                            event.preventDefault();
+                                            setIsDesktopProjectWidgetOpen(true);
+                                            return;
+                                        }
+
+                                        if (window.innerWidth >= 768) {
+                                            return;
+                                        }
+
                                         event.preventDefault();
-                                        setIsDesktopProjectWidgetOpen(true);
-                                        return;
-                                    }
-
-                                    if (window.innerWidth >= 768) {
-                                        return;
-                                    }
-
-                                    event.preventDefault();
-                                    setIsMobileProjectDrawerOpen(true);
-                                }}
-                                className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-[var(--primary-contrast)] transition-colors hover:bg-primary/85"
-                            >
-                                {t("hero.viewProject")}
-                            </Link>
-                            <Link
-                                href="#contact-shortcut"
-                                className="inline-flex items-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/40 hover:text-primary"
-                            >
-                                {t("hero.connect")}
-                            </Link>
+                                        setIsMobileProjectDrawerOpen(true);
+                                    }}
+                                    className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-[var(--primary-contrast)] transition-colors hover:bg-primary/85"
+                                >
+                                    {t("hero.viewProject")}
+                                </Link>
+                                <Link
+                                    href="#contact-shortcut"
+                                    className="inline-flex items-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/40 hover:text-primary"
+                                >
+                                    {t("hero.connect")}
+                                </Link>
+                            </div>
                         </div>
                     </FadeIn>
                 </div>
@@ -681,16 +683,16 @@ export default function Page() {
                                     <h3 className="text-lg font-semibold text-[var(--text)] md:text-xl">
                                         {group.title}
                                     </h3>
-                                    <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                                    <ul className="mt-4 grid grid-cols-2 gap-3">
                                         {group.skills.map((skill) => {
                                             const Icon = skill.icon;
 
                                             return (
                                                 <li
                                                     key={skill.key}
-                                                    className="flex items-center gap-3 text-sm font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
+                                                    className="flex min-w-0 items-start gap-3 text-sm leading-snug font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                                                 >
-                                                    <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full ${skill.badgeToneClassName}`}>
+                                                    <span className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${skill.badgeToneClassName}`}>
                                                         <Icon className={`h-3.5 w-3.5 ${skill.iconToneClassName}`} />
                                                     </span>
                                                     {skill.label}

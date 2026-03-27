@@ -35,10 +35,14 @@
     "copyright": "All Rights Reserved."
   },
   "blogPage": {
-    "title": "Blog",
+    "title": "Get inspired",
     "loading": "Loading posts...",
     "empty": "No posts match this filter.",
     "imageFallback": "No image",
+    "search": {
+      "label": "Search blog posts",
+      "placeholder": "Search articles, topics, or ideas"
+    },
     "filters": {
       "all": "All"
     },
