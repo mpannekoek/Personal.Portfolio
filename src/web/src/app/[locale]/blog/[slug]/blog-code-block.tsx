@@ -34,7 +34,7 @@ export default function BlogCodeBlock({
             <button
                 type="button"
                 onClick={() => void handleCopy()}
-                className="absolute right-3 top-3 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[rgba(7,15,35,0.92)] px-3 py-1.5 text-xs font-medium text-[var(--text)] transition-colors hover:border-[var(--text-soft)]"
+                className="mp-focus absolute right-3 top-3 inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[color-mix(in_srgb,var(--surface-elevated)_88%,transparent)] px-3 py-1.5 text-xs font-medium text-[var(--text)] backdrop-blur transition-colors hover:border-[var(--text-soft)] hover:bg-[color-mix(in_srgb,var(--surface-soft)_92%,transparent)]"
                 aria-label={hasCopied ? copiedLabel : copyLabel}
             >
                 {hasCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
