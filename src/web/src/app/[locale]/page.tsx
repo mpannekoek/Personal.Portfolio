@@ -312,7 +312,7 @@ function ProjectProgressMobileWidget({
             />
             <div
                 id="mobile-project-drawer"
-                className={`fixed inset-x-3 bottom-3 z-40 overflow-hidden rounded-[1.9rem] border border-[var(--border)] bg-[var(--surface-elevated)] shadow-2xl shadow-black/15 ring-1 ring-[var(--ring)] backdrop-blur transition-transform duration-500 ease-out ${isOpen ? "translate-y-0" : "translate-y-[calc(100%+5rem)]"}`}
+                className={`fixed inset-x-3 z-40 overflow-hidden rounded-[1.9rem] border border-[var(--border)] bg-[var(--surface-elevated)] shadow-2xl shadow-black/15 ring-1 ring-[var(--ring)] backdrop-blur transition-[transform,bottom] duration-500 ease-out ${isOpen ? "bottom-24 translate-y-0" : "bottom-3 translate-y-[calc(100%+5rem)]"}`}
             >
                 <div className="border-b border-[var(--border)] px-5 pb-4 pt-3">
                     <span className="mx-auto mb-4 block h-1.5 w-14 rounded-full bg-[var(--border-strong)]" />
@@ -335,7 +335,7 @@ function ProjectProgressMobileWidget({
                         </div>
                     </div>
                 </div>
-                <div className="px-5 pb-5 pt-4">
+                <div className="px-5 pb-6 pt-4">
                     <div className="flex flex-wrap items-center gap-2">
                         <span className="inline-flex items-center rounded-full border border-highlight/35 bg-highlight/12 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-highlight">
                             {currentProject.status}
