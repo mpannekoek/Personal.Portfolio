@@ -63,7 +63,9 @@
     "share": "Share",
     "shared": "Link copied",
     "copy": "Copy markdown",
-    "copied": "Copied"
+    "copied": "Copied",
+    "copyCode": "Copy code",
+    "copiedCode": "Copied"
   },
   "hireMePage": {
     "eyebrow": "Hire Me",

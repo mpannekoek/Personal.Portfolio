@@ -63,7 +63,9 @@
     "share": "Delen",
     "shared": "Link gekopieerd",
     "copy": "Kopieer markdown",
-    "copied": "Gekopieerd"
+    "copied": "Gekopieerd",
+    "copyCode": "Kopieer code",
+    "copiedCode": "Gekopieerd"
   },
   "hireMePage": {
     "eyebrow": "Huur mij in",

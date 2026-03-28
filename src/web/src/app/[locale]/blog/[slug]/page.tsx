@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import type { BlogPost } from "../../../../lib/blog-client";
 import { extractLevelTwoHeadings, slugifyHeading } from "../../../../lib/markdown";
+import BlogCodeBlock from "./blog-code-block";
 import BlogPostActions from "./blog-post-actions";
 import BlogPostToc from "./blog-post-toc";
 
@@ -134,12 +135,17 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             </a>
         ),
         pre: ({ children }) => (
-            <pre className="mt-8 overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-sm leading-7 text-[var(--text)]">
+            <BlogCodeBlock
+                code={flattenText(children).replace(/\n$/, "")}
+                copyLabel={t("copyCode")}
+                copiedLabel={t("copiedCode")}
+            >
                 {children}
-            </pre>
+            </BlogCodeBlock>
         ),
         code: ({ children, className }) => {
-            const isBlock = Boolean(className);
+            const codeContent = flattenText(children);
+            const isBlock = Boolean(className) || codeContent.includes("\n");
 
             if (isBlock) {
                 return <code className={className}>{children}</code>;
