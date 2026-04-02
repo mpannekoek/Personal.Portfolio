@@ -35,6 +35,11 @@ import {
 import type { IconType } from "react-icons";
 import { Link } from "../../i18n/navigation";
 import { getLatestBlogPreviews, type BlogPreviewCard } from "../../lib/blog-client";
+import {
+    fallbackCurrentProject,
+    getCurrentProject,
+    type CurrentProject,
+} from "../../lib/project-client";
 
 const INSIGHTS_POST_LIMIT = 3;
 
@@ -54,23 +59,6 @@ type SkillGroup = {
 type TranslatedSkillGroup = {
     title: string;
     skills: string[];
-};
-
-type CurrentProject = {
-    title: string;
-    summary: string;
-    status: string;
-    timeline: string;
-    progress: number;
-    stack: string[];
-    progressLabel: string;
-    inProgress: string;
-    progressAria: string;
-    widgetLabel: string;
-    currentBuild: string;
-    openPanel: string;
-    closePanel: string;
-    closeWidget: string;
 };
 
 type SkillDefinition = Omit<SkillItem, "label">;
@@ -448,7 +436,6 @@ export default function Page() {
     const locale = useLocale();
     const translatedSkillGroups = t.raw("toolkit.skillGroups") as TranslatedSkillGroup[];
     const skillGroups = buildSkillGroups(translatedSkillGroups);
-    const currentProject = t.raw("project") as CurrentProject;
     const toolkitTags = t.raw("toolkit.tags") as string[];
     const placeholderTitle = t("insights.placeholderTitle");
     const placeholderExcerpt = t("insights.placeholderExcerpt");
@@ -463,6 +450,7 @@ export default function Page() {
             isPlaceholder: true,
         }))
     );
+    const [currentProject, setCurrentProject] = useState<CurrentProject>(fallbackCurrentProject);
     const [isMobileProjectDrawerOpen, setIsMobileProjectDrawerOpen] = useState(false);
     const [isDesktopProjectWidgetOpen, setIsDesktopProjectWidgetOpen] = useState(false);
 
@@ -501,6 +489,30 @@ export default function Page() {
             isCancelled = true;
         };
     }, [locale, placeholderExcerpt, placeholderTitle]);
+
+    useEffect(() => {
+        let isCancelled = false;
+
+        async function loadCurrentProject() {
+            try {
+                const project = await getCurrentProject();
+
+                if (!isCancelled) {
+                    setCurrentProject(project);
+                }
+            } catch {
+                if (!isCancelled) {
+                    setCurrentProject(fallbackCurrentProject);
+                }
+            }
+        }
+
+        void loadCurrentProject();
+
+        return () => {
+            isCancelled = true;
+        };
+    }, []);
 
     return (
         <main className="pb-8 md:pb-0">

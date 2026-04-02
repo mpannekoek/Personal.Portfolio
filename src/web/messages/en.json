@@ -184,22 +184,6 @@
       "description": "I'm Martijn, a software architect with a passion for building scalable and efficient systems. I have experience in various programming languages and frameworks, and I enjoy exploring new technologies. Feel free to check out my <blog>blog</blog> for insights on software development, architecture, and more!",
       "photoAlt": "Picture of Martijn"
     },
-    "project": {
-      "status": "Actively building",
-      "timeline": "March 2026",
-      "title": "AI-Assisted Portfolio Evolution",
-      "summary": "Improving this portfolio with practical UX upgrades, stronger project storytelling, and better conversion paths from visitor to contact.",
-      "progress": 68,
-      "stack": ["Next.js", "TypeScript", "Tailwind CSS", "Lucide", "Vercel"],
-      "progressLabel": "Progress",
-      "inProgress": "In progress",
-      "progressAria": "Current project progress",
-      "widgetLabel": "Project",
-      "currentBuild": "Current Build",
-      "openPanel": "Open current project panel",
-      "closePanel": "Close current project panel",
-      "closeWidget": "Close current project widget"
-    },
     "insights": {
       "title": "Insights",
       "eyebrow": "Recent Writing",

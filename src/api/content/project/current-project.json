@@ -1,0 +1,16 @@
+{
+  "status": "Actively building",
+  "timeline": "March 2026",
+  "title": "Portfolio",
+  "summary": "Creating this portfolio from scratch while exploring how far I can push vibe coding without losing product quality.",
+  "progress": 90,
+  "stack": ["Node.js", "Next.js", "TypeScript", "Tailwind CSS", "Docker"],
+  "progressLabel": "Progress",
+  "inProgress": "In progress",
+  "progressAria": "Current project progress",
+  "widgetLabel": "Project",
+  "currentBuild": "Current build",
+  "openPanel": "Open current project panel",
+  "closePanel": "Close current project panel",
+  "closeWidget": "Close current project widget"
+}
