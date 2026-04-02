@@ -1,12 +1,14 @@
 import {
+    ArrowRight,
     Handshake,
-    ImageIcon,
     MessageSquareQuote,
     MousePointerClick,
     MonitorSmartphone,
     PanelsTopLeft,
+    Play,
     Search,
 } from "lucide-react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import ContactShortcut from "../../components/contact-shortcut";
 import ProcessTimeline from "../../components/process-timeline";
@@ -54,42 +56,54 @@ export default async function HireMePage() {
     ] as const;
     return (
         <main className="container mx-auto px-6 pb-10">
-            <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-                <div className="max-w-3xl">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)]">
-                        {t("eyebrow")}
-                    </p>
-                    <h1 className="mt-2 mb-6 font-bold text-3xl text-[var(--text)] md:text-5xl">
-                        {t("title")}
-                    </h1>
-                    <p className="text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
-                        {t("description")}
-                    </p>
-                    <a
-                        href="#contact"
-                        className="mt-6 inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-[var(--primary-contrast)] transition-colors hover:bg-primary/85"
-                    >
-                        {t("cta")}
-                    </a>
-                </div>
+            <section className="px-0 py-8 md:py-10 lg:py-12">
+                <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(360px,480px)] lg:items-center lg:gap-14">
+                    <div className="max-w-xl">
+                        <h1 className="mx-auto max-w-lg text-center text-4xl font-semibold leading-[0.96] tracking-[-0.05em] text-[var(--text)] md:text-5xl lg:mx-0 lg:text-left lg:text-6xl">
+                            {t("title")}
+                        </h1>
+                        <div className="mt-6 max-w-lg border-l-2 border-[var(--border-strong)] pl-4 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
+                            {t("description")}
+                        </div>
+                        <div className="mt-8 flex flex-wrap items-center gap-4">
+                            <a
+                                href="#contact"
+                                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-[var(--primary-contrast)] shadow-[0_14px_28px_-24px_rgba(29,78,216,0.7)] transition-colors hover:bg-primary/90"
+                            >
+                                {t("cta")}
+                                <ArrowRight className="h-4 w-4" />
+                            </a>
+                            <a
+                                href="#process"
+                                className="inline-flex items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/35 hover:text-primary"
+                            >
+                                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                    <Play className="ml-0.5 h-3.5 w-3.5 fill-current" />
+                                </span>
+                                {t("secondaryCta")}
+                            </a>
+                        </div>
+                    </div>
 
-                <div className="relative overflow-hidden rounded-2xl border border-dashed border-[var(--border-strong)] bg-[var(--surface-elevated)] p-6 shadow-sm ring-1 ring-[var(--ring)]">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.14),transparent_35%),linear-gradient(135deg,rgba(59,130,246,0.08),transparent_55%,rgba(16,185,129,0.08))]" />
-                    <div className="relative flex aspect-[4/5] flex-col items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--surface)] text-center">
-                        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                            <ImageIcon className="h-7 w-7" />
-                        </span>
-                        <p className="mt-5 text-lg font-semibold text-[var(--text)]">
-                            {t("heroImage.title")}
-                        </p>
-                        <p className="mt-2 max-w-xs text-sm leading-relaxed text-[var(--text-muted)]">
-                            {t("heroImage.description")}
-                        </p>
+                    <div className="relative mx-auto w-full max-w-[26rem] lg:max-w-none">
+                        <div className="absolute inset-x-6 inset-y-8 rotate-3 rounded-[2.5rem] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--accent)_20%,white)_0%,color-mix(in_srgb,var(--primary)_16%,white)_100%)]" />
+                        <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-2 shadow-[0_22px_56px_-42px_rgba(15,23,42,0.34)]">
+                            <div className="overflow-hidden rounded-[1.6rem]">
+                                <Image
+                                    src="/me.jpg"
+                                    alt={t("heroImage.alt")}
+                                    width={1152}
+                                    height={1536}
+                                    className="h-auto w-full object-cover object-center"
+                                    priority
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section className="mt-16 md:mt-20">
+            <section className="mt-14 md:mt-16">
                 <SectionHeading
                     title={t("principles.title")}
                     eyebrow={t("principles.eyebrow")}
@@ -125,7 +139,9 @@ export default async function HireMePage() {
 
             <div className="mt-14 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent md:mt-20" />
 
-            <ProcessTimeline />
+            <div id="process" className="scroll-mt-24">
+                <ProcessTimeline />
+            </div>
 
             <div className="mt-14 h-px bg-gradient-to-r from-transparent via-highlight/55 to-transparent md:mt-20" />
 

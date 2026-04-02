@@ -73,9 +73,11 @@
     "description": "Ik bouw websites die helder zijn opgebouwd, technisch goed staan en prettig werken voor je bezoekers. Of het nu gaat om een nieuwe site, een gerichte landingspagina of het verbeteren van een bestaande website: ik zorg voor een oplossing die praktisch is en direct bruikbaar.",
     "heroImage": {
       "title": "Placeholder voor hero image",
-      "description": "Hier kan later een sterke foto of portret van mij komen."
+      "description": "Hier kan later een sterke foto of portret van mij komen.",
+      "alt": "Martijn Pannekoek op een stadsbalkon met uitzicht op het water"
     },
     "cta": "Bespreek je project",
+    "secondaryCta": "Bekijk mijn werkwijze",
     "principles": {
       "eyebrow": "Speerpunten",
       "title": "Hoe ik werk",

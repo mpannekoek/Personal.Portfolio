@@ -132,9 +132,6 @@ export default function ProcessTimeline() {
                     <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
                         {t("process.description")}
                     </p>
-                    <p className="mt-4 text-sm leading-relaxed text-[var(--text-soft)]">
-                        {t("process.interactionHint")}
-                    </p>
                 </div>
 
                 <div className="relative mt-10 overflow-hidden rounded-[2rem] md:mt-12">

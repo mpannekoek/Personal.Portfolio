@@ -73,9 +73,11 @@
     "description": "I build websites that are easy to understand, technically solid, and pleasant to use. Whether you need a new site, a focused landing page, or improvements to an existing website, I deliver something practical that is ready to use.",
     "heroImage": {
       "title": "Hero image placeholder",
-      "description": "A strong personal photo or portrait can be placed here later."
+      "description": "A strong personal photo or portrait can be placed here later.",
+      "alt": "Martijn Pannekoek on a city terrace overlooking the water"
     },
     "cta": "Discuss your project",
+    "secondaryCta": "See how I work",
     "principles": {
       "eyebrow": "Highlights",
       "title": "How I work",
