@@ -42,17 +42,17 @@ export default function NavBar() {
             alt: footerT("social.github"),
         },
         {
-            href: "https://linkedin.com",
+            href: "https://linkedin.com/in/martijnpannekoek",
             icon: linkedinIcon,
             alt: footerT("social.linkedin"),
         },
         {
-            href: "https://instagram.com",
+            href: "https://instagram.com/martijnpannekoek/",
             icon: instagramIcon,
             alt: footerT("social.instagram"),
         },
         {
-            href: "https://facebook.com",
+            href: "https://www.facebook.com/martijn.pannekoek/",
             icon: facebookIcon,
             alt: footerT("social.facebook"),
         },

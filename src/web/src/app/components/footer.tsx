@@ -23,17 +23,17 @@ export default function Footer() {
             alt: t("social.github"),
         },
         {
-            href: "https://linkedin.com",
+            href: "https://linkedin.com/in/martijnpannekoek",
             icon: linkedinIcon,
             alt: t("social.linkedin"),
         },
         {
-            href: "https://instagram.com",
+            href: "https://www.instagram.com/martijnpannekoek/",
             icon: instagramIcon,
             alt: t("social.instagram"),
         },
         {
-            href: "https://facebook.com",
+            href: "https://www.facebook.com/martijn.pannekoek/",
             icon: facebookIcon,
             alt: t("social.facebook"),
         },
