@@ -1,7 +1,11 @@
 services:
   app:
-    image: ${REGISTRY:-ghcr.io}/${IMAGE_NAME:-mpannekoek/personal.portfolio}:${IMAGE_TAG:-latest}
-    container_name: personal-portfolio
+    image: ${IMAGE_REFERENCE:?IMAGE_REFERENCE is required}
+    container_name: ${COMPOSE_PROJECT_NAME:-personal-portfolio}
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      API_ORIGIN: http://127.0.0.1:3001

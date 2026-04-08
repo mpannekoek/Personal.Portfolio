@@ -88,7 +88,7 @@ Deployment instructions are documented in [docs/deployment.md](docs/deployment.m
 
 That includes:
 - publishing the image to GitHub Container Registry
-- deploying the image to Azure App Service
+- deploying the image to an Azure VPS
 - required GitHub secrets and variables
 
 ## GitHub Workflows
@@ -97,4 +97,4 @@ Image publish workflow:
 - [.github/workflows/publish-image.yml](.github/workflows/publish-image.yml)
 
 Azure deploy workflow:
-- [.github/workflows/deploy-azure.yml](.github/workflows/deploy-azure.yml)
+- [.github/workflows/deploy-azure-vps.yml](.github/workflows/deploy-azure-vps.yml)
