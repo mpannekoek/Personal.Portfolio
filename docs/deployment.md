@@ -66,6 +66,11 @@ Optional `deploy/.env` values:
 - `COMPOSE_PROJECT_NAME`
 - `APP_PORT`
 
+Runtime toggle (set in `deploy/compose.yml` or override via VPS env):
+- `MAINTENANCE_MODE` (`"true"` or `"false"`, default `"false"`)
+  - when `"true"`, all public routes (including `/api/*`) return an under-construction page with HTTP `503`
+  - when `"false"`, normal website and API behavior is active
+
 Required repository variables:
 - `VPS_HOST`
 - `VPS_USER`

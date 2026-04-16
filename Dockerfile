@@ -36,6 +36,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV API_ORIGIN=http://127.0.0.1:3001
+ENV MAINTENANCE_MODE=false
 
 COPY --from=web-builder /app/src/web/.next/standalone ./src/web
 COPY --from=web-builder /app/src/web/.next/static ./src/web/.next/static
