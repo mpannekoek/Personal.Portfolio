@@ -24,6 +24,7 @@ Optional runtime configuration can be loaded from deploy/.env on the VPS.
 Supported env vars:
   COMPOSE_PROJECT_NAME
   APP_PORT
+  MAINTENANCE_MODE
   GHCR_USERNAME
   GHCR_TOKEN
 EOF
