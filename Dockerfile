@@ -1,42 +1,42 @@
-FROM node:24.14.0-bookworm AS web-deps
+FROM node:24.14.0-alpine AS web-deps
 
 WORKDIR /app/src/web
 COPY src/web/package*.json ./
 RUN npm ci
 
-FROM node:24.14.0-bookworm AS web-builder
+FROM node:24.14.0-alpine AS web-builder
 
 WORKDIR /app/src/web
 COPY --from=web-deps /app/src/web/node_modules ./node_modules
 COPY src/web ./
 RUN npm run build
 
-FROM node:24.14.0-bookworm AS web-prod-deps
+FROM node:24.14.0-alpine AS web-prod-deps
 
 WORKDIR /app/src/web
 COPY src/web/package*.json ./
 RUN npm ci --omit=dev
 
-FROM node:24.14.0-bookworm AS api-deps
+FROM node:24.14.0-alpine AS api-deps
 
 WORKDIR /app/src/api
 COPY src/api/package*.json ./
 RUN npm ci
 
-FROM node:24.14.0-bookworm AS api-builder
+FROM node:24.14.0-alpine AS api-builder
 
 WORKDIR /app/src/api
 COPY --from=api-deps /app/src/api/node_modules ./node_modules
 COPY src/api ./
 RUN npm run build
 
-FROM node:24.14.0-bookworm AS api-prod-deps
+FROM node:24.14.0-alpine AS api-prod-deps
 
 WORKDIR /app/src/api
 COPY src/api/package*.json ./
 RUN npm ci --omit=dev
 
-FROM node:24.14.0-bookworm AS runner
+FROM node:24.14.0-alpine AS runner
 
 WORKDIR /app
 
