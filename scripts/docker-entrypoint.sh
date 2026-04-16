@@ -6,7 +6,7 @@ npm start &
 api_pid=$!
 
 cd /app/src/web
-npm start &
+node server.js &
 client_pid=$!
 
 cleanup() {

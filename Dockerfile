@@ -11,12 +11,6 @@ COPY --from=web-deps /app/src/web/node_modules ./node_modules
 COPY src/web ./
 RUN npm run build
 
-FROM node:24.14.0-alpine AS web-prod-deps
-
-WORKDIR /app/src/web
-COPY src/web/package*.json ./
-RUN npm ci --omit=dev
-
 FROM node:24.14.0-alpine AS api-deps
 
 WORKDIR /app/src/api
@@ -44,11 +38,9 @@ ENV NODE_ENV=production
 ENV PORT=3001
 ENV API_ORIGIN=http://127.0.0.1:3001
 
-COPY --from=web-prod-deps /app/src/web/node_modules ./src/web/node_modules
-COPY --from=web-builder /app/src/web/.next ./src/web/.next
+COPY --from=web-builder /app/src/web/.next/standalone ./src/web
+COPY --from=web-builder /app/src/web/.next/static ./src/web/.next/static
 COPY --from=web-builder /app/src/web/public ./src/web/public
-COPY --from=web-builder /app/src/web/package.json ./src/web/package.json
-COPY --from=web-builder /app/src/web/next.config.mjs ./src/web/next.config.mjs
 
 COPY --from=api-prod-deps /app/src/api/node_modules ./src/api/node_modules
 COPY --from=api-builder /app/src/api/dist ./src/api/dist
