@@ -20,10 +20,10 @@ Other tags produced by the workflow:
 
 For VPS deployment that pulls from GHCR instead of building locally, use [deploy/compose.yml](../deploy/compose.yml).
 
-## Azure VPS Deployment
+## Linux VPS Deployment
 
 Workflow:
-- [.github/workflows/deploy-azure-vps.yml](../.github/workflows/deploy-azure-vps.yml)
+- [.github/workflows/deploy-linux-vps.yml](../.github/workflows/deploy-linux-vps.yml)
 
 This workflow:
 - runs after `Publish Docker Image` succeeds on `main`

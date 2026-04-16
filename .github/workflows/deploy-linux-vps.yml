@@ -1,4 +1,4 @@
-name: Deploy To Azure VPS
+name: Deploy To Linux VPS
 
 on:
   workflow_run:
