@@ -35,7 +35,6 @@ FROM node:24.14.0-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=3001
 ENV API_ORIGIN=http://127.0.0.1:3001
 
 COPY --from=web-builder /app/src/web/.next/standalone ./src/web

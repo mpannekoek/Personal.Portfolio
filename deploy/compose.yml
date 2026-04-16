@@ -7,5 +7,4 @@ services:
       - "${APP_PORT:-3000}:3000"
     environment:
       NODE_ENV: production
-      PORT: "3001"
       API_ORIGIN: http://127.0.0.1:3001

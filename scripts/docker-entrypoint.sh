@@ -2,11 +2,11 @@
 set -eu
 
 cd /app/src/api
-npm start &
+PORT=3001 npm start &
 api_pid=$!
 
 cd /app/src/web
-node server.js &
+PORT=3000 node server.js &
 client_pid=$!
 
 cleanup() {
