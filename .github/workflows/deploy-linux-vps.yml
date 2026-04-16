@@ -70,6 +70,7 @@ jobs:
         shell: bash
         env:
           VPS_SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          VPS_SSH_PASSPHRASE: ${{ secrets.VPS_SSH_PASSPHRASE }}
         run: |
           set -euo pipefail
           : "${VPS_HOST:?VPS_HOST repository variable is required}"
@@ -82,20 +83,37 @@ jobs:
         shell: bash
         env:
           VPS_SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          VPS_SSH_PASSPHRASE: ${{ secrets.VPS_SSH_PASSPHRASE }}
         run: |
           set -euo pipefail
 
           key_file="$(mktemp)"
           known_hosts_file="$(mktemp)"
-          trap 'rm -f "${key_file}" "${known_hosts_file}"' EXIT
+          askpass_file="$(mktemp)"
+          eval "$(ssh-agent -s)" >/dev/null
+          trap 'rm -f "${key_file}" "${known_hosts_file}" "${askpass_file}"; ssh-agent -k >/dev/null' EXIT
 
           printf '%s\n' "${VPS_SSH_PRIVATE_KEY}" | tr -d '\r' > "${key_file}"
           chmod 600 "${key_file}"
 
+          cat > "${askpass_file}" <<'EOF'
+          #!/usr/bin/env bash
+          printf '%s\n' "${VPS_SSH_PASSPHRASE:-}"
+          EOF
+          chmod 700 "${askpass_file}"
+
+          if ! SSH_ASKPASS="${askpass_file}" SSH_ASKPASS_REQUIRE=force DISPLAY=:0 ssh-add "${key_file}" < /dev/null; then
+            if [ -z "${VPS_SSH_PASSPHRASE:-}" ]; then
+              echo "Failed to add SSH key. If your key is encrypted, set the VPS_SSH_PASSPHRASE secret."
+            else
+              echo "Failed to add SSH key. Check whether VPS_SSH_PASSPHRASE matches the key passphrase."
+            fi
+            exit 1
+          fi
+
           ssh-keyscan -p "${VPS_PORT}" -H "${VPS_HOST}" > "${known_hosts_file}"
 
           ssh \
-            -i "${key_file}" \
             -p "${VPS_PORT}" \
             -o IdentitiesOnly=yes \
             -o StrictHostKeyChecking=yes \
@@ -107,7 +125,6 @@ jobs:
           EOF
 
           scp \
-            -i "${key_file}" \
             -P "${VPS_PORT}" \
             -o IdentitiesOnly=yes \
             -o StrictHostKeyChecking=yes \
@@ -120,20 +137,37 @@ jobs:
         shell: bash
         env:
           VPS_SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+          VPS_SSH_PASSPHRASE: ${{ secrets.VPS_SSH_PASSPHRASE }}
         run: |
           set -euo pipefail
 
           key_file="$(mktemp)"
           known_hosts_file="$(mktemp)"
-          trap 'rm -f "${key_file}" "${known_hosts_file}"' EXIT
+          askpass_file="$(mktemp)"
+          eval "$(ssh-agent -s)" >/dev/null
+          trap 'rm -f "${key_file}" "${known_hosts_file}" "${askpass_file}"; ssh-agent -k >/dev/null' EXIT
 
           printf '%s\n' "${VPS_SSH_PRIVATE_KEY}" | tr -d '\r' > "${key_file}"
           chmod 600 "${key_file}"
 
+          cat > "${askpass_file}" <<'EOF'
+          #!/usr/bin/env bash
+          printf '%s\n' "${VPS_SSH_PASSPHRASE:-}"
+          EOF
+          chmod 700 "${askpass_file}"
+
+          if ! SSH_ASKPASS="${askpass_file}" SSH_ASKPASS_REQUIRE=force DISPLAY=:0 ssh-add "${key_file}" < /dev/null; then
+            if [ -z "${VPS_SSH_PASSPHRASE:-}" ]; then
+              echo "Failed to add SSH key. If your key is encrypted, set the VPS_SSH_PASSPHRASE secret."
+            else
+              echo "Failed to add SSH key. Check whether VPS_SSH_PASSPHRASE matches the key passphrase."
+            fi
+            exit 1
+          fi
+
           ssh-keyscan -p "${VPS_PORT}" -H "${VPS_HOST}" > "${known_hosts_file}"
 
           ssh \
-            -i "${key_file}" \
             -p "${VPS_PORT}" \
             -o IdentitiesOnly=yes \
             -o StrictHostKeyChecking=yes \

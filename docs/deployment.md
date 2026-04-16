@@ -77,6 +77,8 @@ Optional repository variable:
 Required repository secret:
 - `VPS_SSH_PRIVATE_KEY`
 
+Optional repository secret:
+- `VPS_SSH_PASSPHRASE` (required when `VPS_SSH_PRIVATE_KEY` is encrypted)
 ## Deployment Flow
 
 1. Push to `main`.
