@@ -1,0 +1,54 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="1120" y2="590" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF4E6"/>
+      <stop offset="1" stop-color="#E6F4FF"/>
+    </linearGradient>
+    <linearGradient id="scoopA" x1="426" y1="183" x2="516" y2="310" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7DAE"/>
+      <stop offset="1" stop-color="#FF5F8F"/>
+    </linearGradient>
+    <linearGradient id="scoopB" x1="557" y1="168" x2="666" y2="307" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9E83FF"/>
+      <stop offset="1" stop-color="#7A5CFF"/>
+    </linearGradient>
+    <linearGradient id="scoopC" x1="690" y1="180" x2="801" y2="322" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#56D4B1"/>
+      <stop offset="1" stop-color="#1AB394"/>
+    </linearGradient>
+    <linearGradient id="cone" x1="611" y1="309" x2="611" y2="488" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3C58A"/>
+      <stop offset="1" stop-color="#E0A35C"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" rx="26" fill="url(#bg)"/>
+  <circle cx="191" cy="122" r="104" fill="#9CD6FF" fill-opacity="0.22"/>
+  <circle cx="1035" cy="535" r="140" fill="#FFD8A8" fill-opacity="0.24"/>
+
+  <g opacity="0.95">
+    <circle cx="470" cy="244" r="87" fill="url(#scoopA)"/>
+    <circle cx="611" cy="233" r="92" fill="url(#scoopB)"/>
+    <circle cx="749" cy="246" r="85" fill="url(#scoopC)"/>
+    <path d="M611 487L529 309H693L611 487Z" fill="url(#cone)"/>
+    <path d="M566 353L656 443" stroke="#D18E43" stroke-width="7" stroke-linecap="round"/>
+    <path d="M555 392L640 477" stroke="#D18E43" stroke-width="7" stroke-linecap="round"/>
+    <path d="M653 349L566 436" stroke="#D18E43" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <rect x="78" y="69" width="217" height="47" rx="23.5" fill="#0E7A9A" fill-opacity="0.12" stroke="#0E7A9A" stroke-opacity="0.35"/>
+  <text x="186.5" y="98.5" fill="#0B5E7A" font-family="'Plus Jakarta Sans','Segoe UI',sans-serif" font-size="20" font-weight="700" letter-spacing="2">CASE STUDY</text>
+
+  <text x="80" y="546" fill="#10213F" font-family="'Plus Jakarta Sans','Segoe UI',sans-serif" font-size="52" font-weight="700">
+    Ice Cream Shop Landing Page
+  </text>
+  <text x="80" y="589" fill="#526A8F" font-family="'Plus Jakarta Sans','Segoe UI',sans-serif" font-size="30" font-weight="500">
+    Built with support from AI-DLC on AWS
+  </text>
+
+  <rect x="855" y="67" width="111" height="47" rx="23.5" fill="#FF6FA2" fill-opacity="0.13" stroke="#FF6FA2" stroke-opacity="0.45"/>
+  <text x="890" y="98.5" fill="#C83A72" font-family="'IBM Plex Mono','Courier New',monospace" font-size="20" font-weight="700">AI-DLC</text>
+
+  <rect x="977" y="67" width="84" height="47" rx="23.5" fill="#7A5CFF" fill-opacity="0.12" stroke="#7A5CFF" stroke-opacity="0.42"/>
+  <text x="1001" y="98.5" fill="#5E44D6" font-family="'IBM Plex Mono','Courier New',monospace" font-size="20" font-weight="700">AWS</text>
+</svg>

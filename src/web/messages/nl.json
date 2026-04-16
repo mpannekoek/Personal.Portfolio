@@ -19,7 +19,7 @@
   "footer": {
     "badge": "Beschikbaar voor opdrachten",
     "role": "Software Architect",
-    "summary": "Ik ontwerp veerkrachtige digitale producten met moderne engineeringstandaarden en een sterke focus op productuitvoering.",
+    "summary": "Van idee tot werkend product: ik ontwerp en bouw digitale oplossingen die sterk, modern en praktisch zijn.",
     "pages": "Pagina's",
     "connect": "Contact",
     "about": "Over mij",
@@ -174,7 +174,7 @@
   },
   "home": {
     "hero": {
-      "title": "Hoi en welkom. Laten we samen iets moois bouwen!",
+      "title": "Collaborate. Create. Deploy.",
       "viewProject": "Bekijk huidig project",
       "connect": "Contact"
     },

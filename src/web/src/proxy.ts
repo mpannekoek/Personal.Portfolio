@@ -17,7 +17,12 @@ function isMaintenanceModeEnabled() {
 }
 
 function isExcludedFromLocaleMiddleware(pathname: string) {
-    return pathname.startsWith("/_next") || pathname.startsWith("/_vercel") || pathname.includes(".");
+    return (
+        pathname.startsWith("/api") ||
+        pathname.startsWith("/_next") ||
+        pathname.startsWith("/_vercel") ||
+        pathname.includes(".")
+    );
 }
 
 function maintenanceHtml() {
