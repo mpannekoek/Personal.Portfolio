@@ -3,7 +3,7 @@
   "timeline": "March 2026",
   "title": "Portfolio",
   "summary": "Creating this portfolio from scratch while exploring how far I can push vibe coding without losing product quality.",
-  "progress": 90,
+  "progress": 95,
   "stack": ["Node.js", "Next.js", "TypeScript", "Tailwind CSS", "Docker"],
   "progressLabel": "Progress",
   "inProgress": "In progress",
