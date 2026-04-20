@@ -54,3 +54,19 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  cleanup-package-versions:
+    runs-on: ubuntu-latest
+    needs: publish
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Delete old GHCR package versions (keep latest 5)
+        uses: actions/delete-package-versions@v5
+        with:
+          owner: mpannekoek
+          package-name: ${{ github.event.repository.name }}
+          package-type: container
+          min-versions-to-keep: 5
