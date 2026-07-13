@@ -212,7 +212,7 @@
         },
         {
           "title": "Cloud & DevOps",
-          "skills": ["Azure", "Docker", "Podman", "Git"]
+          "skills": ["Azure", "Scaleway", "Docker", "Podman", "Git"]
         },
         {
           "title": "AI & agentisch",

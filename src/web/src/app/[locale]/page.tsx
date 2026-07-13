@@ -30,6 +30,7 @@ import {
     SiPodman,
     SiPostgresql,
     SiPython,
+    SiScaleway,
     SiYaml,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
@@ -108,6 +109,12 @@ const skillDefinitions: SkillDefinition[][] = [
             icon: FaMicrosoft,
             badgeToneClassName: "bg-[#0078d4]/10 ring-1 ring-[#0078d4]/20",
             iconToneClassName: "text-[#0078d4]",
+        },
+        {
+            key: "scaleway",
+            icon: SiScaleway,
+            badgeToneClassName: "bg-[#4f0599]/10 ring-1 ring-[#4f0599]/20",
+            iconToneClassName: "text-[#4f0599]",
         },
         {
             key: "docker",
@@ -691,7 +698,7 @@ export default function Page() {
                                             return (
                                                 <li
                                                     key={skill.key}
-                                                    className="flex min-w-0 items-start gap-3 text-sm leading-snug font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
+                                                    className="flex min-w-0 items-center gap-3 text-sm leading-snug font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                                                 >
                                                     <span className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${skill.badgeToneClassName}`}>
                                                         <Icon className={`h-3.5 w-3.5 ${skill.iconToneClassName}`} />
