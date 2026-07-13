@@ -41,7 +41,6 @@
   "blogPage": {
     "title": "Laat je inspireren",
     "empty": "Geen artikelen gevonden voor dit filter.",
-    "imageFallback": "Geen afbeelding",
     "search": {
       "label": "Zoek in blogartikelen",
       "placeholder": "Zoek op artikel, onderwerp of idee"
@@ -71,12 +70,9 @@
     "copiedCode": "Gekopieerd"
   },
   "hireMePage": {
-    "eyebrow": "Huur mij in",
     "title": "Websites die duidelijk, snel en betrouwbaar zijn",
     "description": "Ik bouw websites die helder zijn opgebouwd, technisch goed staan en prettig werken voor je bezoekers. Of het nu gaat om een nieuwe site, een gerichte landingspagina of het verbeteren van een bestaande website: ik zorg voor een oplossing die praktisch is en direct bruikbaar.",
     "heroImage": {
-      "title": "Placeholder voor hero image",
-      "description": "Hier kan later een sterke foto of portret van mij komen.",
       "alt": "Martijn Pannekoek op een stadsbalkon met uitzicht op het water"
     },
     "cta": "Bespreek je project",
@@ -119,7 +115,6 @@
       "eyebrow": "Proces",
       "title": "Zo werk ik",
       "description": "Ik werk praktisch, communiceer helder en houd het proces overzichtelijk van eerste gesprek tot livegang. Zo weet je steeds wat de volgende stap is, waar we staan en wat er van jou nodig is.",
-      "interactionHint": "Beweeg over een stap of klik erop om meer uitleg te zien.",
       "stepLabel": "Stap {number}",
       "steps": {
         "step1": {

@@ -19,7 +19,6 @@ export type BlogPreviewCard = {
     date: string;
     sortDate?: string;
     href: string;
-    author?: string;
     tags?: string[];
     image?: string;
     isPlaceholder?: boolean;
@@ -47,7 +46,6 @@ export function toBlogPreviewCards(
                 : formatter.format(parsedDate),
             sortDate: blog.date,
             href: `/blog/${blog.slug}`,
-            author: blog.author,
             tags: blog.tags,
             image: blog.image,
         };

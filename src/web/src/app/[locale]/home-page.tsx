@@ -274,7 +274,6 @@ export default async function HomePage({ locale }: { locale: string }) {
                         <SectionHeading
                             title={t("insights.title")}
                             eyebrow={t("insights.eyebrow")}
-                            variant="reactive"
                         />
                         <div className="grid grid-cols-1 gap-x-10 gap-y-3 lg:grid-cols-2">
                             {latestPosts.map((post) => {
@@ -304,7 +303,6 @@ export default async function HomePage({ locale }: { locale: string }) {
                             <SectionHeading
                                 title={t("toolkit.title")}
                                 eyebrow={t("toolkit.eyebrow")}
-                                variant="reactive"
                             />
                         </div>
                         <div className="mb-14 grid grid-cols-1 gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-10 md:mb-16">
@@ -327,7 +325,7 @@ export default async function HomePage({ locale }: { locale: string }) {
 
                             <div className="relative min-h-[18rem] overflow-hidden rounded-[1.75rem] bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(34,211,238,0.14),transparent_36%),linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.09))] shadow-[0_28px_80px_-56px_rgba(15,23,42,0.55)]">
                                 <Image
-                                    src="dev-cartoon.svg"
+                                    src="/dev-cartoon.svg"
                                     alt={t("toolkit.illustrationAlt")}
                                     fill
                                     sizes="(min-width: 1024px) 48vw, 100vw"
@@ -375,7 +373,6 @@ export default async function HomePage({ locale }: { locale: string }) {
                             <SectionHeading
                                 title={t("connect.title")}
                                 eyebrow={t("connect.eyebrow")}
-                                variant="reactive"
                             />
                         </div>
                         <div className="mt-10 md:mt-12">

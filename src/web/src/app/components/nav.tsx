@@ -116,14 +116,10 @@ export default function NavBar() {
         }
 
         if (isActive) {
-            return isSticky
-                ? "relative px-1 py-1 font-semibold text-[var(--text)] after:absolute after:left-1 after:right-1 after:-bottom-1.5 after:h-0.5 after:rounded-full after:bg-highlight"
-                : "relative px-1 py-1 font-semibold text-[var(--text)] after:absolute after:left-1 after:right-1 after:-bottom-1.5 after:h-0.5 after:rounded-full after:bg-highlight";
+            return "relative px-1 py-1 font-semibold text-[var(--text)] after:absolute after:left-1 after:right-1 after:-bottom-1.5 after:h-0.5 after:rounded-full after:bg-highlight";
         }
 
-        return isSticky
-            ? "px-1 py-1 font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
-            : "px-1 py-1 font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]";
+        return "px-1 py-1 font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]";
     };
 
     const getMobileNavItemClass = (item: NavItem, isActive: boolean) => {

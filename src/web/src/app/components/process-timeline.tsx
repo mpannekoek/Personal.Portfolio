@@ -129,7 +129,6 @@ export default function ProcessTimeline() {
                         <SectionHeading
                             title={t("process.title")}
                             eyebrow={t("process.eyebrow")}
-                            variant="reactive"
                         />
                     </FadeIn>
                     <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">

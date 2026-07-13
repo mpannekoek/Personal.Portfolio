@@ -127,7 +127,6 @@ export default async function HireMePage() {
                     <SectionHeading
                         title={t("principles.title")}
                         eyebrow={t("principles.eyebrow")}
-                        variant="reactive"
                     />
                 </FadeIn>
 
@@ -173,7 +172,6 @@ export default async function HireMePage() {
                             <SectionHeading
                                 title={t("servicesTitle")}
                                 eyebrow={t("servicesEyebrow")}
-                                variant="reactive"
                             />
                         </FadeIn>
                         <h2 className="text-3xl font-bold text-[var(--text)] md:text-4xl">
@@ -228,7 +226,6 @@ export default async function HireMePage() {
                                 <SectionHeading
                                     title={t("pricing.title")}
                                     eyebrow={t("pricing.eyebrow")}
-                                    variant="reactive"
                                 />
                             </FadeIn>
                         </div>
