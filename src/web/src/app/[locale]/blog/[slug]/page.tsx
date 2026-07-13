@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import type { BlogPost } from "../../../../lib/blog-client";
 import { extractLevelTwoHeadings, slugifyHeading } from "../../../../lib/markdown";
+import type { AppLocale } from "../../../../i18n/routing";
+import { createPageMetadata } from "../../../../lib/site";
 import BlogCodeBlock from "./blog-code-block";
 import BlogPostActions from "./blog-post-actions";
 import BlogPostToc from "./blog-post-toc";
@@ -52,17 +54,24 @@ async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function generateMetadata({ params }: BlogDetailPageProps) {
-    const { slug } = await params;
+    const { locale, slug } = await params;
     const post = await fetchBlogPost(slug);
 
     if (!post) {
         return {};
     }
 
-    return {
-        title: `${post.title} | Blog`,
+    return createPageMetadata({
+        locale: locale as AppLocale,
+        path: `/blog/${slug}`,
+        title: `${post.title} | Martijn Pannekoek`,
         description: post.description,
-    };
+        article: {
+            publishedTime: post.date,
+            authors: [post.author],
+            tags: post.tags,
+        },
+    });
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {

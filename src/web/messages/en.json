@@ -1,7 +1,11 @@
 {
   "metadata": {
-    "title": "Martijn Pannekoek",
-    "description": "Software architect, engineer, and developer."
+    "title": "Martijn Pannekoek | Software Architect",
+    "description": "Portfolio of Martijn Pannekoek, a software architect specializing in scalable systems, cloud, AI, and product development.",
+    "blogTitle": "Software Architecture and Development Blog | Martijn Pannekoek",
+    "blogDescription": "Articles by Martijn Pannekoek about software architecture, .NET, databases, cloud, AI, and modern product development.",
+    "hireMeTitle": "Website and Application Development | Martijn Pannekoek",
+    "hireMeDescription": "Hire software architect Martijn Pannekoek to build a clear, fast, and reliable website, landing page, or application."
   },
   "nav": {
     "about": "About",
@@ -174,7 +178,8 @@
   },
   "home": {
     "hero": {
-      "title": "Collaborate. Create. Deploy.",
+      "tagline": "Collaborate. Create. Deploy.",
+      "title": "Martijn Pannekoek, software architect",
       "viewProject": "View current project",
       "connect": "Contact"
     },

@@ -531,6 +531,9 @@ export default function Page() {
                 <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
                     <FadeIn delay="delay-100">
                         <div className="py-4 md:py-6">
+                            <p className="mb-4 font-mono text-base font-medium text-primary md:text-lg">
+                                {t("hero.tagline")}
+                            </p>
                             <h1 className="mb-8 text-3xl font-semibold leading-[0.98] tracking-[-0.045em] text-[var(--text)] md:text-5xl">
                                 {t("hero.title")}
                             </h1>

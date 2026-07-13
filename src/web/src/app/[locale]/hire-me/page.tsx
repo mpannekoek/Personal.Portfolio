@@ -10,9 +10,27 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import type { AppLocale } from "../../../i18n/routing";
+import { createPageMetadata } from "../../../lib/site";
 import ContactShortcut from "../../components/contact-shortcut";
 import ProcessTimeline from "../../components/process-timeline";
 import SectionHeading from "../../components/section-heading";
+
+type HireMePageProps = {
+    params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: HireMePageProps) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: "metadata" });
+
+    return createPageMetadata({
+        locale: locale as AppLocale,
+        path: "/hire-me",
+        title: t("hireMeTitle"),
+        description: t("hireMeDescription"),
+    });
+}
 
 export default async function HireMePage() {
     const t = await getTranslations("hireMePage");
