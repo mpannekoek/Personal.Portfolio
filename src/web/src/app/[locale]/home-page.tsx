@@ -218,6 +218,12 @@ export default async function HomePage({ locale }: { locale: string }) {
                             </h1>
                             <div className="flex flex-wrap justify-center gap-3">
                                 <Link
+                                    href="/blog"
+                                    className="inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-[var(--primary-contrast)] transition-colors hover:bg-primary/85"
+                                >
+                                    {t("hero.readArticles")}
+                                </Link>
+                                <Link
                                     href="#contact-shortcut"
                                     className="inline-flex items-center rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--text)] transition-colors hover:border-primary/40 hover:text-primary"
                                 >
