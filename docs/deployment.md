@@ -65,6 +65,7 @@ If your GHCR package is private, set these environment variables in `deploy/.env
 Optional `deploy/.env` values:
 - `COMPOSE_PROJECT_NAME`
 - `APP_PORT`
+- `SITE_URL` (defaults to `https://martijnpannekoek.nl`)
 - `MAINTENANCE_MODE`
 
 Runtime toggle (set in `deploy/compose.yml` or override via VPS env):
