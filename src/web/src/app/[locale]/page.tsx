@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import type { AppLocale } from "../../i18n/routing";
+import { routing, type AppLocale } from "../../i18n/routing";
 import { getLocalizedUrl, SITE_URL } from "../../lib/site";
 import StructuredData from "../components/structured-data";
 import HomePage from "./home-page";
@@ -15,6 +15,19 @@ export default async function HomePageRoute({ params }: HomePageRouteProps) {
     const url = getLocalizedUrl(siteLocale, "/");
     const personUrl = getLocalizedUrl("nl", "/");
     const personId = `${SITE_URL}/#person`;
+    const websiteId = `${SITE_URL}/#website`;
+    const website = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": websiteId,
+        url: `${SITE_URL}/`,
+        name: "Martijn Pannekoek",
+        alternateName: "martijnpannekoek.nl",
+        inLanguage: routing.locales,
+        publisher: {
+            "@id": personId,
+        },
+    };
     const profilePage = {
         "@context": "https://schema.org",
         "@type": "ProfilePage",
@@ -23,6 +36,9 @@ export default async function HomePageRoute({ params }: HomePageRouteProps) {
         name: t("title"),
         description: t("description"),
         inLanguage: siteLocale,
+        isPartOf: {
+            "@id": websiteId,
+        },
         mainEntity: {
             "@type": "Person",
             "@id": personId,
@@ -48,6 +64,9 @@ export default async function HomePageRoute({ params }: HomePageRouteProps) {
 
     return (
         <>
+            {siteLocale === routing.defaultLocale ? (
+                <StructuredData id="website-jsonld" data={website} />
+            ) : null}
             <StructuredData id="profile-page-jsonld" data={profilePage} />
             <HomePage locale={siteLocale} />
         </>
