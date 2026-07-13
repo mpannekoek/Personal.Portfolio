@@ -30,7 +30,7 @@ import {
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 import { Link } from "../../i18n/navigation";
-import { getLatestBlogPreviewsForHome } from "../../lib/home-page-data";
+import { getLatestBlogPreviews } from "../../lib/blog-server";
 
 const INSIGHTS_POST_LIMIT = 3;
 
@@ -195,7 +195,7 @@ export default async function HomePage({ locale }: { locale: string }) {
     const placeholderTitle = t("insights.placeholderTitle");
     const placeholderExcerpt = t("insights.placeholderExcerpt");
     const placeholderCta = t("insights.placeholderCta");
-    const latestPosts = await getLatestBlogPreviewsForHome({
+    const latestPosts = await getLatestBlogPreviews({
         limit: INSIGHTS_POST_LIMIT,
         locale,
         placeholder: {

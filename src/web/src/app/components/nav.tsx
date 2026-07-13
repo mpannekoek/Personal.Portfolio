@@ -156,14 +156,6 @@ export default function NavBar() {
         };
     }, []);
 
-    useEffect(() => {
-        document.body.dataset.mobileMenuOpen = isMenuOpen ? "true" : "false";
-
-        return () => {
-            delete document.body.dataset.mobileMenuOpen;
-        };
-    }, [isMenuOpen]);
-
     return (
         <div>
             <div className="h-6 bg-gradient-to-r from-primary via-accent to-highlight" />

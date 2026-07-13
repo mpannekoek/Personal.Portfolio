@@ -40,7 +40,6 @@
   },
   "blogPage": {
     "title": "Laat je inspireren",
-    "loading": "Artikelen laden...",
     "empty": "Geen artikelen gevonden voor dit filter.",
     "imageFallback": "Geen afbeelding",
     "search": {

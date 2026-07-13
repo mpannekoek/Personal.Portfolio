@@ -4,7 +4,7 @@ import type { Components } from "react-markdown";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
-import type { BlogPost } from "../../../../lib/blog-client";
+import { getBlogPost } from "../../../../lib/blog-server";
 import { extractLevelTwoHeadings, slugifyHeading } from "../../../../lib/markdown";
 import type { AppLocale } from "../../../../i18n/routing";
 import { createPageMetadata, getLocalizedUrl, SITE_URL } from "../../../../lib/site";
@@ -12,8 +12,6 @@ import StructuredData from "../../../components/structured-data";
 import BlogCodeBlock from "./blog-code-block";
 import BlogPostActions from "./blog-post-actions";
 import BlogPostToc from "./blog-post-toc";
-
-const API_ORIGIN = process.env.API_ORIGIN ?? "http://127.0.0.1:3001";
 
 type BlogDetailPageProps = {
     params: Promise<{
@@ -38,25 +36,9 @@ function flattenText(node: ReactNode): string {
     return "";
 }
 
-async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
-    const response = await fetch(`${API_ORIGIN}/api/blogs/${slug}`, {
-        next: { revalidate: 60 },
-    });
-
-    if (response.status === 404) {
-        return null;
-    }
-
-    if (!response.ok) {
-        throw new Error(`Failed to load blog post "${slug}"`);
-    }
-
-    return (await response.json()) as BlogPost;
-}
-
 export async function generateMetadata({ params }: BlogDetailPageProps) {
     const { locale, slug } = await params;
-    const post = await fetchBlogPost(slug);
+    const post = await getBlogPost(slug);
 
     if (!post) {
         return {};
@@ -78,7 +60,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps) {
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     const { locale, slug } = await params;
     const siteLocale = locale as AppLocale;
-    const post = await fetchBlogPost(slug);
+    const post = await getBlogPost(slug);
     const t = await getTranslations({ locale, namespace: "blogDetailPage" });
 
     if (!post) {
