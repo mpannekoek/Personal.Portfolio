@@ -14,6 +14,7 @@ import type { AppLocale } from "../../../i18n/routing";
 import { createPageMetadata } from "../../../lib/site";
 import ContactShortcut from "../../components/contact-shortcut";
 import ProcessTimeline from "../../components/process-timeline";
+import FadeIn from "../../components/providers/fade-in-provider";
 import SectionHeading from "../../components/section-heading";
 
 type HireMePageProps = {
@@ -122,11 +123,13 @@ export default async function HireMePage() {
             </section>
 
             <section className="mt-14 md:mt-16">
-                <SectionHeading
-                    title={t("principles.title")}
-                    eyebrow={t("principles.eyebrow")}
-                    variant="reactive"
-                />
+                <FadeIn>
+                    <SectionHeading
+                        title={t("principles.title")}
+                        eyebrow={t("principles.eyebrow")}
+                        variant="reactive"
+                    />
+                </FadeIn>
 
                 <div className="mt-8 grid gap-5 lg:grid-cols-2">
                     {principles.map((principle) => {
@@ -166,11 +169,13 @@ export default async function HireMePage() {
             <section className="mt-10 md:mt-14">
                 <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
                     <div className="max-w-lg">
-                        <SectionHeading
-                            title={t("servicesTitle")}
-                            eyebrow={t("servicesEyebrow")}
-                            variant="reactive"
-                        />
+                        <FadeIn>
+                            <SectionHeading
+                                title={t("servicesTitle")}
+                                eyebrow={t("servicesEyebrow")}
+                                variant="reactive"
+                            />
+                        </FadeIn>
                         <h2 className="text-3xl font-bold text-[var(--text)] md:text-4xl">
                             {t("servicesIntroTitle")}
                         </h2>
@@ -219,11 +224,13 @@ export default async function HireMePage() {
 
                     <div className="relative grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
                         <div className="max-w-lg">
-                            <SectionHeading
-                                title={t("pricing.title")}
-                                eyebrow={t("pricing.eyebrow")}
-                                variant="reactive"
-                            />
+                            <FadeIn>
+                                <SectionHeading
+                                    title={t("pricing.title")}
+                                    eyebrow={t("pricing.eyebrow")}
+                                    variant="reactive"
+                                />
+                            </FadeIn>
                         </div>
 
                         <div className="max-w-2xl space-y-5">

@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-
 type HeadingVariant = "editorial" | "minimal" | "reactive";
 
 type SectionHeadingProps = {
@@ -12,33 +8,9 @@ type SectionHeadingProps = {
 };
 
 export default function SectionHeading({ title, eyebrow, meta, variant }: SectionHeadingProps) {
-    const rootRef = useRef<HTMLDivElement | null>(null);
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        const node = rootRef.current;
-        if (!node) {
-            return;
-        }
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setIsVisible(entry.isIntersecting);
-            },
-            { threshold: 0.25 }
-        );
-
-        observer.observe(node);
-
-        return () => observer.disconnect();
-    }, []);
-
     if (variant === "editorial") {
         return (
-            <div
-                ref={rootRef}
-                className={`mb-6 transition-all duration-500 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"}`}
-            >
+            <div className="mb-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)]">
                     {eyebrow}
                 </p>
@@ -51,7 +23,7 @@ export default function SectionHeading({ title, eyebrow, meta, variant }: Sectio
 
     if (variant === "minimal") {
         return (
-            <div ref={rootRef} className="mb-6">
+            <div className="mb-6">
                 <div className="flex items-end justify-between gap-4">
                     <h2 className="font-mono text-[1.85rem] font-semibold leading-none tracking-[-0.035em] text-[var(--text)] md:text-[3.1rem]">
                         {`<${title} />`}
@@ -63,29 +35,20 @@ export default function SectionHeading({ title, eyebrow, meta, variant }: Sectio
                     ) : null}
                 </div>
                 <div className="mt-3 h-px overflow-hidden bg-[var(--border)]">
-                    <span
-                        className={`block h-full bg-gradient-to-r from-primary/60 via-accent/60 to-highlight/55 transition-transform duration-700 ${isVisible ? "scale-x-100" : "scale-x-0"}`}
-                        style={{ transformOrigin: "left center" }}
-                    />
+                    <span className="block h-full bg-gradient-to-r from-primary/60 via-accent/60 to-highlight/55" />
                 </div>
             </div>
         );
     }
 
     return (
-        <div ref={rootRef} className="mb-6">
+        <div className="mb-6">
             {eyebrow ? (
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text-soft)]">
                     {eyebrow}
                 </p>
             ) : null}
-            <h2
-                className={`mt-2 text-2xl font-semibold leading-tight tracking-[-0.03em] transition-all duration-500 md:text-4xl ${
-                    isVisible
-                        ? "translate-y-0 scale-100 text-primary"
-                        : "translate-y-2 scale-[0.98] text-primary"
-                }`}
-            >
+            <h2 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.03em] text-primary md:text-4xl">
                 {title}
             </h2>
         </div>
