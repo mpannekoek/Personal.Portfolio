@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { useTranslations } from "next-intl";
+import FadeIn from "./providers/fade-in-provider";
 import SectionHeading from "./section-heading";
 
 type ProcessStepKey = "step1" | "step2" | "step3" | "step4" | "step5";
@@ -124,11 +125,12 @@ export default function ProcessTimeline() {
         <section className="mt-10 md:mt-14">
             <div>
                 <div className="max-w-3xl">
-                    <SectionHeading
-                        title={t("process.title")}
-                        eyebrow={t("process.eyebrow")}
-                        variant="reactive"
-                    />
+                    <FadeIn>
+                        <SectionHeading
+                            title={t("process.title")}
+                            eyebrow={t("process.eyebrow")}
+                        />
+                    </FadeIn>
                     <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
                         {t("process.description")}
                     </p>

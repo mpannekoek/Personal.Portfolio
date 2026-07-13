@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 const BLOG_CONTENT_DIR = path.resolve(process.cwd(), 'content/blog');
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export interface BlogMeta {
+interface BlogMeta {
   slug: string;
   title: string;
   date: string;
@@ -16,7 +16,7 @@ export interface BlogMeta {
   image?: string;
 }
 
-export interface BlogWithContent extends BlogMeta {
+interface BlogWithContent extends BlogMeta {
   content: string;
 }
 

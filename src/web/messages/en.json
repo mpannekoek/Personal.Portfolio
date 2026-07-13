@@ -1,7 +1,11 @@
 {
   "metadata": {
-    "title": "Martijn Pannekoek",
-    "description": "Software architect, engineer, and developer."
+    "title": "Martijn Pannekoek | Software Architect",
+    "description": "Portfolio of Martijn Pannekoek, a software architect specializing in scalable systems, cloud, AI, and product development.",
+    "blogTitle": "Software Architecture and Development Blog | Martijn Pannekoek",
+    "blogDescription": "Articles by Martijn Pannekoek about software architecture, .NET, databases, cloud, AI, and modern product development.",
+    "hireMeTitle": "Website and Application Development | Martijn Pannekoek",
+    "hireMeDescription": "Hire software architect Martijn Pannekoek to build a clear, fast, and reliable website, landing page, or application."
   },
   "nav": {
     "about": "About",
@@ -36,9 +40,7 @@
   },
   "blogPage": {
     "title": "Get inspired",
-    "loading": "Loading posts...",
     "empty": "No posts match this filter.",
-    "imageFallback": "No image",
     "search": {
       "label": "Search blog posts",
       "placeholder": "Search articles, topics, or ideas"
@@ -68,12 +70,9 @@
     "copiedCode": "Copied"
   },
   "hireMePage": {
-    "eyebrow": "Hire Me",
     "title": "Websites that are clear, fast, and reliable",
     "description": "I build websites that are easy to understand, technically solid, and pleasant to use. Whether you need a new site, a focused landing page, or improvements to an existing website, I deliver something practical that is ready to use.",
     "heroImage": {
-      "title": "Hero image placeholder",
-      "description": "A strong personal photo or portrait can be placed here later.",
       "alt": "Martijn Pannekoek on a city terrace overlooking the water"
     },
     "cta": "Discuss your project",
@@ -116,7 +115,6 @@
       "eyebrow": "Process",
       "title": "How I work",
       "description": "I work in a practical way, communicate clearly, and keep the process easy to follow from the first conversation to launch. That means you always know the next step, where we stand, and what I need from you.",
-      "interactionHint": "Hover a step or click it to see more context.",
       "stepLabel": "Step {number}",
       "steps": {
         "step1": {
@@ -174,8 +172,9 @@
   },
   "home": {
     "hero": {
-      "title": "Collaborate. Create. Deploy.",
-      "viewProject": "View current project",
+      "tagline": "Collaborate. Create. Deploy.",
+      "title": "Martijn Pannekoek, software architect",
+      "readArticles": "Read my articles",
       "connect": "Contact"
     },
     "about": {
@@ -207,7 +206,7 @@
         },
         {
           "title": "Cloud & DevOps",
-          "skills": ["Azure", "Docker", "Podman", "Git"]
+          "skills": ["Azure", "Scaleway", "Docker", "Podman", "Git"]
         },
         {
           "title": "AI & Agentic",

@@ -1,229 +1,41 @@
-"use client";
+import { getTranslations } from "next-intl/server";
+import { getAllBlogPreviews } from "../../../lib/blog-server";
+import BlogExplorer, { type BlogExplorerLabels } from "./blog-explorer";
 
-import { useEffect, useMemo, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
-import { ArrowUpDown, Grid3X3, List, Search } from "lucide-react";
-import BlogListItem from "../../components/blog-list-item";
-import { getAllBlogPreviews, type BlogPreviewCard } from "../../../lib/blog-client";
+type BlogPageProps = {
+    params: Promise<{ locale: string }>;
+};
 
-type SortOption = "date-desc" | "date-asc" | "title-asc";
-type ViewMode = "metro" | "text";
-
-export default function BlogPage() {
-    const t = useTranslations("blogPage");
-    const locale = useLocale();
-    const [posts, setPosts] = useState<BlogPreviewCard[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedTag, setSelectedTag] = useState<string | null>(null);
-    const [sortBy, setSortBy] = useState<SortOption>("date-desc");
-    const [viewMode, setViewMode] = useState<ViewMode>("metro");
-
-    useEffect(() => {
-        let isCancelled = false;
-
-        async function loadPosts() {
-            setIsLoading(true);
-            const loadedPosts = await getAllBlogPreviews(locale);
-
-            if (!isCancelled) {
-                setPosts(loadedPosts);
-                setIsLoading(false);
-            }
-        }
-
-        void loadPosts();
-
-        return () => {
-            isCancelled = true;
-        };
-    }, [locale]);
-
-    const availableTags = useMemo(() => {
-        const tags = new Set<string>();
-
-        posts.forEach((post) => {
-            post.tags?.forEach((tag) => tags.add(tag));
-        });
-
-        return Array.from(tags).sort((left, right) => left.localeCompare(right));
-    }, [posts]);
-
-    const normalizedSearchQuery = searchQuery.trim().toLocaleLowerCase();
-
-    const visiblePosts = useMemo(() => {
-        const filteredByTag = selectedTag
-            ? posts.filter((post) => post.tags?.includes(selectedTag))
-            : posts;
-
-        const filteredPosts = normalizedSearchQuery
-            ? filteredByTag.filter((post) => {
-                const searchableValues = [
-                    post.title,
-                    post.excerpt,
-                    ...(post.tags ?? []),
-                ];
-
-                return searchableValues.some((value) =>
-                    value.toLocaleLowerCase().includes(normalizedSearchQuery),
-                );
-            })
-            : filteredByTag;
-
-        return [...filteredPosts].sort((left, right) => {
-            if (sortBy === "title-asc") {
-                return left.title.localeCompare(right.title);
-            }
-
-            const leftTimestamp = Date.parse(left.sortDate ?? "");
-            const rightTimestamp = Date.parse(right.sortDate ?? "");
-
-            if (Number.isNaN(leftTimestamp) || Number.isNaN(rightTimestamp)) {
-                return left.title.localeCompare(right.title);
-            }
-
-            if (sortBy === "date-asc") {
-                return leftTimestamp - rightTimestamp;
-            }
-
-            return rightTimestamp - leftTimestamp;
-        });
-    }, [normalizedSearchQuery, posts, selectedTag, sortBy]);
+export default async function BlogPage({ params }: BlogPageProps) {
+    const { locale } = await params;
+    const [t, posts] = await Promise.all([
+        getTranslations({ locale, namespace: "blogPage" }),
+        getAllBlogPreviews(locale),
+    ]);
+    const labels: BlogExplorerLabels = {
+        empty: t("empty"),
+        searchLabel: t("search.label"),
+        searchPlaceholder: t("search.placeholder"),
+        allFilter: t("filters.all"),
+        sortLabel: t("sort.label"),
+        newestSort: t("sort.newest"),
+        oldestSort: t("sort.oldest"),
+        titleSort: t("sort.title"),
+        metroView: t("view.metro"),
+        textView: t("view.text"),
+    };
 
     return (
         <main className="pb-10">
             <div className="container mx-auto px-6">
                 <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-                    <div className="py-4 md:py-6">
+                    <div className="pt-4 md:pt-6">
                         <h1 className="mb-8 text-4xl font-semibold leading-[0.98] tracking-[-0.045em] text-[var(--text)] md:text-5xl">
                             {t("title")}
                         </h1>
-                        <div className="mx-auto w-full max-w-2xl">
-                            <label htmlFor="blog-search" className="sr-only">
-                                {t("search.label")}
-                            </label>
-                            <div className="flex items-center gap-3 rounded-[1.5rem] border border-[var(--border)] bg-[var(--surface)] px-4 py-3 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.28)] ring-1 ring-[var(--ring)]/50">
-                                <Search className="h-5 w-5 shrink-0 text-[var(--text-soft)]" />
-                                <input
-                                    id="blog-search"
-                                    type="search"
-                                    value={searchQuery}
-                                    onChange={(event) => setSearchQuery(event.target.value)}
-                                    placeholder={t("search.placeholder")}
-                                    className="w-full bg-transparent text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-soft)] md:text-base"
-                                />
-                            </div>
-                        </div>
-                        <div className="mt-6 flex flex-wrap justify-center gap-2">
-                            <button
-                                type="button"
-                                onClick={() => setSelectedTag(null)}
-                                className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                                    selectedTag === null
-                                        ? "bg-primary text-[var(--primary-contrast)]"
-                                        : "bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text)]"
-                                }`}
-                            >
-                                {t("filters.all")}
-                            </button>
-                            {availableTags.map((tag) => (
-                                <button
-                                    key={tag}
-                                    type="button"
-                                    onClick={() => setSelectedTag(tag)}
-                                    className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                                        selectedTag === tag
-                                            ? "bg-primary text-[var(--primary-contrast)]"
-                                            : "bg-[var(--surface)] text-[var(--text-muted)] hover:text-[var(--text)]"
-                                    }`}
-                                >
-                                    {tag}
-                                </button>
-                            ))}
-                        </div>
                     </div>
                 </div>
-
-                <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-end">
-                    <div className="flex items-center gap-3 self-start lg:self-auto">
-                        <label
-                            htmlFor="blog-sort"
-                            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-muted)]"
-                        >
-                            <ArrowUpDown className="h-4 w-4" />
-                            {t("sort.label")}
-                        </label>
-                        <select
-                            id="blog-sort"
-                            value={sortBy}
-                            onChange={(event) => setSortBy(event.target.value as SortOption)}
-                            className="rounded-lg border border-[var(--border)] bg-[var(--surface-elevated)] px-3 py-2 text-sm text-[var(--text)]"
-                        >
-                            <option value="date-desc">{t("sort.newest")}</option>
-                            <option value="date-asc">{t("sort.oldest")}</option>
-                            <option value="title-asc">{t("sort.title")}</option>
-                        </select>
-
-                        <div className="inline-flex items-center rounded-lg border border-[var(--border)] bg-[var(--surface-elevated)] p-1">
-                            <button
-                                type="button"
-                                aria-label={t("view.metro")}
-                                onClick={() => setViewMode("metro")}
-                                className={`rounded-md p-2 transition-colors ${
-                                    viewMode === "metro"
-                                        ? "bg-primary text-[var(--primary-contrast)]"
-                                        : "text-[var(--text-muted)]"
-                                }`}
-                            >
-                                <Grid3X3 className="h-4 w-4" />
-                            </button>
-                            <button
-                                type="button"
-                                aria-label={t("view.text")}
-                                onClick={() => setViewMode("text")}
-                                className={`rounded-md p-2 transition-colors ${
-                                    viewMode === "text"
-                                        ? "bg-primary text-[var(--primary-contrast)]"
-                                        : "text-[var(--text-muted)]"
-                                }`}
-                            >
-                                <List className="h-4 w-4" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {isLoading ? (
-                    <p className="mt-8 text-sm text-[var(--text-soft)]">{t("loading")}</p>
-                ) : null}
-
-                {!isLoading && visiblePosts.length === 0 ? (
-                    <p className="mt-8 text-sm text-[var(--text-soft)]">{t("empty")}</p>
-                ) : null}
-
-                {!isLoading && visiblePosts.length > 0 && viewMode === "metro" ? (
-                    <div className="mt-8 grid grid-cols-1 gap-x-10 gap-y-4 xl:grid-cols-2">
-                        {visiblePosts.map((post) => (
-                            <BlogListItem
-                                key={post.id}
-                                post={post}
-                                titleTag="h2"
-                            />
-                        ))}
-                    </div>
-                ) : null}
-
-                {!isLoading && visiblePosts.length > 0 && viewMode === "text" ? (
-                    <div className="mt-8 space-y-2">
-                        {visiblePosts.map((post) => (
-                            <BlogListItem
-                                key={post.id}
-                                post={post}
-                                titleTag="h2"
-                            />
-                        ))}
-                    </div>
-                ) : null}
+                <BlogExplorer posts={posts} labels={labels} />
             </div>
         </main>
     );

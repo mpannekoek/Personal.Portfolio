@@ -4,13 +4,14 @@ import type { Components } from "react-markdown";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
-import type { BlogPost } from "../../../../lib/blog-client";
+import { getBlogPost } from "../../../../lib/blog-server";
 import { extractLevelTwoHeadings, slugifyHeading } from "../../../../lib/markdown";
+import type { AppLocale } from "../../../../i18n/routing";
+import { createPageMetadata, getLocalizedUrl, SITE_URL } from "../../../../lib/site";
+import StructuredData from "../../../components/structured-data";
 import BlogCodeBlock from "./blog-code-block";
 import BlogPostActions from "./blog-post-actions";
 import BlogPostToc from "./blog-post-toc";
-
-const API_ORIGIN = process.env.API_ORIGIN ?? "http://127.0.0.1:3001";
 
 type BlogDetailPageProps = {
     params: Promise<{
@@ -35,39 +36,31 @@ function flattenText(node: ReactNode): string {
     return "";
 }
 
-async function fetchBlogPost(slug: string): Promise<BlogPost | null> {
-    const response = await fetch(`${API_ORIGIN}/api/blogs/${slug}`, {
-        next: { revalidate: 60 },
-    });
-
-    if (response.status === 404) {
-        return null;
-    }
-
-    if (!response.ok) {
-        throw new Error(`Failed to load blog post "${slug}"`);
-    }
-
-    return (await response.json()) as BlogPost;
-}
-
 export async function generateMetadata({ params }: BlogDetailPageProps) {
-    const { slug } = await params;
-    const post = await fetchBlogPost(slug);
+    const { locale, slug } = await params;
+    const post = await getBlogPost(slug);
 
     if (!post) {
         return {};
     }
 
-    return {
-        title: `${post.title} | Blog`,
+    return createPageMetadata({
+        locale: locale as AppLocale,
+        path: `/blog/${slug}`,
+        title: `${post.title} | Martijn Pannekoek`,
         description: post.description,
-    };
+        article: {
+            publishedTime: post.date,
+            authors: [post.author],
+            tags: post.tags,
+        },
+    });
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     const { locale, slug } = await params;
-    const post = await fetchBlogPost(slug);
+    const siteLocale = locale as AppLocale;
+    const post = await getBlogPost(slug);
     const t = await getTranslations({ locale, namespace: "blogDetailPage" });
 
     if (!post) {
@@ -80,6 +73,61 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         year: "numeric",
     }).format(new Date(post.date));
     const tocItems = extractLevelTwoHeadings(post.content);
+    const articleUrl = getLocalizedUrl(siteLocale, `/blog/${slug}`);
+    const blogUrl = getLocalizedUrl(siteLocale, "/blog");
+    const homeUrl = getLocalizedUrl(siteLocale, "/");
+    const personUrl = getLocalizedUrl("nl", "/");
+    const personId = `${SITE_URL}/#person`;
+    const blogPosting = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": `${articleUrl}#article`,
+        url: articleUrl,
+        mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": articleUrl,
+        },
+        headline: post.title,
+        description: post.description,
+        ...(post.image ? { image: [new URL(post.image, SITE_URL).toString()] } : {}),
+        datePublished: post.date,
+        keywords: post.tags,
+        author: {
+            "@type": "Person",
+            "@id": personId,
+            name: post.author,
+            url: personUrl,
+        },
+        isPartOf: {
+            "@type": "Blog",
+            "@id": `${blogUrl}#blog`,
+            url: blogUrl,
+        },
+    };
+    const breadcrumbList = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: homeUrl,
+            },
+            {
+                "@type": "ListItem",
+                position: 2,
+                name: "Blog",
+                item: blogUrl,
+            },
+            {
+                "@type": "ListItem",
+                position: 3,
+                name: post.title,
+                item: articleUrl,
+            },
+        ],
+    };
 
     const markdownComponents: Components = {
         h1: ({ children }) => (
@@ -161,7 +209,10 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     };
 
     return (
-        <main className="mx-auto max-w-7xl px-6 pb-20 pt-0">
+        <>
+            <StructuredData id="blog-posting-jsonld" data={blogPosting} />
+            <StructuredData id="breadcrumb-jsonld" data={breadcrumbList} />
+            <main className="mx-auto max-w-7xl px-6 pb-20 pt-0">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_280px] xl:items-start">
                 <article className="overflow-hidden rounded-[2rem]">
                     <div className="px-6 pb-10 pt-0 md:px-10 md:pb-14 md:pt-1">
@@ -249,6 +300,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                     </div>
                 </div>
             </div>
-        </main>
+            </main>
+        </>
     );
 }

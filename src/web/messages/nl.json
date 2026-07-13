@@ -1,7 +1,11 @@
 {
   "metadata": {
-    "title": "Martijn Pannekoek",
-    "description": "Software architect, engineer en developer."
+    "title": "Martijn Pannekoek | Software architect",
+    "description": "Portfolio van Martijn Pannekoek, software architect gespecialiseerd in schaalbare systemen, cloud, AI en productontwikkeling.",
+    "blogTitle": "Softwarearchitectuur en development blog | Martijn Pannekoek",
+    "blogDescription": "Artikelen van Martijn Pannekoek over softwarearchitectuur, .NET, databases, cloud, AI en moderne productontwikkeling.",
+    "hireMeTitle": "Website of applicatie laten bouwen | Martijn Pannekoek",
+    "hireMeDescription": "Laat een heldere, snelle en betrouwbare website, landingspagina of applicatie bouwen door software architect Martijn Pannekoek."
   },
   "nav": {
     "about": "Over mij",
@@ -36,9 +40,7 @@
   },
   "blogPage": {
     "title": "Laat je inspireren",
-    "loading": "Artikelen laden...",
     "empty": "Geen artikelen gevonden voor dit filter.",
-    "imageFallback": "Geen afbeelding",
     "search": {
       "label": "Zoek in blogartikelen",
       "placeholder": "Zoek op artikel, onderwerp of idee"
@@ -68,12 +70,9 @@
     "copiedCode": "Gekopieerd"
   },
   "hireMePage": {
-    "eyebrow": "Huur mij in",
     "title": "Websites die duidelijk, snel en betrouwbaar zijn",
     "description": "Ik bouw websites die helder zijn opgebouwd, technisch goed staan en prettig werken voor je bezoekers. Of het nu gaat om een nieuwe site, een gerichte landingspagina of het verbeteren van een bestaande website: ik zorg voor een oplossing die praktisch is en direct bruikbaar.",
     "heroImage": {
-      "title": "Placeholder voor hero image",
-      "description": "Hier kan later een sterke foto of portret van mij komen.",
       "alt": "Martijn Pannekoek op een stadsbalkon met uitzicht op het water"
     },
     "cta": "Bespreek je project",
@@ -116,7 +115,6 @@
       "eyebrow": "Proces",
       "title": "Zo werk ik",
       "description": "Ik werk praktisch, communiceer helder en houd het proces overzichtelijk van eerste gesprek tot livegang. Zo weet je steeds wat de volgende stap is, waar we staan en wat er van jou nodig is.",
-      "interactionHint": "Beweeg over een stap of klik erop om meer uitleg te zien.",
       "stepLabel": "Stap {number}",
       "steps": {
         "step1": {
@@ -174,8 +172,9 @@
   },
   "home": {
     "hero": {
-      "title": "Collaborate. Create. Deploy.",
-      "viewProject": "Bekijk huidig project",
+      "tagline": "Collaborate. Create. Deploy.",
+      "title": "Martijn Pannekoek, software architect",
+      "readArticles": "Lees mijn artikelen",
       "connect": "Contact"
     },
     "about": {
@@ -207,7 +206,7 @@
         },
         {
           "title": "Cloud & DevOps",
-          "skills": ["Azure", "Docker", "Podman", "Git"]
+          "skills": ["Azure", "Scaleway", "Docker", "Podman", "Git"]
         },
         {
           "title": "AI & agentisch",

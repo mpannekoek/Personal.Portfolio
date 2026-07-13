@@ -2,9 +2,7 @@
 
 import { Globe } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useTransition } from "react";
 import { usePathname as useCurrentPathname } from "next/navigation";
-import { useRouter } from "../i18n/navigation";
 import { routing } from "../i18n/routing";
 
 function getInternalPathname(pathname: string) {
@@ -21,8 +19,6 @@ export default function LanguageToggle() {
     const t = useTranslations("languageToggle");
     const locale = useLocale();
     const pathname = useCurrentPathname();
-    const router = useRouter();
-    const [isPending, startTransition] = useTransition();
     const localeOptions = routing.locales.map((localeOption) => ({
         value: localeOption,
         label: localeOption.toUpperCase(),
@@ -35,16 +31,13 @@ export default function LanguageToggle() {
         }
 
         const internalPathname = getInternalPathname(pathname);
+        const localizedPathname = `/${nextLocale}${
+            internalPathname === "/" ? "" : internalPathname
+        }`;
         const queryString = window.location.search;
         const hash = window.location.hash;
 
-        startTransition(() => {
-            router.replace(
-                `${internalPathname}${queryString}${hash}`,
-                { locale: nextLocale },
-            );
-            router.refresh();
-        });
+        window.location.assign(`${localizedPathname}${queryString}${hash}`);
     };
 
     return (
@@ -69,7 +62,7 @@ export default function LanguageToggle() {
                             ? localeOption.label
                             : t("switchTo", { locale: localeOption.label })
                     }
-                    disabled={isPending || localeOption.isActive}
+                    disabled={localeOption.isActive}
                     onClick={() => switchLocale(localeOption.value)}
                     className={`mp-focus cursor-pointer rounded-3xl px-2.5 py-1 text-xs font-semibold tracking-[0.08em] transition-colors ${
                         localeOption.isActive
