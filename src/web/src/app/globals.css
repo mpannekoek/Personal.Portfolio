@@ -165,6 +165,482 @@
   }
 }
 
+@keyframes race-pet-pedal {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes race-pet-wheel-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes race-pet-breathe {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(1px) rotate(-0.25deg);
+  }
+}
+
+@keyframes race-pet-road-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  22% {
+    transform: translateY(-1px) rotate(-0.25deg);
+  }
+  49% {
+    transform: translateY(1.6px) rotate(0.45deg);
+  }
+  76% {
+    transform: translateY(-0.6px) rotate(-0.18deg);
+  }
+}
+
+@keyframes race-pet-sprint-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  28% {
+    transform: translateY(-1.4px) rotate(-0.4deg);
+  }
+  58% {
+    transform: translateY(1.5px) rotate(0.5deg);
+  }
+  83% {
+    transform: translateY(-0.5px) rotate(-0.2deg);
+  }
+}
+
+@keyframes race-pet-look-around {
+  0%,
+  16%,
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  34%,
+  54% {
+    transform: rotate(-9deg) translateX(-1px);
+  }
+  70%,
+  86% {
+    transform: rotate(6deg) translateX(1px);
+  }
+}
+
+@keyframes race-pet-enter-from-right {
+  0% {
+    opacity: 0;
+    transform: translateX(calc(100vw + 1rem));
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    transform: translateX(calc(var(--race-pet-rest-x) - 4px));
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(var(--race-pet-rest-x));
+  }
+}
+
+@keyframes race-pet-sprint-left {
+  0% {
+    opacity: 1;
+    transform: translateX(var(--race-pet-rest-x)) rotate(0deg);
+  }
+  12% {
+    transform: translateX(calc(var(--race-pet-rest-x) + 7px)) rotate(1deg);
+  }
+  80% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(-100% - 2rem)) rotate(-0.5deg);
+  }
+}
+
+@keyframes race-pet-speed-flash {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  25%,
+  72% {
+    opacity: 0.8;
+    transform: translateX(0);
+  }
+}
+
+@keyframes race-pet-speech-in {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.94);
+  }
+  18%,
+  82% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-2px) scale(0.98);
+  }
+}
+
+@keyframes race-pet-speech-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  14%,
+  84% {
+    opacity: 1;
+  }
+}
+
+.race-pet-shell {
+  --race-pet-rest-x: calc(100vw - 100% - 1.5rem);
+  position: fixed;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  z-index: 40;
+  width: 10.5rem;
+  pointer-events: none;
+}
+
+.race-pet {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 1.25rem;
+  background: transparent;
+  padding: 0;
+  color: var(--text);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(calc(100vw + 1rem));
+  filter: drop-shadow(0 7px 7px rgb(15 23 42 / 0.08));
+  transition: filter 180ms ease;
+}
+
+.race-pet--entering,
+.race-pet--speaking,
+.race-pet--sprinting {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+}
+
+.race-pet--entering {
+  animation: race-pet-enter-from-right 0.8s ease-out forwards;
+}
+
+.race-pet--speaking {
+  transform: translateX(var(--race-pet-rest-x));
+}
+
+.race-pet--sprinting {
+  animation: race-pet-sprint-left 1.2s cubic-bezier(0.45, 0, 0.82, 0.42) forwards;
+}
+
+.race-pet-art {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  transform: scaleX(-1);
+}
+
+.race-pet-speech {
+  position: absolute;
+  bottom: calc(100% - 0.65rem);
+  left: 0;
+  z-index: 2;
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 0.85rem 0.85rem 0.85rem 0.25rem;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  padding: 0.38rem 0.58rem;
+  color: var(--text-muted);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  box-shadow: 0 8px 24px -16px rgb(15 23 42 / 0.5);
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+
+.race-pet-speech::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 1rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-right: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border-strong);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  transform: translateY(-0.35rem) rotate(45deg);
+}
+
+.race-pet--speaking .race-pet-speech {
+  animation: race-pet-speech-in 2.3s ease-out;
+}
+
+.race-pet-rider {
+  transform-box: view-box;
+  transform-origin: 110px 98px;
+}
+
+.race-pet--entering .race-pet-rider {
+  animation: race-pet-road-sway 0.44s linear infinite;
+}
+
+.race-pet--speaking .race-pet-rider {
+  animation: race-pet-breathe 2.3s ease-in-out infinite;
+}
+
+.race-pet--sprinting .race-pet-rider {
+  animation: race-pet-sprint-sway 0.28s linear infinite;
+}
+
+.race-pet-wheel,
+.race-pet-crank {
+  transform-box: view-box;
+}
+
+.race-pet-wheel--rear {
+  transform-origin: 57px 98px;
+}
+
+.race-pet-wheel--front {
+  transform-origin: 167px 98px;
+}
+
+.race-pet-crank {
+  transform-origin: 110px 98px;
+  fill: var(--surface);
+  stroke: var(--text);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.race-pet-tire {
+  fill: color-mix(in srgb, var(--surface) 75%, transparent);
+  stroke: var(--text);
+  stroke-width: 4.8;
+}
+
+.race-pet-rim {
+  fill: none;
+  stroke: color-mix(in srgb, var(--primary) 55%, var(--text));
+  stroke-width: 2;
+}
+
+.race-pet-spokes {
+  fill: none;
+  stroke: color-mix(in srgb, var(--text-soft) 58%, transparent);
+  stroke-width: 1;
+}
+
+.race-pet-hub {
+  fill: var(--highlight);
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.race-pet-frame {
+  stroke: var(--primary);
+  stroke-width: 5.8;
+}
+
+.race-pet-fork,
+.race-pet-handlebar,
+.race-pet-seat {
+  stroke: var(--text);
+  stroke-width: 3.4;
+}
+
+.race-pet-chain {
+  stroke: var(--text-soft);
+  stroke-width: 1.5;
+}
+
+.race-pet-leg,
+.race-pet-arm {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 6;
+}
+
+.race-pet-leg--back,
+.race-pet-arm--back {
+  stroke: color-mix(in srgb, var(--text) 68%, var(--surface));
+}
+
+.race-pet-torso {
+  fill: var(--accent);
+  stroke: var(--text);
+  stroke-width: 3;
+}
+
+.race-pet-jersey-stripe {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 4;
+}
+
+.race-pet-neck,
+.race-pet-head,
+.race-pet-ear,
+.race-pet-hand {
+  fill: #e7aa7d;
+  stroke: var(--text);
+  stroke-width: 2.2;
+}
+
+.race-pet-neck {
+  fill: none;
+  stroke-width: 5;
+}
+
+.race-pet-nose {
+  fill: none;
+  stroke: #8a4d32;
+  stroke-width: 1.4;
+}
+
+.race-pet-cheek {
+  fill: #ef7f76;
+  opacity: 0.48;
+}
+
+.race-pet-eye {
+  fill: #67a9d6;
+  stroke: var(--text);
+  stroke-width: 0.8;
+}
+
+.race-pet-smile {
+  fill: var(--surface);
+  stroke: #7a402d;
+  stroke-width: 1.4;
+}
+
+.race-pet-helmet {
+  fill: var(--highlight);
+  stroke: var(--text);
+  stroke-width: 2.8;
+}
+
+.race-pet-helmet-detail {
+  fill: none;
+  stroke: color-mix(in srgb, var(--highlight) 45%, var(--text));
+  stroke-width: 1.6;
+}
+
+.race-pet-hair {
+  fill: #8a6547;
+  stroke: var(--text);
+  stroke-width: 1.8;
+}
+
+.race-pet-shoe {
+  fill: none;
+  stroke: var(--highlight);
+  stroke-width: 4;
+}
+
+.race-pet-shadow {
+  fill: rgb(15 23 42 / 0.13);
+}
+
+.race-pet-ground {
+  fill: none;
+  stroke: color-mix(in srgb, var(--text-soft) 28%, transparent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 4 7;
+}
+
+.race-pet-speed-lines {
+  opacity: 0;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.race-pet-head-group,
+.race-pet-person {
+  transform-box: view-box;
+}
+
+.race-pet-head-group {
+  transform-origin: 102px 35px;
+}
+
+.race-pet--speaking .race-pet-head-group {
+  animation: race-pet-look-around 2.3s ease-in-out;
+}
+
+.race-pet--entering .race-pet-wheel--rear,
+.race-pet--entering .race-pet-wheel--front {
+  animation: race-pet-wheel-turn 0.7s linear infinite;
+}
+
+.race-pet--entering .race-pet-crank {
+  animation: race-pet-pedal 0.52s linear infinite;
+}
+
+.race-pet--sprinting .race-pet-wheel--rear,
+.race-pet--sprinting .race-pet-wheel--front {
+  animation: race-pet-wheel-turn 0.24s linear infinite;
+}
+
+.race-pet--sprinting .race-pet-crank {
+  animation: race-pet-pedal 0.2s linear infinite;
+}
+
+.race-pet--sprinting .race-pet-speed-lines {
+  animation: race-pet-speed-flash 1.2s ease-out;
+}
+
+.dark .race-pet {
+  filter: drop-shadow(0 7px 10px rgb(34 211 238 / 0.09));
+}
+
+@media (max-width: 639px) {
+  .race-pet-shell {
+    --race-pet-rest-x: calc(100vw - 100% - 0.5rem);
+    bottom: 0.25rem;
+    left: 0.25rem;
+    width: 7.25rem;
+  }
+
+  .race-pet-speech {
+    bottom: calc(100% - 0.5rem);
+    font-size: 0.56rem;
+  }
+}
+
 .toolkit-illustration {
   animation: toolkit-illustration-drift 8.5s ease-in-out infinite;
   transform-origin: center;
@@ -289,5 +765,35 @@
   .toolkit-orb {
     animation: none;
     opacity: 0.85;
+  }
+
+  .race-pet,
+  .race-pet-art,
+  .race-pet-rider,
+  .race-pet-wheel,
+  .race-pet-crank,
+  .race-pet-speed-lines,
+  .race-pet-head-group,
+  .race-pet-person {
+    animation: none !important;
+    transition: none;
+  }
+
+  .race-pet--entering,
+  .race-pet--sprinting {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: none;
+  }
+
+  .race-pet--speaking {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .race-pet--speaking .race-pet-speech {
+    animation: race-pet-speech-fade 2.3s ease-out !important;
   }
 }

@@ -20,6 +20,13 @@
     "label": "Change language",
     "switchTo": "Switch language to {locale}"
   },
+  "pet": {
+    "speech": {
+      "home": "Hi, I'm Martijn's riding buddy.",
+      "blog": "Just one more article…",
+      "hireMe": "Shall we map out a great route?"
+    }
+  },
   "footer": {
     "badge": "Available for projects",
     "role": "Software Architect",

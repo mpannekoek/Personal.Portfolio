@@ -20,6 +20,13 @@
     "label": "Wijzig taal",
     "switchTo": "Schakel taal naar {locale}"
   },
+  "pet": {
+    "speech": {
+      "home": "Hoi, ik ben het koersmaatje van Martijn.",
+      "blog": "Nog één artikel dan…",
+      "hireMe": "Samen een mooie route uitstippelen?"
+    }
+  },
   "footer": {
     "badge": "Beschikbaar voor opdrachten",
     "role": "Software Architect",

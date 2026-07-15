@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { routing, type AppLocale } from "../../i18n/routing";
 import { createPageMetadata } from "../../lib/site";
+import RaceCyclistPet from "../components/race-cyclist-pet";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
     subsets: ["latin"],
@@ -78,6 +79,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
                         <div className="pt-0 md:pt-6">
                             <Footer />
                         </div>
+                        <RaceCyclistPet />
                     </NextIntlClientProvider>
                 </ThemeProvider>
             </body>
