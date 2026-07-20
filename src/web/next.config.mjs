@@ -6,6 +6,20 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        source: "/hire-me",
+        destination: "/samenwerken",
+        permanent: true,
+      },
+      {
+        source: "/en/hire-me",
+        destination: "/en/collaborate",
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {

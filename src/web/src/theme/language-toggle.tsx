@@ -15,6 +15,16 @@ function getInternalPathname(pathname: string) {
     return normalizedPathname || "/";
 }
 
+function getLocalizedPathname(pathname: string, nextLocale: string) {
+    const internalPathname = getInternalPathname(pathname);
+
+    if (internalPathname === "/samenwerken" || internalPathname === "/collaborate") {
+        return nextLocale === "nl" ? "/nl/samenwerken" : "/en/collaborate";
+    }
+
+    return `/${nextLocale}${internalPathname === "/" ? "" : internalPathname}`;
+}
+
 export default function LanguageToggle() {
     const t = useTranslations("languageToggle");
     const locale = useLocale();
@@ -30,10 +40,7 @@ export default function LanguageToggle() {
             return;
         }
 
-        const internalPathname = getInternalPathname(pathname);
-        const localizedPathname = `/${nextLocale}${
-            internalPathname === "/" ? "" : internalPathname
-        }`;
+        const localizedPathname = getLocalizedPathname(pathname, nextLocale);
         const queryString = window.location.search;
         const hash = window.location.hash;
 

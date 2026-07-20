@@ -4,13 +4,13 @@
     "description": "Portfolio of Martijn Pannekoek, a software architect specializing in scalable systems, cloud, AI, and product development.",
     "blogTitle": "Software Architecture and Development Blog | Martijn Pannekoek",
     "blogDescription": "Articles by Martijn Pannekoek about software architecture, .NET, databases, cloud, AI, and modern product development.",
-    "hireMeTitle": "Website and Application Development | Martijn Pannekoek",
-    "hireMeDescription": "Hire software architect Martijn Pannekoek to build a clear, fast, and reliable website, landing page, or application."
+    "collaborateTitle": "Let's make something | Martijn Pannekoek",
+    "collaborateDescription": "Got a digital idea? I’m happy to think along, help with technical choices, and build it with you when it feels like a good fit."
   },
   "nav": {
     "about": "About",
     "blog": "Blog",
-    "hireMe": "Hire Me",
+    "collaborate": "Collaborate",
     "mobileNavigation": "Navigation",
     "openMenu": "Open mobile menu",
     "closeMenu": "Close mobile menu",
@@ -24,18 +24,18 @@
     "speech": {
       "home": "Hi, I'm Martijn's riding buddy.",
       "blog": "Just one more article…",
-      "hireMe": "Shall we map out a great route?"
+      "collaborate": "Shall we map out a great route?"
     }
   },
   "footer": {
-    "badge": "Available for projects",
+    "badge": "Curious about good ideas",
     "role": "Software Architect",
-    "summary": "From idea to working product: I design and build digital solutions that are strong, modern, and practical.",
+    "summary": "I enjoy thinking along on digital ideas and helping them move forward where I can.",
     "pages": "Pages",
     "connect": "Connect",
     "about": "About",
     "blog": "Blog",
-    "hireMe": "Hire Me",
+    "collaborate": "Collaborate",
     "social": {
       "github": "Check my code on GitHub",
       "linkedin": "Follow me on LinkedIn",
@@ -76,105 +76,54 @@
     "copyCode": "Copy code",
     "copiedCode": "Copied"
   },
-  "hireMePage": {
-    "title": "Websites that are clear, fast, and reliable",
-    "description": "I build websites that are easy to understand, technically solid, and pleasant to use. Whether you need a new site, a focused landing page, or improvements to an existing website, I deliver something practical that is ready to use.",
+  "collaboratePage": {
+    "title": "Got a good idea?",
+    "description": "I like thinking along on ideas that are useful, interesting, or simply worth making. Sometimes a fresh perspective is enough. Sometimes it’s more fun to actually build it.",
     "heroImage": {
       "alt": "Martijn Pannekoek on a city terrace overlooking the water"
     },
-    "cta": "Discuss your project",
-    "secondaryCta": "See how I work",
-    "principles": {
-      "eyebrow": "Highlights",
-      "title": "This is what I stand for",
-      "honestStory": {
-        "title": "An honest story",
-        "description": "I do not promise what is unrealistic. You get a clear view of what makes sense, what is unnecessary, and where the best return is likely to come from."
-      },
-      "idealSolution": {
-        "title": "The best solution is shaped together",
-        "description": "The strongest website does not come from assumptions, but from collaboration. I turn your goals and context into a solution that makes sense for your business and works clearly for your visitors."
-      }
+    "landscapeImage": {
+      "alt": "A cyclist follows a winding road through a green, hilly landscape"
     },
-    "servicesTitle": "What I do",
-    "servicesEyebrow": "Services",
-    "servicesIntroTitle": "Digital products built to work clearly",
-    "servicesIntroDescription": "I design and build digital products that need to be clear, reliable, and purposeful. From websites and landing pages to web and desktop applications: no unnecessary layers, just professional work that solves real problems.",
-    "services": {
-      "websites": {
-        "title": "Websites",
-        "description": "I build complete websites that fit your business, offer, and audience. You get a site with a clear structure, strong mobile support, and a solid base to launch with confidence."
+    "cta": "Tell me about it",
+    "contributions": {
+      "title": "Maybe I can help",
+      "description": "By sharpening the idea, figuring out technical choices, or building something that works. A website, app, prototype, or something that doesn’t have a name yet. You don’t need a complete plan.",
+      "think": {
+        "title": "Think it through",
+        "description": "Figure out together what you really want to make."
       },
-      "applications": {
-        "title": "Web and desktop applications",
-        "description": "I build applications that simplify processes, present information clearly, and feel solid in day-to-day use. That can be an internal tool, a client portal, or a desktop application that fits the way your business actually works."
+      "make": {
+        "title": "Make it",
+        "description": "Go from a first version to something you can use."
       },
-      "landingPages": {
-        "title": "Landing pages",
-        "description": "I create landing pages with one clear goal: inform, persuade, or improve conversion. The structure and content are shaped around what your visitor needs to take the next step."
-      },
-      "seo": {
-        "title": "SEO basics",
-        "description": "I make sure the technical and content foundation for search visibility is in place. For example with a logical page structure, strong titles, clean metadata, and a website search engines can read properly."
+      "improve": {
+        "title": "Improve it",
+        "description": "See what could be simpler, smarter, or nicer to use."
       }
-    },
-    "process": {
-      "eyebrow": "Process",
-      "title": "How I work",
-      "description": "I work in a practical way, communicate clearly, and keep the process easy to follow from the first conversation to launch. That means you always know the next step, where we stand, and what I need from you.",
-      "stepLabel": "Step {number}",
-      "steps": {
-        "step1": {
-          "title": "Introduction",
-          "description": "We talk about what you need, who the website is for, and what it needs to achieve. I ask focused questions so we can quickly identify where the real value is."
-        },
-        "step2": {
-          "title": "Strategy / structure",
-          "description": "Next, I map out the main structure: content, flow, and logical page or section setup. That gives us a clear foundation before we spend time on details."
-        },
-        "step3": {
-          "title": "Design",
-          "description": "I turn the structure into a design that fits your identity and works well for your visitors. Every design choice stays functional, so the look supports the goal."
-        },
-        "step4": {
-          "title": "Build and feedback",
-          "description": "Then I build the website and work step by step toward a strong first version. You can give feedback along the way, so we can adjust without making the process messy."
-        },
-        "step5": {
-          "title": "Launch and aftercare",
-          "description": "Once everything is right, I launch the website and check that the essentials are in place. I also remain available afterward for small improvements, questions, or practical follow-up."
-        }
-      }
-    },
-    "pricing": {
-      "eyebrow": "Pricing",
-      "title": "Clear costs, aligned upfront",
-      "intro": "No standard rate, but clear expectations from the start.",
-      "description": "No website project is exactly the same. The cost depends on the scope, the content, the functionality required, and the timeline. That is why I define upfront what is needed, which choices make sense, and what the budget should realistically cover.",
-      "note": "That way, you know where you stand before we start, without surprises afterward."
     }
   },
   "contact": {
-    "badge": "Hire me",
-    "title": "Tell me what you need built",
-    "description": "Need a website, landing page, or improvements to an existing site? Send a short message. Your email app opens with the details prefilled so you can quickly share your project or inquiry.",
-    "directEmail": "Prefer to send a direct inquiry?",
+    "badge": "Contact",
+    "title": "Want to talk?",
+    "description": "Tell me what’s been on your mind and why you want to make it. Then we can see if it clicks and what kind of setup feels right.",
+    "directEmail": "Prefer to just email?",
     "fields": {
       "name": "Name",
       "email": "Email",
-      "message": "Message"
+      "message": "What’s on your mind?"
     },
     "placeholders": {
       "name": "Your name",
       "email": "you@example.com",
-      "message": "Briefly describe your project, timeline, or question."
+      "message": "Tell me a little about your idea. It doesn’t have to be finished."
     },
-    "cta": "Send inquiry by email",
+    "cta": "Share your idea",
     "mailto": {
       "defaultSender": "Portfolio visitor",
       "intro": "Hi Martijn, this is {sender}{senderEmail}.",
-      "fallbackBody": "I need help with a website or landing page and would like to discuss the project.",
-      "subject": "Project inquiry via portfolio"
+      "fallbackBody": "I have an idea on my mind and would love to tell you more about it.",
+      "subject": "An idea from your website"
     }
   },
   "home": {
@@ -227,7 +176,7 @@
     },
     "connect": {
       "title": "Contact",
-      "eyebrow": "Available for assignments"
+      "eyebrow": "Got an idea?"
     }
   }
 }

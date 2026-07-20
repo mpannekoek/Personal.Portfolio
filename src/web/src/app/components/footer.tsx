@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Code } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "../../i18n/navigation";
 import facebookIcon from "../../assets/icons/social/facebook-icon.svg";
 import githubIcon from "../../assets/icons/social/github-icon.svg";
@@ -10,11 +10,13 @@ import linkedinIcon from "../../assets/icons/social/linkedin-icon.svg";
 
 export default function Footer() {
     const t = useTranslations("footer");
+    const locale = useLocale();
     const currentYear = new Date().getFullYear();
+    const collaborationHref = locale === "nl" ? "/samenwerken" : "/collaborate";
     const pageLinks = [
         { href: "/", label: t("about") },
         { href: "/blog", label: t("blog") },
-        { href: "/hire-me", label: t("hireMe") },
+        { href: collaborationHref, label: t("collaborate") },
     ];
     const socialLinks = [
         {

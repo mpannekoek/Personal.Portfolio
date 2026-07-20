@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "../../i18n/navigation";
 
 type PetPhase = "hidden" | "entering" | "speaking" | "sprinting";
-type PetRoute = "home" | "blog" | "hire-me";
+type PetRoute = "home" | "blog" | "collaborate";
 
 const ENTER_DURATION_MS = 800;
 const SPEAK_DURATION_MS = 2_300;
@@ -43,13 +43,13 @@ export default function RaceCyclistPet() {
     const normalizedPathname = pathname.replace(/^\/(?:nl|en)(?=\/|$)/, "") || "/";
     const route: PetRoute = normalizedPathname.startsWith("/blog")
         ? "blog"
-        : normalizedPathname.startsWith("/hire-me")
-            ? "hire-me"
+        : normalizedPathname.startsWith("/samenwerken") || normalizedPathname.startsWith("/collaborate")
+            ? "collaborate"
             : "home";
     const contextualMessage = route === "blog"
         ? t("speech.blog")
-        : route === "hire-me"
-            ? t("speech.hireMe")
+        : route === "collaborate"
+            ? t("speech.collaborate")
             : t("speech.home");
 
     const clearSequence = useCallback(() => {

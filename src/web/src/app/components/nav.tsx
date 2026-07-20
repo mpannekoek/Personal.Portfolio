@@ -16,15 +16,9 @@ import linkedinIcon from "../../assets/icons/social/linkedin-icon.svg";
 
 type NavItem = {
     href: string;
-    labelKey: "about" | "blog" | "hireMe";
+    labelKey: "about" | "blog" | "collaborate";
     variant?: "default" | "cta";
 };
-
-const navItems: NavItem[] = [
-    { href: "/", labelKey: "about" },
-    { href: "/blog", labelKey: "blog" },
-    { href: "/hire-me", labelKey: "hireMe", variant: "cta" },
-];
 
 export default function NavBar() {
     const t = useTranslations("nav");
@@ -35,6 +29,12 @@ export default function NavBar() {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isMenuVisible, setMenuVisible] = useState(false);
     const closeTimeoutRef = useRef<number | null>(null);
+    const collaborationHref = locale === "nl" ? "/samenwerken" : "/collaborate";
+    const navItems: NavItem[] = [
+        { href: "/", labelKey: "about" },
+        { href: "/blog", labelKey: "blog" },
+        { href: collaborationHref, labelKey: "collaborate", variant: "cta" },
+    ];
     const socialLinks = [
         {
             href: "https://github.com/mpannekoek",

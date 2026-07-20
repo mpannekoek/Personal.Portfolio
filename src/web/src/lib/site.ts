@@ -5,10 +5,11 @@ const DEFAULT_SITE_URL = "https://martijnpannekoek.nl";
 export const SITE_URL = (process.env.SITE_URL ?? DEFAULT_SITE_URL).replace(/\/+$/, "");
 
 type SiteLocale = "nl" | "en";
+type LocalizedPaths = Record<SiteLocale, string>;
 
 type PageMetadataOptions = {
     locale: SiteLocale;
-    path: string;
+    path: string | LocalizedPaths;
     title: string;
     description: string;
     article?: {
@@ -33,9 +34,11 @@ export function createPageMetadata({
     description,
     article,
 }: PageMetadataOptions): Metadata {
-    const canonical = getLocalizedUrl(locale, path);
-    const dutchUrl = getLocalizedUrl("nl", path);
-    const englishUrl = getLocalizedUrl("en", path);
+    const dutchPath = typeof path === "string" ? path : path.nl;
+    const englishPath = typeof path === "string" ? path : path.en;
+    const canonical = getLocalizedUrl(locale, locale === "nl" ? dutchPath : englishPath);
+    const dutchUrl = getLocalizedUrl("nl", dutchPath);
+    const englishUrl = getLocalizedUrl("en", englishPath);
     const sharedOpenGraph = {
         title,
         description,
